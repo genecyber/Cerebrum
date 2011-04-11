@@ -1,0 +1,1273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ISUI>
+	<template name='Priest.SmallFont'>
+		<Name>Terminal</Name>
+		<Size>11</Size>
+		<Color>FFFFFFFF</Color>
+	</template>
+	<Window name='ClassGUI'>
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>1</Visible>
+		<Title>     Priest Routine by Artimus/Apoc v2.31</Title>
+		<X>5</X>
+		<Y>600</Y>
+		<Width>465</Width>
+		<Height>450</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>270</height>
+			<draggable>false</draggable>
+			<tabs>
+<!-- Spell Tab -->
+				<tab name='Spells' >
+					
+					
+					<text name='lblSelectPullSpell'>
+						<X>200</X>
+						<Y>5</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Pull With:</Text>
+					</text>
+					<combobox name='cmbSelectPullSpell'>
+						<x>200</x>
+						<y>15</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>80</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["PullSpell"]
+						</OnSelect>
+						<Items>
+							<Item Value='Smite' Default='1'>Smite</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+						</Items>
+					</combobox>
+					
+					<text name='lblUseWand'>
+						<X>10</X>
+						<Y>20</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Wand:</Text>
+					</text>
+					<checkbox name='chkBoxUseWand'>
+						<x>140</x>
+						<y>10</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseWand"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblSmite'>
+						<X>10</X>
+						<Y>40</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Smite:</Text>
+					</text>
+					<checkbox name='chkBoxUseSmite'>
+						<x>140</x>
+						<y>30</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseSmite"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblShadowWordPain'>
+						<X>10</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shadow Word: Pain:</Text>
+					</text>
+					<checkbox name='chkBoxUseShadowWordPain'>
+						<x>140</x>
+						<y>50</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShadowWordPain"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseMindBlast'>
+						<X>10</X>
+						<Y>80</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Mind Blast:</Text>
+					</text>
+					<checkbox name='chkBoxUseMindBlast'>
+						<x>140</x>
+						<y>70</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseMindBlast"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblMindFlay'>
+						<X>10</X>
+						<Y>100</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Mind Flay:</Text>
+					</text>
+					<checkbox name='chkBoxUseMindFlay'>
+						<x>140</x>
+						<y>90</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseMindFlay"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblPsychicScream'>
+						<X>10</X>
+						<Y>120</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Psychic Scream:</Text>
+					</text>
+					<checkbox name='chkBoxUsePsychicScream'>
+						<x>140</x>
+						<y>110</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUsePsychicScream"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseShieldOnPull'>
+						<X>10</X>
+						<Y>140</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shield On Pull:</Text>
+					</text>
+					<checkbox name='chkBoxUseShieldOnPull'>
+						<x>140</x>
+						<y>130</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShieldOnPull"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseShcklUndead'>
+						<X>10</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shackle Undead:</Text>
+					</text>
+					<checkbox name='chkBoxUseShcklUndead'>
+						<x>140</x>
+						<y>150</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShcklUndead"]
+						</OnLeftClick>
+					</checkbox>
+
+					
+					<text name='lblUseVampiricTouch'>
+						<X>10</X>
+						<Y>180</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Vampiric Touch:</Text>
+					</text>
+					<checkbox name='chkBoxUseVampiricTouch'>
+						<x>140</x>
+						<y>170</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseVampiricTouch"]
+						</OnLeftClick>
+					</checkbox>
+					
+					
+					<text name='lblUseVampiricEmbrace'>
+						<X>10</X>
+						<Y>200</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Vampiric Embrace:</Text>
+					</text>
+					<checkbox name='chkBoxUseVampiricEmbrace'>
+						<x>140</x>
+						<y>190</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseVampiricEmbrace"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseShadowWordDeath'>
+						<X>10</X>
+						<Y>220</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shadow Word: Death:</Text>
+					</text>						
+					<checkbox name='chkBoxUseShadowWordDeath'>
+						<x>140</x>
+						<y>210</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShadowWordDeath"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblTxtWandAt'>
+						<X>200</X>
+						<Y>50</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Wand at:</Text>
+					</text>
+					<text name='lblTxtWandAtTargetHP'>
+						<X>250</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Target HP:</Text>
+					</text>
+					<text name='lblWandAtPct'>
+						<X>360</X>
+						<Y>75</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Spells@Pages@ClassGUI].FindChild[sldWandAt].Value}%</Text>
+					</text>
+					<slider name='sldWandAt'>
+						<x>250</x>
+						<y>70</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["UseWandAtTargetHp"]
+						</OnChange>
+					</slider>
+					<text name='lblTxtWandAtPctMP'>
+						<X>250</X>
+						<Y>95</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>My MP:</Text>
+					</text>
+					<text name='lblWandAtManaPct'>
+						<X>360</X>
+						<Y>110</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Spells@Pages@ClassGUI].FindChild[sldWandAtPctMp].Value}%</Text>
+					</text>
+					<slider name='sldWandAtPctMp'>
+						<x>250</x>
+						<y>105</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["UseWandAtPctMp"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblUseSilence'>
+						<X>200</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Silence</Text>
+					</text>						
+					<checkbox name='chkBoxUseSilence'>
+						<X>300</X>
+						<Y>150</Y>
+						<Width>30</Width>
+						<Height>25</Height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseSilence"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblMindFlayRunners'>
+						<X>200</X>
+						<Y>180</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Mind Flay Runners:</Text>
+					</text>						
+					<checkbox name='chkBoxMindFlayRunners'>
+						<X>300</X>
+						<Y>170</Y>
+						<Width>30</Width>
+						<Height>25</Height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkMindFlayRunners"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseInnerFocus'>
+						<X>200</X>
+						<Y>200</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Inner Focus:</Text>
+					</text>						
+					<checkbox name='chkBoxUseInnerFocus'>
+						<X>300</X>
+						<Y>190</Y>
+						<Width>30</Width>
+						<Height>25</Height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseInnerFocus"]
+						</OnLeftClick>
+					</checkbox>
+				</tab>
+				
+
+				<tab name = 'CustomAtkOrder'>
+					<text name='lblSelectCustSpell'>
+						<X>5</X>
+						<Y>5</Y>
+						<Width>200</Width>
+						<Height>40</Height>
+						<Text>Custom Attack Order</Text>
+					</text>
+					
+					<text name='lblUseCustomSpellOrder'>
+						<X>230</X>
+						<Y>5</Y>
+						<Width>200</Width>
+						<Height>40</Height>
+						<Text>Use Custom Attack Order:</Text>
+					</text>
+
+					<checkbox name='chkBoxUseCustomAtkOrder'>
+						<x>340</x>
+						<y>3</y>
+						<width>20</width>
+						<height>15</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseCustomAtkOrder"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblSelectCustSpellOne'>
+						<X>10</X>
+						<Y>20</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell One:</Text>
+					</text>
+					<combobox name='cmbCustSpellOne'>
+						<x>20</x>
+						<y>30</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellOne"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Smite'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+					
+					<text name='lblTxtExplainTimers'>
+						<X>200</X>
+						<Y>20</Y>
+						<Width>200</Width>
+						<Height>40</Height>
+						<Text>Timer == Time to wait before casting same spell again</Text>
+					</text>
+					
+					<text name='lblTxtSpellOneTimer'>
+						<X>200</X>
+						<Y>35</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell One Timer:</Text>
+					</text>
+					<text name='lblSpellOneTimerPct'>
+						<X>380</X>
+						<Y>35</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellOneTimer].Value} Seconds</Text>
+					</text>
+					<variableslider name='sldSpellOneTimer'>
+						<x>275</x>
+						<y>32</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellOneTimer"]
+						</OnChange>
+					</variableslider>
+
+					
+					<text name='lblTxtSpellTwoTimer'>
+						<X>200</X>
+						<Y>70</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Two Timer:</Text>
+					</text>
+					<text name='lblSpellTwoTimerPct'>
+						<X>380</X>
+						<Y>70</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellTwoTimer].Value} Seconds</Text>
+					</text>
+					<slider name='sldSpellTwoTimer'>
+						<x>275</x>
+						<y>68</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellTwoTimer"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblTxtSpellThreeTimer'>
+						<X>200</X>
+						<Y>105</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Three Timer:</Text>
+					</text>
+					<text name='lblSpellThreeTimerPct'>
+						<X>380</X>
+						<Y>105</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellThreeTimer].Value} Seconds</Text>
+					</text>
+					<slider name='sldSpellThreeTimer'>
+						<x>275</x>
+						<y>103</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellThreeTimer"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblTxtSpellFourTimer'>
+						<X>200</X>
+						<Y>140</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Four Timer:</Text>
+					</text>
+					<text name='lblSpellFourTimerPct'>
+						<X>380</X>
+						<Y>140</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellFourTimer].Value} Seconds</Text>
+					</text>
+					<slider name='sldSpellFourTimer'>
+						<x>275</x>
+						<y>138</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellFourTimer"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblTxtSpellFiveTimer'>
+						<X>200</X>
+						<Y>175</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Five Timer:</Text>
+					</text>
+					<text name='lblSpellFiveTimerPct'>
+						<X>380</X>
+						<Y>175</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellFiveTimer].Value} Seconds</Text>
+					</text>
+					<slider name='sldSpellFiveTimer'>
+						<x>275</x>
+						<y>173</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellFiveTimer"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblTxtSpellSixTimer'>
+						<X>200</X>
+						<Y>205</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Six Timer:</Text>
+					</text>
+					<text name='lblSpellSixTimerPct'>
+						<X>380</X>
+						<Y>205</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[CustomAtkOrder@Pages@ClassGUI].FindChild[sldSpellSixTimer].Value} Seconds</Text>
+					</text>
+					<slider name='sldSpellSixTimer'>
+						<x>275</x>
+						<y>203</y>
+						<Range>10</Range>
+						<VariableRange>100</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpellSixTimer"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblSelectCustSpellTwo'>
+						<X>10</X>
+						<Y>55</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Two:</Text>
+					</text>
+					<combobox name='cmbCustSpellTwo'>
+						<x>20</x>
+						<y>65</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellTwo"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Smite'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+
+					<text name='lblSelectCustSpellThree'>
+						<X>10</X>
+						<Y>90</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Three:</Text>
+					</text>
+					<combobox name='cmbCustSpellThree'>
+						<x>20</x>
+						<y>100</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellThree"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Smite'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+
+					<text name='lblSelectCustSpellFour'>
+						<X>10</X>
+						<Y>125</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Four:</Text>
+					</text>
+					<combobox name='cmbCustSpellFour'>
+						<x>20</x>
+						<y>135</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellFour"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Smite'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+
+					<text name='lblSelectCustSpellFive'>
+						<X>10</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Five:</Text>
+					</text>
+					<combobox name='cmbSpellFive'>
+						<x>20</x>
+						<y>170</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellFive"]
+						</OnSelect>
+						<Items>
+							<Item Value='None'>None</Item>
+							<Item Value='Smite' Default='1'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+
+					<text name='lblSelectCustSpellSix'>
+						<X>10</X>
+						<Y>195</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spell Six:</Text>
+					</text>
+					<combobox name='cmbCustSpellSix'>
+						<x>20</x>
+						<y>205</y>
+						<width>155</width>
+						<height>20</height>
+						<FullHeight>140</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["CmbCustSpellSix"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Smite'>Smite</Item>
+							<Item Value='Shadow Word: Pain'>Shadow Word: Pain</Item>
+							<Item Value='Mind Blast'>Mind Blast</Item>
+							<Item Value='Mind Flay'>Mind Flay</Item>
+							<Item Value='Holy Fire'>Holy Fire</Item>
+							<Item Value='Holy Nova'>Holy Nova</Item>
+							<Item Value='Vampiric Touch'>Vampiric Touch</Item>
+						</Items>
+					</combobox>
+				</tab>
+<!-- Heal Spells -->
+				<tab name = 'Heals'>
+						<text name='lblHealSpellOne'>
+						<X>10</X>
+						<Y>10</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Heal Spell One:</Text>
+					</text>
+					
+					<text name='lblHealSpellTwo'>
+						<X>10</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Heal Spell Two:</Text>
+					</text>
+					
+					<text name='lblHealSpellThree'>
+						<X>10</X>
+						<Y>110</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Heal Spell Three:</Text>
+					</text>
+					
+					<text name='lblHealSpellFour'>
+						<X>10</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Heal Spell Four:</Text>
+					</text>
+					<text name='lblHealSpellFive'>
+						<X>10</X>
+						<Y>210</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Heal Spell Five:</Text>
+					</text>
+
+					<text name='lblHealSpellOnePct'>
+						<X>185</X>
+						<Y>45</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealSpellOneAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealSpellOneAt'>
+						<x>80</x>
+						<y>40</y>
+						<Range>100</Range>
+						<VariableRange>200</VariableRange>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["sldUseHealSpellOneAt"]
+						</OnChange>
+					</slider>
+
+					<text name='lblHealSpellTwoPct'>
+						<X>185</X>
+						<Y>95</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealSpellTwoAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealSpellTwoAt'>
+						<x>80</x>
+						<y>90</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["sldUseHealSpellTwoAt"]
+						</OnChange>
+					</slider>
+
+					<text name='lblHealSpellThreePct'>
+						<X>185</X>
+						<Y>145</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealSpellThreeAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealSpellThreeAt'>
+						<x>80</x>
+						<y>140</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["sldUseHealSpellThreeAt"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblHealSpellFourPct'>
+						<X>185</X>
+						<Y>195</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealSpellFourAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealSpellFourAt'>
+						<x>80</x>
+						<y>190</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["sldUseHealSpellFourAt"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblHealSpellFivePct'>
+						<X>185</X>
+						<Y>240</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealSpellFiveAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealSpellFiveAt'>
+						<x>80</x>
+						<y>235</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["sldUseHealSpellFiveAt"]
+						</OnChange>
+					</slider>
+						
+					<text name='txtUseHealPotsAt'>
+						<X>315</X>
+						<Y>20</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Healing Potions At:</Text>
+					</text>
+					<text name='lblUseHealPotsPct'>
+						<X>420</X>
+						<Y>35</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Heals@Pages@ClassGUI].FindChild[sldUseHealPotsAt].Value}%</Text>
+					</text>
+					<slider name='sldUseHealPotsAt'>
+						<x>315</x>
+						<y>30</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldUseHealPotsAt"]
+						</OnChange>
+					</slider>
+
+					<text name='lblHealPots'>
+						<X>250</X>
+						<Y>10</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Healing Potions:</Text>
+					</text>
+					<checkbox name='chkBoxUseHealPots'>
+						<x>270</x>
+						<y>20</y>
+						<width>20</width>
+						<height>15</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["chkUseHealPots"]
+						</OnLeftClick>
+					</checkbox>
+					
+<!-- HealSpell Listboxes -->
+					<combobox name='cmbHealSpellOne'>
+						<x>80</x>
+						<y>10</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>115</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["BoxHealSpellOne"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Lesser Heal'>Lesser Heal</Item>
+							<Item Value='Heal'>Heal</Item>
+							<Item Value='Greater Heal'>Greater Heal</Item>
+							<Item Value='Flash Heal'>Flash Heal</Item>
+							<Item Value='Renew'>Renew</Item>
+							<Item Value='Desperate Prayer'>Desperate Prayer</Item>
+							<Item Value='Gift of the Naaru'>Gift of the Naaru</Item>
+						</Items>
+					</combobox>
+					
+					
+					<combobox name='cmbHealSpellTwo'>
+						<x>80</x>
+						<y>60</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>115</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["BoxHealSpellTwo"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Lesser Heal'>Lesser Heal</Item>
+							<Item Value='Heal'>Heal</Item>
+							<Item Value='Greater Heal'>Greater Heal</Item>
+							<Item Value='Flash Heal'>Flash Heal</Item>
+							<Item Value='Renew'>Renew</Item>
+							<Item Value='Desperate Prayer'>Desperate Prayer</Item>
+							<Item Value='Gift of the Naaru'>Gift of the Naaru</Item>
+						</Items>
+					</combobox>
+					
+					<combobox name='cmbHealSpellThree'>
+						<x>80</x>
+						<y>110</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>115</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["BoxHealSpellThree"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Lesser Heal'>Lesser Heal</Item>
+							<Item Value='Heal'>Heal</Item>
+							<Item Value='Greater Heal'>Greater Heal</Item>
+							<Item Value='Flash Heal'>Flash Heal</Item>
+							<Item Value='Renew'>Renew</Item>
+							<Item Value='Desperate Prayer'>Desperate Prayer</Item>
+							<Item Value='Gift of the Naaru'>Gift of the Naaru</Item>
+						</Items>
+					</combobox>
+					
+					<combobox name='cmbHealSpellFour'>
+						<x>80</x>
+						<y>160</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>115</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["BoxHealSpellFour"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Lesser Heal'>Lesser Heal</Item>
+							<Item Value='Heal'>Heal</Item>
+							<Item Value='Greater Heal'>Greater Heal</Item>
+							<Item Value='Flash Heal'>Flash Heal</Item>
+							<Item Value='Renew'>Renew</Item>
+							<Item Value='Desperate Prayer'>Desperate Prayer</Item>
+							<Item Value='Gift of the Naaru'>Gift of the Naaru</Item>
+						</Items>
+					</combobox>
+					
+					<combobox name='cmbHealSpellFive'>
+						<x>80</x>
+						<y>210</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>115</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["BoxHealSpellFive"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Lesser Heal'>Lesser Heal</Item>
+							<Item Value='Heal'>Heal</Item>
+							<Item Value='Greater Heal'>Greater Heal</Item>
+							<Item Value='Flash Heal'>Flash Heal</Item>
+							<Item Value='Renew'>Renew</Item>
+							<Item Value='Desperate Prayer'>Desperate Prayer</Item>
+							<Item Value='Gift of the Naaru'>Gift of the Naaru</Item>
+						</Items>
+					</combobox>
+					
+				</tab>
+
+<!-- Buffs -->
+				<tab name = 'Buffs/Cures'>
+					
+					<text name='lblEnableChooseBuffs'>
+						<X>10</X>
+						<Y>20</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Enable Choose Buffs:</Text>
+					</text>
+					<checkbox name='chkBoxEnableChooseBuffs'>
+						<x>150</x>
+						<y>10</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkEnableChooseBuffs"]
+						</OnLeftClick>
+					</checkbox>
+
+					<text name='lblUseShield'>
+						<X>30</X>
+						<Y>40</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shield:</Text>
+					</text>
+					<checkbox name='chkBoxUseShield'>
+						<x>200</x>
+						<y>30</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShield"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseShadowform'>
+						<X>30</X>
+						<Y>120</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shadowform:</Text>
+					</text>
+					<checkbox name='chkBoxUseShadowform'>
+						<x>200</x>
+						<y>110</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShadowform"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblPwrWordFort'>
+						<X>30</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Power Word: Fortitude:</Text>
+					</text>
+					<checkbox name='chkBoxUsePwrWordFort'>
+						<x>200</x>
+						<y>50</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseFortitude"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseShadowProt'>
+						<X>30</X>
+						<Y>80</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Shadow Protection:</Text>
+					</text>
+					<checkbox name='chkBoxUseShadowProt'>
+						<x>200</x>
+						<y>70</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseShadowProtection"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseInnerFire'>
+						<X>30</X>
+						<Y>100</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Inner Fire:</Text>
+					</text>
+					<checkbox name='chkBoxUseInnerFire'>
+						<x>200</x>
+						<y>90</y>
+						<width>30</width>
+						<height>25</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseInnerFire"]
+						</OnLeftClick>
+					</checkbox>
+				</tab>
+<!-- Rest -->
+				<tab name = 'Rest'>
+					<text name='lblUseRest'>
+						<X>20</X>
+						<Y>25</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Rest:</Text>
+					</text>
+					<checkbox name='chkBoxUseRest'>
+						<x>85</x>
+						<y>20</y>
+						<width>20</width>
+						<height>15</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseRest"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblRestMP'>
+						<X>20</X>
+						<Y>45</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Drink at This MP:</Text>
+					</text>
+					<text name='lblRestAtPct'>
+						<X>215</X>
+						<Y>45</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Rest@Pages@ClassGUI].FindChild[sldRestAtMp].Value}%</Text>
+					</text>
+					<slider name='sldRestAtMp'>
+						<x>110</x>
+						<y>40</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldRestAtMp"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblRestHP'>
+						<X>20</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Eat at this HP:</Text>
+					</text>
+					<text name='lblRestHpPct'>
+						<X>215</X>
+						<Y>60</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Rest@Pages@ClassGUI].FindChild[sldRestAtHp].Value}%</Text>
+					</text>
+					<slider name='sldRestAtHp'>
+						<x>110</x>
+						<y>55</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldRestAtHp"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblUseBandages'>
+						<X>20</X>
+						<Y>85</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Use Bandages:</Text>
+					</text>
+					<checkbox name='chkUseBandages'>
+						<x>85</x>
+						<y>80</y>
+						<width>20</width>
+						<height>15</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkUseBandages"]
+						</OnLeftClick>
+					</checkbox>
+					
+					<text name='lblUseBandagesAt'>
+						<X>20</X>
+						<Y>105</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Bandages at this HP:</Text>
+					</text>
+					<text name='lblUseBandagesAtPct'>
+						<X>215</X>
+						<Y>105</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Rest@Pages@ClassGUI].FindChild[sldUseBandagesAt].Value}%</Text>
+					</text>
+					<slider name='sldUseBandagesAt'>
+						<x>110</x>
+						<y>100</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldUseBandagesAt"]
+						</OnChange>
+					</slider>
+					
+					<text name='lblSpiritTapMP'>
+						<X>20</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Spirit Tap MP:</Text>
+					</text>
+					<text name='lblSpiritTapPct'>
+						<X>215</X>
+						<Y>160</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>${UIElement[Rest@Pages@ClassGUI].FindChild[sldSpiritTapMp].Value}%</Text>
+					</text>
+					<slider name='sldSpiritTapMp'>
+						<x>110</x>
+						<y>155</y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[CLASS_GUI_CHANGE]:Execute["SldSpiritTapMp"]
+						</OnChange>
+					</slider>
+				</tab>
+<!-- Info -->
+				<tab name = 'OtherSettings'>
+					
+					<text name='lblShowOutput'>
+						<X>10</X>
+						<Y>30</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Show Output:</Text>
+					</text>
+					<checkbox name='chkBoxShowOutput'>
+						<x>70</x>
+						<y>25</y>
+						<width>20</width>
+						<height>15</height>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ChkEnableOutput"]
+						</OnLeftClick>
+					</checkbox>
+				</tab>
+			</tabs>
+		</TabControl>
+		<console name="Console">
+			<BackBufferSize>24</BackBufferSize>
+			<X>0</X>
+			<Y>275</Y> <!--316-->
+			<Width>100%</Width>
+			<Height>35%</Height>
+		</console>
+		</Children>
+	</Window>
+</ISUI>

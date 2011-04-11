@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+This .xml was derived from the WoWSkin xml
+-->
+<ISUI>
+	<template name='JHn.ButtonTexture' Filename='Interface/obSkin/Button-Up.png' />
+	<template name='JHn.ButtonTexturePressed' Filename='Interface/obSkin/Button-Down.png' />
+	<template name='JHn.TabButtonTexture' Filename='Interface/obSkin/Button-Up.png' />
+	<template name='JHn.TabButtonTextureSelected' Filename='Interface/obSkin/Button-Down.png' />
+	<template name='JHn.ButtonTextureHover' Filename='Interface/obSkin/Button-Highlight.png' />
+	<template name='JHn.WindowBackground' Filename='Interface/obSkin/Window-Background-Dither.png' ColorKey="FF000000" />
+	<template name='JHn.Slider.Texture' Filename='Interface/obSkin/Slider.png' ColorKey="FF000000">
+		<Border>0</Border>
+		<Top>0</Top>
+		<Left>0</Left>
+		<Right>110</Right>
+		<Bottom>20</Bottom>
+	</template>
+	<template name='JHn.Slider.HandleTexture' filename='Interface/obSkin/Slider.png' ColorKey="FF000000">
+		<Top>3</Top>
+		<Bottom>17</Bottom>
+		<Left>113</Left>
+		<Right>120</Right>
+	</template>
+	<template name='JHn.TitleBarBackground' Filename='Interface/obSkin/TitleBar.png'  ColorKey='FFFF179A'>
+		<Border>3</Border>
+	</template>
+
+<!-- Font -->
+	<template name='JHn.Font' Template='Default Font'>	
+		<Name>Verdana</Name>
+		<Size>10</Size>
+		<Color>FFFF9900</Color>
+	</template>
+	
+	<template name='Button.Font' Template='Default Font'>	
+		<Name>Verdana</Name>
+		<Size>12</Size>
+		<Color>FF000000</Color>
+	</template>
+	
+	<template name='Display.Font' Template='Default Font'>	
+		<Name>Verdana</Name>
+		<Size>12</Size>
+		<Color>FFFFFFFF</Color>
+	</template>
+	
+<!-- Button -->
+	<template name='JHn.Button' template='commandbutton'>
+		<Width>130</Width> 
+		<Height>30</Height> 
+		<BackgroundColor />
+		<Font Template='Button.Font'/>
+		<Texture Template='JHn.ButtonTexture' />
+		<TexturePressed Template='JHn.ButtonTexturePressed' />
+		<TextureHover Template='JHn.ButtonTextureHover' />
+		<TextColor>FF000000</TextColor>
+	</template>
+
+<!-- CommandButton -->
+	<template name='JHn.CommandButton' template='commandbutton'>
+		<Width>130</Width> 
+		<Height>30</Height> 
+		<BackgroundColor />
+		<Font Template='Button.Font'/>
+		<Texture Template='JHn.ButtonTexture' />
+		<TexturePressed Template='JHn.ButtonTexturePressed' />
+		<TextureHover Template='JHn.ButtonTextureHover' />
+		<TextColor>FF000000</TextColor>
+	</template>
+
+<!-- Checkbox -->
+	<template name='JHn.CheckBox' template='checkbox'>
+		<Font Template='JHn.Font'/>
+		<Width>120</Width> 
+		<Height>16</Height> 
+		<Texture Filename='Interface/obSkin/CheckBox-Up.png' />
+		<TextureHover Filename='Interface/obSkin/CheckBox-Highlight.png' />
+		<TexturePressed Filename='Interface/obSkin/CheckBox-Up.png' />
+		<TextureChecked Filename='Interface/obSkin/CheckBox-Down.png' />
+		<TextureCheckedHover Filename='Interface/obSkin/CheckBox-DownHighlight.png' />
+		<TextureCheckedPressed Filename='Interface/obSkin/CheckBox-Down.png' />
+	</template>
+
+<!-- CommandCheckbox -->
+	<template name='JHn.CommandCheckBox' template='commandcheckbox'>
+		<Font Template='JHn.Font'/>
+		<Width>120</Width> 
+		<Height>16</Height> 
+		<Texture Filename='Interface/obSkin/CheckBox-Up.png' />
+		<TextureHover Filename='Interface/obSkin/CheckBox-Highlight.png' />
+		<TexturePressed Filename='Interface/obSkin/CheckBox-Up.png' />
+		<TextureChecked Filename='Interface/obSkin/CheckBox-Down.png' />
+		<TextureCheckedHover Filename='Interface/obSkin/CheckBox-DownHighlight.png' />
+		<TextureCheckedPressed Filename='Interface/obSkin/CheckBox-Down.png' />
+	</template>
+
+<!-- Console -->
+	<template name='JHn.Console' Template='console'>
+		<Font Template='Display.Font' />
+		<Texture Template='JHn.WindowBackground' />
+		<ScrollbackColor>FF330000</ScrollbackColor>
+		<BackgroundColor />
+		<BorderColor>FFFF9900</BorderColor>
+		<SelectionColor>FF006666</SelectionColor>
+		<Border>1</Border>
+		<ScrollBar>console.ScrollBar</ScrollBar>
+	</template>
+
+<!-- Window -->
+	<template name='window.TitleBar.Title.Font' Template='Default Font'>
+    <Name>Verdana</Name>
+    <Size>14</Size>
+    <Bold />
+  </template>
+  <template name='window.TitleBar.Title'>
+    <X>10</X>
+    <Y>2</Y>
+    <Width>r38</Width>
+    <Height>12</Height>
+    <Font Template='window.TitleBar.Title.Font' />
+  </template>
+  <template name='window.TitleBar.Minimize.Texture' Filename='Interface/obSkin/MinimiseWindow-Up.png'>
+  </template>
+  <template name='window.TitleBar.Minimize.TexturePressed' Filename='Interface/obSkin/MinimiseWindow-Down.png'>
+  </template>
+  <template name='window.TitleBar.Minimize'>
+    <X>r32</X>
+    <Y>2</Y>
+    <Width>12</Width>
+    <Height>12</Height>
+    <Texture Template='window.TitleBar.Minimize.Texture' />
+    <TexturePressed Template='window.TitleBar.Minimize.TexturePressed' />
+  </template>
+  <template name='window.TitleBar.Maximize.Texture' Filename='Interface/obSkin/WindowControls.png'>
+    <Left>32</Left>
+    <Right>48</Right>
+    <Top>0</Top>
+    <Bottom>14</Bottom>
+  </template>
+  <template name='window.TitleBar.Maximize.TexturePressed' Filename='Interface/obSkin/WindowControls.png'>
+    <Left>48</Left>
+    <Right>64</Right>
+    <Top>0</Top>
+    <Bottom>14</Bottom>
+  </template>
+  <template name='window.TitleBar.Maximize'>
+    <X>r32</X>
+    <Y>2</Y>
+    <Width>12</Width>
+    <Height>12</Height>
+    <Texture Template='window.TitleBar.Maximize.Texture' />
+    <TexturePressed Template='window.TitleBar.Maximize.TexturePressed' />
+  </template>
+  <template name='window.TitleBar.Close.Texture' Filename='Interface/obSkin/CloseWindow-Up.png'/>
+  <template name='window.TitleBar.Close.TexturePressed' Filename='Interface/obSkin/CloseWindow-Down.png'/>
+  <template name='window.TitleBar.Close'>
+    <X>r16</X>
+    <Y>2</Y>
+    <Width>12</Width>
+    <Height>12</Height>
+    <Texture Template='window.TitleBar.Close.Texture' />
+    <TexturePressed Template='window.TitleBar.Close.TexturePressed' />
+  </template>
+  <template name='JHn.window.TitleBar' template='window.TitleBar'>
+   <Height>16</Height>
+	<Border>3</Border>
+	<BorderColor>FF333333</BorderColor>
+    <Width>100%</Width>
+    <Texture Template='JHn.TitleBarBackground' />
+    <Children>
+      <text Name='Title' template='window.TitleBar.title' />
+      <button Name='Close' template='window.TitleBar.Close' />
+      <button Name='Minimize' template='window.TitleBar.Minimize' />
+      <button Name='Maximize' template='window.TitleBar.Maximize' />
+    </Children>
+  </template>
+	<template name='JHn.Window.Client'>
+		<Y>16</Y>
+		<Height>r16</Height>
+		<Width>100%</Width>
+	</template>
+	<template name='JHn.Window' template='window'>
+		<Border>1</Border>
+		<Texture Template='JHn.WindowBackground' />
+		<BorderColor>FF333333</BorderColor>
+		<Resizable>0</Resizable>
+		<CloseButton />
+		<MinimizeButton />
+		<WidthResizable>0</WidthResizable>
+		<HeightResizable>0</HeightResizable>
+		<Texture Template='JHn.WindowBackground' />
+		<TitleBar template='JHn.Window.TitleBar' />
+		<Client template='JHn.Window.Client' />
+	</template>
+
+<!-- TabControl -->
+	<template name='JHn.TabControl' template='tabcontrol'>
+		<FrameTexture />
+		<Font template='Button.Font' />
+		<BorderColor />
+		<FrameBorderColor>FFFF9900</FrameBorderColor>
+		<FrameBackgroundColor>6F000000</FrameBackgroundColor>
+		<SelectedTextColor>FF000000</SelectedTextColor>
+		<TabTexture Template='JHn.TabButtonTexture' />
+		<TabSelectedTexture Template='JHn.TabButtonTextureSelected' />
+	</template>
+		
+
+<!-- MessageBox -->
+	<template name='JHn.MessageBox' template='messagebox'>
+		<Texture Template='JHn.WindowBackground' />
+		<BackgroundColor>FF000000</BackgroundColor>
+		<Border>1</Border>
+		<BorderColor>FFFFFFFF</BorderColor>
+		<TitleBar template='JHn.Window.TitleBar' />
+		<Font Template='JHn.Font'/>
+		<OKColor>FFFF9900</OKColor>
+		<CancelColor>FFFF9900</CancelColor>
+		<YesColor>FFFF9900</YesColor>
+		<NoColor>FFFF9900</NoColor>
+		<OKTexture Template='JHn.ButtonTexture' />
+		<OKTexturePressed Template='JHn.ButtonTexturePressed' />
+		<OKTextureHover Template='JHn.ButtonTextureHover' />
+		<CancelTexture Template='JHn.ButtonTexture' />
+		<CancelTexturePressed Template='JHn.ButtonTexturePressed' />
+		<CancelTextureHover Template='JHn.ButtonTextureHover' />
+		<YesTexture Template='JHn.ButtonTexture' />
+		<YesTexturePressed Template='JHn.ButtonTexturePressed' />
+		<YesTextureHover Template='JHn.ButtonTextureHover' />
+		<NoTexture Template='JHn.ButtonTexture' />
+		<NoTexturePressed Template='JHn.ButtonTexturePressed' />
+		<NoTextureHover Template='JHn.ButtonTextureHover' />
+	</template>
+	
+
+<!-- Text -->
+	<template name='JHn.Text' template='text'>
+		<Font Template='JHn.Font' />
+		<Wrap>0</Wrap>
+		<Alignment>Left</Alignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</template>
+
+<!-- TextEntry -->
+	<template name='JHn.TextEntry' template='textentry'>
+		<MaxLength>256</MaxLength>
+		<SelectionColor>FF000000</SelectionColor>
+		<BackgroundColor>32000000</BackgroundColor>
+		<BorderColor>FFFF9900</BorderColor>
+		<Border>1</Border>
+		<CaretInnerColor>FFFFFFFF</CaretInnerColor>
+		<CaretOuterColor>FFFFFFFF</CaretOuterColor>
+	</template>
+
+	  <!-- ScrollBar -->
+  <template name='scrollbar.UpTexture' Filename='Interface/obSkin/ScrollBar.png'>
+    <Border>4</Border>
+    <Bottom>16</Bottom>
+    <Left>32</Left>
+    <Right>48</Right>
+  </template>
+  <template name='scrollbar.UpTexturePressed' Filename='Interface/obSkin/ScrollBar.png'>
+    <Border>4</Border>
+    <Bottom>16</Bottom>
+    <Left>48</Left>
+    <Right>64</Right>
+  </template>
+  <template name='scrollbar.DownTexture' Filename='Interface/obSkin/ScrollBar.png'>
+    <Border>4</Border>
+    <Bottom>16</Bottom>
+    <Left>32</Left>
+    <Right>48</Right>
+    <Orientation>2</Orientation>
+  </template>
+  <template name='scrollbar.DownTexturePressed' Filename='Interface/obSkin/ScrollBar.png'>
+    <Border>4</Border>
+    <Bottom>16</Bottom>
+    <Left>48</Left>
+    <Right>64</Right>
+    <Orientation>2</Orientation>
+  </template>
+  <template name='scrollbar.SliderTexture' Filename='Interface/obSkin/ScrollBar.png'>
+    <Left>16</Left>
+    <Right>32</Right>
+    <Bottom>16</Bottom>
+  </template>
+  <template name='scrollbar.SliderHandleTexture' Filename='Interface/obSkin/ScrollBar.png'>
+    <Left>0</Left>
+    <Right>16</Right>
+    <Bottom>16</Bottom>
+  </template>
+  <template name='JHn.scrollbar' template='scrollbar'>
+    <Vertical>0</Vertical>
+    <UpTexture Template='scrollbar.UpTexture' />
+    <UpTexturePressed Template='scrollbar.UpTexturePressed' />
+    <UpTextureHover Template='scrollbar.UpTextureHover' />
+    <DownTexture Template='scrollbar.DownTexture' />
+    <DownTexturePressed Template='scrollbar.DownTexturePressed' />
+    <DownTextureHover Template='scrollbar.DownTextureHover' />
+    <SliderTexture Template='scrollbar.SliderTexture ' />
+    <SliderHandleTexture Template='scrollbar.SliderHandleTexture ' />
+  </template>
+  <template name='JHn.verticalscrollbar' template='verticalscrollbar'>
+    <Vertical>1</Vertical>
+    <UpTexture Template='scrollbar.UpTexture'>
+      <Orientation>3</Orientation>
+    </UpTexture>
+    <UpTexturePressed Template='scrollbar.UpTexturePressed'>
+      <Orientation>3</Orientation>
+    </UpTexturePressed>
+    <UpTextureHover Template='scrollbar.UpTextureHover'>
+      <Orientation>3</Orientation>
+    </UpTextureHover>
+    <DownTexture Template='scrollbar.DownTexture'>
+      <Orientation>1</Orientation>
+    </DownTexture>
+    <DownTexturePressed Template='scrollbar.DownTexturePressed'>
+      <Orientation>1</Orientation>
+    </DownTexturePressed>
+    <DownTextureHover Template='scrollbar.DownTextureHover'>
+      <Orientation>1</Orientation>
+    </DownTextureHover>
+    <SliderTexture Template='scrollbar.SliderTexture'>
+      <Orientation>1</Orientation>
+    </SliderTexture>
+    <SliderHandleTexture Template='scrollbar.SliderHandleTexture' />
+  </template>
+	
+<!-- Slider -->
+	<template name='JHn.Slider' template='slider'>
+		<Vertical>0</Vertical>
+		<Range>100</Range> <!-- Causes sliders to default to 0-100. Changing this is not recommended -->
+		<Border>0</Border>
+		<Texture Template='JHn.Slider.Texture' />
+		<HandleTexture Template='JHn.Slider.HandleTexture' />
+	</template>
+	<template name='JHn.VerticalSlider' Template='JHn.Slider'>
+		<Vertical>1</Vertical>
+		<Texture Template='JHn.Slider.Texture'>
+			<Orientation>3</Orientation>
+		</Texture>
+		<HandleTexture Template='JHn.Slider.HandleTexture'>
+			<Orientation>3</Orientation>
+		</HandleTexture>
+	</template>
+
+<!-- ComboBox -->
+	<template name='JHn.combobox.Texture' Filename='Interface/obSkin/Combobox.png'>
+    <Left>0</Left>
+    <Right>16</Right>
+    <Top>0</Top>
+    <Bottom>16</Bottom>
+    <Border>1</Border>
+    <BackgroundColor>00000000</Backgroundcolor>
+		<BorderColor>FFFF9900</BorderColor>
+		<SelectionColor>4BFF9900</SelectionColor>
+  </template>
+  <template name='JHn.combobox.ButtonTexture' Filename='Interface/obSkin/Combobox.png'>
+    <Left>16</Left>
+    <Right>32</Right>
+    <Top>0</Top>
+    <Bottom>16</Bottom>
+  </template>
+  <template name='JHn.combobox.ListBoxTexture' Filename='Interface/obSkin/Combobox.png'>
+    <Left>32</Left>
+    <Right>48</Right>
+    <Top>0</Top>
+    <Bottom>16</Bottom>
+    <Border>1</Border>
+    <BackgroundColor>00000000</Backgroundcolor>
+		<BorderColor>FFFF9900</BorderColor>
+		<SelectionColor>4BFF9900</SelectionColor>
+  </template>
+  <template name='JHn.combobox.ListBox' Template='listbox'>
+  <Border>1</Border>
+		<BackgroundColor>96000000</Backgroundcolor>
+		<BorderColor>FFFF9900</BorderColor>
+		<SelectionColor>4BFF9900</SelectionColor>
+  </template>
+  
+  <template name='JHn.combobox' template='combobox'>
+	<Font Template='Display.Font' />
+		<Texture Template='JHn.combobox.Texture'>
+			<ColorMask>4BFF9900</ColorMask>
+		</texture>
+		<ListBox template='JHn.combobox.ListBox' />
+		<ButtonTexture Template='JHn.combobox.ButtonTexture' />
+		<Border />
+	</template>
+	
+<!-- ListBox -->
+	<template name='JHn.ListBox' template='listbox'>
+		<BackgroundColor>1EFF9900</Backgroundcolor>
+		<BorderColor>FFFF9900</BorderColor>
+		<SelectionColor>4BFF9900</SelectionColor>
+	</template>
+
+<!-- VariableSlider -->
+	<template name='JHn.VariableSlider' Template='variableslider'>
+		<Vertical>0</Vertical>
+		<Range>100</Range> <!-- Causes variablesliders to default to 0-100. Changing this is not recommended -->
+		<Border>0</Border>
+		<Data />
+		<Offset>0</Offset>
+		<VariableRange>1.0</VariableRange>
+		<Texture Template='JHn.Slider.Texture' />
+		<HandleTexture Template='JHn.slider.HandleTexture' />
+	</template>
+	<template name='JHn.VerticalVariableSlider' Template='JHn.VariableSlider'>
+		<Vertical>1</Vertical>
+		<Texture Template='JHn.Variableslider.Texture'>
+			<Orientation>3</Orientation>
+		</Texture>
+		<HandleTexture Template='JHn.variableslider.HandleTexture'>
+			<Orientation>3</Orientation>
+		</HandleTexture>
+	</template>
+
+<!-- TextEdit -->
+	<template name='JHn.TextEdit' template='textedit'>
+		<BorderColor>FFFF9900</BorderColor>
+	</template>
+
+<!-- Frame -->
+	<template name='JHn.Frame' template='frame'>
+		<BorderColor>FFFF9900</BorderColor>
+	</template>
+
+<!-- CommandEntry -->
+	<template name='JHn.CommandEntry' template='commandentry'>
+		<BorderColor>FFFF9900</BorderColor>
+	</template>
+	
+
+
+
+<!-- Declare all the Skin Templates -->
+	<Skin Name='obskin' Template='Default Skin'>
+		<SkinTemplate Base='button' Skin='JHn.Button' />
+		<SkinTemplate Base='checkbox' Skin='JHn.CheckBox' />
+		<SkinTemplate Base='combobox' Skin='JHn.combobox' />
+		<SkinTemplate Base='commandbutton' Skin='JHn.CommandButton' />
+		<SkinTemplate Base='commandcheckbox' Skin='JHn.CommandCheckBox' />
+		<SkinTemplate Base='commandentry' Skin='' />
+		<SkinTemplate Base='console' Skin='JHn.Console' />
+		<SkinTemplate Base='frame' Skin='' />
+		<SkinTemplate Base='scrollbar' Skin='JHn.scrollbar' />
+		<SkinTemplate Base='verticalscrollbar' Skin='JHn.verticalscrollbar' />
+<!--		<SkinTemplate Base='gauge' Skin='' /> 			-->
+<!--		<SkinTemplate Base='hud' Skin='' /> 			-->
+<!--		<SkinTemplate Base='hudelement' Skin='' />		-->
+		<SkinTemplate Base='listbox' Skin='JHn.Listbox' />
+		<SkinTemplate Base='slider' Skin='JHn.Slider' />
+		<SkinTemplate Base='tabcontrol' Skin='JHn.tabcontrol' />
+<!--		<SkinTemplate Base='table' Skin='' /> 		-->
+		<SkinTemplate Base='text' Skin='JHn.Text' />
+		<SkinTemplate Base='textedit' skin='JHn.TextEdit' />
+		<SkinTemplate Base='textentry' Skin='JHn.TextEntry' />
+<!--		<SkinTemplate Base='tooltip' Skin='' /> 		-->
+<!--		<SkinTemplate Base='variableguage' Skin='' /> 		-->
+		<SkinTemplate Base='variableslider' Skin='JHn.VariableSlider' />
+		<SkinTemplate Base='Window' Skin='JHn.Window' />
+		<SkinTemplate Base='Window.TitleBar' Skin='JHn.Window.TitleBar' />
+	</Skin>
+</ISUI>

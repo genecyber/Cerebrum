@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 
+OpenBot Radar
+-->
+<ISUI>
+	<template name='CerebrumRadar.Font' Template='Default Font'>	
+		<Name>Verdana</Name>
+		<Size>10</Size>
+		<Color>FFFFFFFF</Color>
+	</template>
+	<template Name='Cerebrum_radar'>
+		<Font Template='CerebrumRadar.Font' />
+		<ClipZ>0</ClipZ>
+		<ClipRadius>0</ClipRadius>
+		<ClipText>0</ClipText>
+		<ShowLabels />
+		<Rotation>0</Rotation>
+		<RadarSize>200.0</RadarSize>
+	</template>
+	<template Name='wowradar' Template='Cerebrum_radar'>
+		<Self />
+		<BlipTypes>
+			<BlipType Name='Item' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Container' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Unit' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Quest NPC - Available Later' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>112</Left>
+				<Right>128</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>	
+			<BlipType Name='Quest NPC - Available Trivial' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>112</Left>
+				<Right>128</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+				<ColorMask>FFAAAA00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Quest NPC - Incomplete' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>112</Left>
+				<Right>128</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+			</BlipType>	
+			<BlipType Name='Quest NPC - Incomplete Repeatable' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>96</Left>
+				<Right>112</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>	
+			<BlipType Name='Quest NPC - Available' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>32</Left>
+				<Right>48</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>						
+			<BlipType Name='Quest NPC - Complete' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>48</Left>
+				<Right>64</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>			
+			<BlipType Name='Quest NPC - Available Repeatable' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Merchant' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>64</Left>
+				<Right>80</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>	
+			<BlipType Name='Banker' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>64</Left>
+				<Right>80</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+				<ColorMask>FF00FF00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Auctioneer' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>64</Left>
+				<Right>80</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+				<ColorMask>FFFF0000</ColorMask>
+			</BlipType>	
+			<BlipType Name='InnKeeper' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>80</Left>
+				<Right>96</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+				<ColorMask>FF00FF00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Griffon Master' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>112</Left>
+				<Right>128</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+				<ColorMask>FF00FF00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Neutral Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFFFF00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Friendly Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FF00FF00</ColorMask>
+			</BlipType>	
+			<BlipType Name='Dead Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>32</Top>
+				<Bottom>48</Bottom>
+			</BlipType>			
+			<BlipType Name='Skinnable Dead Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>16</Left>
+				<Right>32</Right>
+				<Top>32</Top>
+				<Bottom>48</Bottom>
+			</BlipType>			
+			<BlipType Name='Lootable Dead Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>32</Left>
+				<Right>48</Right>
+				<Top>32</Top>
+				<Bottom>48</Bottom>
+			</BlipType>			
+			<BlipType Name='Normal Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFF0000</ColorMask>
+			</BlipType>			
+			<BlipType Name='Elite Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>32</Left>
+				<Right>48</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFF0000</ColorMask>
+			</BlipType>
+			<BlipType Name='Rare Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFF00FF</ColorMask>
+			</BlipType>
+			<BlipType Name='World Boss Unit' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>48</Left>
+				<Right>64</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFF0000</ColorMask>
+			</BlipType>
+			<BlipType Name='Rare Elite Unit' TFilename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>32</Left>
+				<Right>48</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+				<ColorMask>FFFF00FF</ColorMask>
+			</BlipType>
+			<BlipType Name='Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Alliance Player' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>0</Left>
+				<Right>16</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>
+			<BlipType Name='Horde Player' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>16</Left>
+				<Right>32</Right>
+				<Top>0</Top>
+				<Bottom>16</Bottom>
+			</BlipType>
+			<BlipType Name='Human Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Orc Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Dwarf Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Night Elf Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Undead Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Tauren Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Gnome Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Troll Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Warrior Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Paladin Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Hunter Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Rogue Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Priest Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Shaman Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Mage Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Warlock Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Druid Player' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Game Object' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Door' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Button' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Quest Giver' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Power Crystal' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Mining Node' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>64</Left>
+				<Right>80</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+			</BlipType>
+			<BlipType Name='Herb Node' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>80</Left>
+				<Right>96</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+			</BlipType>
+			<BlipType Name='Sustenance' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Unusable Chest' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>48</Left>
+				<Right>64</Right>
+				<Top>32</Top>
+				<Bottom>48</Bottom>
+				<ColorMask>FF909090</ColorMask>
+			</BlipType>			
+			<BlipType Name='Chest' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>48</Left>
+				<Right>64</Right>
+				<Top>32</Top>
+				<Bottom>48</Bottom>
+			</BlipType>			
+			<BlipType Name='Binder' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Generic' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>96</Left>
+				<Right>112</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+			</BlipType>
+			<BlipType Name='Trap' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Chair' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Spell Focus' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Text' Filename='Interface/WoWRadar.png' ColorKey='FFFF179A'>
+				<Left>96</Left>
+				<Right>112</Right>
+				<Top>16</Top>
+				<Bottom>32</Bottom>
+			</BlipType>
+			<BlipType Name='Goober' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Transport' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Area Damage' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Camera' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='World Object' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Map Object Transport' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Duel Arbiter' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Fishing Node' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Ritual' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Mailbox' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Auction House' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Spell Caster' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Meeting Stone' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Dynamic Object' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Corpse' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+			<BlipType Name='Unknown' Template='Button.Texture'>
+				<ColorMask>FFFFFFFF</ColorMask>
+			</BlipType>
+		</BlipTypes>
+	</template>
+
+        <Window Name='cerebrum wowradar'>
+		<X>650</X>
+		<Y>50</Y>
+		<BackgroundColor>0</BackgroundColor>
+		<Border>0</Border>
+		<Width>426</Width>
+		<Height>410</Height>
+		<Visible>0</Visible>		
+		<Children>
+			<radarframe Name='wowradar'>
+				<Width>100%</Width>
+				<Height>100%</Height>
+				<MinZoom>50</MinZoom>
+				<MaxZoom>300</MaxZoom>
+				<ZoomUnits>yds</ZoomUnits>
+				<children>
+					<checkbox Name='Show Labels'>
+						<X>160</X>
+						<Y>0</Y>
+						<Width>50</Width>
+						<Height>12</Height>
+						<FontSize>10</FontSize>
+						<Text>Labels</Text>
+					</checkbox>
+					<slider Name='Zoom'>
+						<X>80</X>
+						<Y>0</Y>
+						<Border>0</Border>
+						<Width>50</Width>
+						<Height>10</Height>
+						<AutoTooltip>Zoom level</AutoTooltip>
+					</slider>
+					<text Name='Diameter'>
+						<Width>60</Width>
+						<Height>40</Height>
+						<FontSize>10</FontSize>
+						<TextColor>FFFFFFFF</TextColor>
+					</text>
+					<wowradar Name='Radar'>
+                                     		<RadarSize>250.0</RadarSize>
+						<X>16</X>
+						<Y>10</Y>
+						<Width>400</Width>	
+						<Height>400</Height>	
+						<Rotation /> 
+						<ClipRadius />
+				<UnitBlips>Classification</UnitBlips>
+				<PlayerBlips>Team</PlayerBlips>
+				<Filter>-players -units -gameobjects -mine -nopets -alive -notflying</Filter>
+						<Children>
+							<tooltip Name='Radar Tooltip'>
+							</tooltip>
+						</Children>
+					</wowradar>
+				</children>
+			</radarframe>
+		</Children>
+        </Window>
+        <Window Name='cerebrum pvp'>
+		<X>650</X>
+		<Y>500</Y>
+		<BackgroundColor>0</BackgroundColor>
+		<Border>0</Border>
+		<Width>326</Width>
+		<Height>310</Height>
+		<Visible>0</Visible>		
+		<Children>
+			<radarframe Name='wowradar'>
+				<Width>100%</Width>
+				<Height>100%</Height>
+				<MinZoom>50</MinZoom>
+				<MaxZoom>300</MaxZoom>
+				<ZoomUnits>yds</ZoomUnits>
+				<children>
+					<checkbox Name='Show Labels'>
+						<X>160</X>
+						<Y>0</Y>
+						<Width>50</Width>
+						<Height>12</Height>
+						<FontSize>10</FontSize>
+						<Text>Labels</Text>
+					</checkbox>
+					<slider Name='Zoom'>
+						<X>80</X>
+						<Y>0</Y>
+						<Border>0</Border>
+						<Width>50</Width>
+						<Height>10</Height>
+						<AutoTooltip>Zoom level</AutoTooltip>
+					</slider>
+					<text Name='Diameter'>
+						<Width>60</Width>
+						<Height>40</Height>
+						<FontSize>10</FontSize>
+						<TextColor>FFFFFFFF</TextColor>
+					</text>
+					<wowradar Name='Radar'>
+                                     		<RadarSize>500.0</RadarSize>
+						<X>16</X>
+						<Y>10</Y>
+						<Width>300</Width>	
+						<Height>300</Height>	
+						<Rotation /> 
+						<ClipRadius />
+				<UnitBlips>Classification</UnitBlips>
+				<PlayerBlips>Team</PlayerBlips>
+				<Filter>-players -notflying</Filter>
+						<Children>
+							<tooltip Name='Radar Tooltip'>
+							</tooltip>
+						</Children>
+					</wowradar>
+				</children>
+			</radarframe>
+		</Children>
+        </Window>
+</ISUI>

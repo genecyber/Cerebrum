@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='ClassGUI'> 
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>0</Visible>
+		<Title>Crazy Rogue Config</Title>
+		<X>5</X> 
+		<Y>600</Y> 
+		<Width>350</Width> 
+		<Height>350</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+				<tab name='Core'>
+					<text name='lblRestHP'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Min Health:</Text>   
+					</text>
+						<text name='valueRestHP'>     
+						<X>100</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Core@Pages@ClassGUI].FindChild[sldRestHP].Value}%     
+						</Text>    
+					</text>
+					<slider name='sldRestHP'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRestHP"]
+						</OnChange>    
+					</slider>
+					<text name='lblStandHP'>        
+						<X>10</X>      
+						<Y>40</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Quit Rest at:</Text>      
+					</text>
+					<text name='valueStandHP'>   
+						<X>100</X>   
+						<Y>40</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						${UIElement[Core@Pages@ClassGUI].FindChild[sldStandHP].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldStandHP'>    
+						<X>180</X>    
+						<Y>35</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldStandHP"]
+						</OnChange>    
+					</slider>
+					<text name='lblSkipToLoot'>    
+						<X>10</X>     
+						<Y>75</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Skip To Loot:</Text>     
+					</text>			
+					<checkbox name='chkSkipToLoot'>   
+						<X>100</X>  
+						<y>70</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkSkipToLoot"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblShootToPull'>    
+						<X>10</X>     
+						<Y>105</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Shoot To Pull:</Text>     
+					</text>
+					<checkbox name='chkShootToPull'>   
+						<X>100</X>  
+						<y>100</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkShootToPull"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblChaseRunners'>   
+						<X>195</X>     
+						<Y>105</Y>    
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Chase Runners:</Text>     
+					</text>
+					<checkbox name='chkChaseRunners'>   
+						<X>270</X>   
+						<y>100</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkChaseRunners"]
+						</OnLeftClick>   
+					</checkbox>							
+					<text name='lblPrimaryAttack'>    
+						<X>10</X>      
+						<Y>165</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Primary Attack:</Text>   
+					</text>
+					<combobox name='cmbPrimaryAttack'>       
+						<X>100</X>     
+						<y>160</y>  
+						<Width>180</Width>       
+						<height>20</height>      
+						<FullHeight>100</FullHeight>     
+						<Items>
+							 <Item Value='Sinister Strike' default='1'>Sinister Strike</Item>
+							 <Item Value='Hemorrhage'>Hemorrhage</Item>
+							 <Item Value='Shiv'>Shiv</Item>
+						</Items>    
+						<OnSelect>     
+						Event[OPENBOT_CONFIG_COMBO]:Execute["cmbPrimaryAttack"]  
+						</OnSelect>      
+					</combobox>
+					<text name='lblPrimaryBackAttack'>     
+						<X>10</X>      
+						<Y>195</Y>     
+						<Width>140</Width>   
+						<Height>20</Height>     
+						<Text>Back Attack:</Text>   
+					</text>
+					<combobox name='cmbPrimaryBackAttack'>    
+						<X>100</X>     
+						<y>190</y>       
+						<Width>180</Width>         
+						<height>20</height>        
+						<FullHeight>100</FullHeight>       
+						<Items>  
+							 <Item Value='Backstab' default='1'>Backstab</Item>
+							 <Item Value='Mutilate'>Mutilate</Item>					
+						</Items>    
+						<OnSelect>       
+						Event[OPENBOT_CONFIG_COMBO]:Execute["cmbPrimaryBackAttack"]  
+						</OnSelect>       
+					</combobox>
+					<text name='lblUseBackAttack'>   
+						<X>10</X>     
+						<Y>225</Y>    
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Use Back Attack:</Text>     
+					</text>
+					<checkbox name='chkUseBackAttack'>   
+						<X>100</X>   
+						<y>220</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBackAttack"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblWeaponSwap'>   
+						<X>195</X>     
+						<Y>225</Y>    
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Swap Weapons:</Text>     
+					</text>
+					<checkbox name='chkWeaponSwap'>   
+						<X>270</X>   
+						<y>220</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkWeaponSwap"]
+						</OnLeftClick>   
+					</checkbox>				
+				</tab>
+				<tab name='Ability'>
+					<text name='lblEviscerateMultiplier'>     
+						<X>10</X>     
+						<Y>10</Y>     
+						<Width>140</Width>      
+						<Height>20</Height>     
+						<Text>Evis Multiplier:</Text> 
+					</text>
+					<text name='valueEviscerateMultiplier'>     
+						<X>100</X>    
+						<Y>10</Y>    
+						<Width>60</Width>      
+						<Height>20</Height>    
+						<Text> 
+						${UIElement[Ability@Pages@ClassGUI].FindChild[sldEviscerateMultiplier].Value}  
+						</Text>   
+					</text>
+					<slider name='sldEviscerateMultiplier'>    
+						<X>180</X>   
+						<Y>5</Y>    
+						<Offset>1</Offset>     
+						<Range>20</Range>       
+						<Width>160</Width> 
+						<Height>15</Height>      
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldEviscerateMultiplier"]
+						</OnChange>    
+					</slider>
+					<text name='lblUseSliceAndDice'>     
+						<X>10</X>     
+						<Y>45</Y>       
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Slice and Dice:</Text>   
+					</text>
+					<checkbox name='chkUseSliceAndDice'>  
+						<x>100</x>
+						<y>40</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>   
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseSliceAndDice"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseRupture'>    
+						<X>10</X>       
+						<Y>75</Y>  
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Rupture:</Text>      
+					</text>
+					<checkbox name='chkUseRupture'>  
+						<X>100</X>  
+						<y>70</y>  
+						<width>60</width>  
+						<height>20</height>    
+						<FullHeight>20</FullHeight> 
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseRupture"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblHealthForRupture'>     
+						<X>190</X>    
+						<Y>75</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Min Pct:</Text>     
+					</text>
+					<text name='valueHealthForRupture'>     
+						<X>225</X>     
+						<Y>75</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Ability@Pages@ClassGUI].FindChild[sldHealthForRupture].Value}%   
+						</Text>   
+					</text>
+					<slider name='sldHealthForRupture'>     
+						<X>260</X> 
+						<Y>70</Y>      
+						<Offset>1</Offset>          
+						<Range>100</Range>  
+						<Width>80</Width>  
+						<Height>15</Height>   
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForRupture"]
+						</OnChange>   
+					</slider>
+					<text name='lblUseGarrote'>  
+						<X>10</X>       
+						<Y>105</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Garrote:</Text>      
+					</text>
+					<checkbox name='chkUseGarrote'>  
+						<X>100</X>  
+						<y>100</y>   
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseGarrote"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseKidneyShot'>     
+						<X>10</X> 
+						<Y>135</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>       
+						<Text>Kidney Shot:</Text>  
+					</text>
+					<checkbox name='chkUseKidneyShot'>   
+						<X>100</X> 
+						<y>130</y>  
+						<width>60</width>  
+						<height>20</height>  
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseKidneyShot"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblHealthForKidneyShot'>     
+						<X>190</X>    
+						<Y>135</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Min Pct:</Text>     
+					</text>
+					<text name='valueHealthForKidneyShot'>     
+						<X>225</X>     
+						<Y>135</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Ability@Pages@ClassGUI].FindChild[sldHealthForKidneyShot].Value}%   
+						</Text>   
+					</text>
+					<slider name='sldHealthForKidneyShot'>     
+						<X>260</X> 
+						<Y>130</Y>      
+						<Offset>1</Offset>          
+						<Range>100</Range>  
+						<Width>80</Width>  
+						<Height>15</Height>   
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForKidneyShot"]
+						</OnChange>   
+					</slider>
+					<text name='lblUseAmbush'>    
+						<X>10</X>      
+						<Y>165</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Ambush:</Text>    
+					</text>
+					<checkbox name='chkUseAmbush'>  
+						<X>100</X>  
+						<y>160</y>   
+						<width>60</width>  
+						<height>20</height> 
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>  
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseAmbush"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseRiposte'>   
+						<X>10</X>     
+						<Y>195</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Riposte:</Text>   
+					</text>
+					<checkbox name='chkUseRiposte'>  
+						<X>100</X>  
+						<y>190</y>    
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseRiposte"]
+						</OnLeftClick>    
+					</checkbox>
+					<text name='lblUseGhostlyStrike'>      
+						<X>10</X>      
+						<Y>225</Y>   
+						<Width>140</Width>      
+						<Height>20</Height>       
+						<Text>GhostlyStrike:</Text>     
+					</text>
+					<checkbox name='chkUseGhostlyStrike'>  
+						<X>100</X>  
+						<y>220</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseGhostlyStrike"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseKick'>      
+						<X>10</X>      
+						<Y>255</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Kick:</Text>     
+					</text>
+					<checkbox name='chkUseKick'> 
+						<X>100</X>   
+						<y>250</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseKick"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseDistract'>     
+						<X>10</X>     
+						<Y>285</Y>    
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Distract:</Text>   
+					</text>
+					<checkbox name='chkUseDistract'>  
+						<X>100</X> 
+						<y>280</y> 
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight> 
+						<text>       On - Off</text>
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseDistract"]
+						</OnLeftClick> 
+					</checkbox>
+				</tab>
+				<tab name='Aggro'>
+					<text name='lblRangePullOnDetectAdds'>      
+						<X>10</X>   
+						<Y>15</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Detect Adds:</Text>   
+					</text>
+					<checkbox name='chkRangePullOnDetectAdds'>  
+						<X>100</X>  
+						<y>10</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkRangePullOnDetectAdds"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblRangePullOnDetectAddsRadius'>       
+						<X>10</X>    
+						<Y>40</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>      
+						<Text>Detect Radius:</Text>  
+					</text>
+					<text name='valueRangePullOnDetectAddsRadius'>     
+						<X>100</X>    
+						<Y>40</Y>       
+						<Width>60</Width>     
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldRangePullOnDetectAddsRadius].Value}    
+						</Text>    
+					</text>
+					<slider name='sldRangePullOnDetectAddsRadius'>    
+						<X>180</X>     
+						<Y>35</Y>      
+						<Offset>5</Offset>      
+						<Range>45</Range>    
+						<Width>160</Width>     
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRangePullOnDetectAddsRadius"]
+						</OnChange>   
+					</slider>
+					<text name='lblAddsForBladeFlurry'>      
+						<X>10</X>     
+						<Y>70</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Adds - Blade Flurry:</Text>   
+					</text>
+					<text name='valueAddsForBladeFlurry'>     
+						<X>100</X>    
+						<Y>70</Y>       
+						<Width>60</Width>     
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForBladeFlurry].Value}
+						</Text>    
+					</text>
+					<slider name='sldAddsForBladeFlurry'>    
+						<X>180</X>     
+						<Y>65</Y>      
+						<Offset>1</Offset>      
+						<Range>5</Range>    
+						<Width>160</Width>     
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForBladeFlurry"] 
+						</OnChange>   
+					</slider>
+					<text name='lblAddsForAdrenalineRush'>      
+						<X>10</X>   
+						<Y>100</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>     
+						<Text>Adds - Adrenaline:</Text>    
+					</text>
+					<text name='valueAddsForAdrenalineRush'>    
+						<X>100</X>     
+						<Y>100</Y>       
+						<Width>60</Width>       
+						<Height>20</Height>      
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForAdrenalineRush].Value}
+						</Text>   
+					</text>
+					<slider name='sldAddsForAdrenalineRush'>   
+						<X>180</X>     
+						<Y>95</Y>     
+						<Offset>1</Offset>     
+						<Range>5</Range>    
+						<Width>160</Width>    
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForAdrenalineRush"]
+						</OnChange>     
+					</slider>
+					<text name='lblAddsForVanish'>      
+						<X>10</X>   
+						<Y>130</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Adds - Vanish:</Text>     
+					</text>
+					<text name='valueAddsForVanish'>      
+						<X>100</X>    
+						<Y>130</Y>     
+						<Width>60</Width>      
+						<Height>20</Height>       
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForVanish].Value}  
+						</Text>   
+					</text>
+					<slider name='sldAddsForVanish'>    
+						<X>180</X>    
+						<Y>125</Y>     
+						<Offset>1</Offset>     
+						<Range>5</Range>   
+						<Width>160</Width>    
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForVanish"]
+						</OnChange>    
+					</slider>
+					<text name='lblAddsForEvasion'>    
+						<X>10</X>      
+						<Y>160</Y>       
+						<Width>140</Width>    
+						<Height>20</Height>     
+						<Text>Adds - Evasion:</Text>   
+					</text>
+					<text name='valueAddsForEvasion'>    
+						<X>100</X>      
+						<Y>160</Y>       
+						<Width>60</Width>   
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForEvasion].Value}     
+						</Text>     
+					</text>
+					<slider name='sldAddsForEvasion'>     
+						<X>180</X>  
+						<Y>155</Y>    
+						<Offset>1</Offset>        
+						<Range>5</Range>    
+						<Width>160</Width>      
+						<Height>15</Height>     
+						<OnChange>   
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForEvasion"]
+						</OnChange>   
+					</slider>
+					<text name='lblAddsForTrinketOne'>       
+						<X>10</X>    
+						<Y>190</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Adds - Trinket1:</Text>    
+					</text>
+					<text name='valueAddsForTrinketOne'>        
+						<X>100</X>     
+						<Y>190</Y>      
+						<Width>60</Width>   
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForTrinketOne].Value}
+						</Text>     
+					</text>
+					<slider name='sldAddsForTrinketOne'>      
+						<X>180</X>   
+						<Y>185</Y>  
+						<Offset>1</Offset>      
+						<Range>5</Range>  
+						<Width>160</Width>     
+						<Height>15</Height>      
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForTrinketOne"]
+						</OnChange> 
+					</slider>
+					<text name='lblAddsForTrinketTwo'>      
+						<X>10</X>      
+						<Y>220</Y>        
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Adds - Trinket2:</Text>   
+					</text>
+					<text name='valueAddsForTrinketTwo'>    
+						<X>100</X>      
+						<Y>220</Y>       
+						<Width>60</Width>       
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForTrinketTwo].Value}
+						</Text>    
+					</text>
+					<slider name='sldAddsForTrinketTwo'>    
+						<X>180</X>   
+						<Y>215</Y>   
+						<Offset>1</Offset>   
+						<Range>5</Range>    
+						<Width>160</Width>   
+						<Height>15</Height>      
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForTrinketTwo"]
+						</OnChange>    
+					</slider>
+					<text name='lblUseGougeOnAdds'>      
+						<X>10</X>   
+						<Y>255</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use Gouge on Adds:</Text>   
+					</text>
+					<checkbox name='chkUseGougeOnAdds'>  
+						<X>100</X>  
+						<y>250</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseGougeOnAdds"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseBlindOnAdds'>      
+						<X>10</X>   
+						<Y>285</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use Blind on Adds:</Text>   
+					</text>
+					<checkbox name='chkUseBlindOnAdds'>  
+						<X>100</X>  
+						<y>280</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBlindOnAdds"]
+						</OnLeftClick>  
+					</checkbox>
+				</tab>
+				<tab name='Misc'>
+					<text name='lblHealthForEvasion'>   
+						<X>10</X>     
+						<Y>10</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Pct Evasion:</Text>     
+					</text>
+					<text name='valueHealthForEvasion'>   
+						<X>100</X>    
+						<Y>10</Y>       
+						<Width>60</Width>    
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForEvasion].Value}%
+						</Text>   
+					</text>
+					<slider name='sldHealthForEvasion'>    
+						<X>180</X>   
+						<Y>5</Y>    
+						<Offset>1</Offset>      
+						<Range>100</Range>     
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForEvasion"]
+						</OnChange>    
+					</slider>
+					<text name='lblHealthForVanish'>     
+						<X>10</X>    
+						<Y>40</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Pct Vanish:</Text>     
+					</text>
+					<text name='valueHealthForVanish'>     
+						<X>100</X>     
+						<Y>40</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForVanish].Value}%   
+						</Text>   
+					</text>
+					<slider name='sldHealthForVanish'>     
+						<X>180</X> 
+						<Y>35</Y>      
+						<Offset>1</Offset>          
+						<Range>100</Range>  
+						<Width>160</Width>  
+						<Height>15</Height>   
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForVanish"]
+						</OnChange>   
+					</slider>
+					<text name='lblHealthForBandage'>     
+						<X>10</X>    
+						<Y>70</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Pct  Bandage:</Text>   
+					</text>
+					<text name='valueHealthForBandage'>   
+						<X>100</X>   
+						<Y>70</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>    
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForBandage].Value}%    
+						</Text>    
+					</text>
+					<slider name='sldHealthForBandage'>   
+						<X>180</X>    
+						<Y>65</Y>      
+						<Offset>1</Offset>      
+						<Range>100</Range>    
+						<Width>160</Width>   
+						<Height>15</Height>    
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForBandage"] 
+						</OnChange>    
+					</slider>
+					<text name='lblHealthForPotion'>     
+						<X>10</X>    
+						<Y>100</Y>     
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Pct Potion:</Text>   
+					</text>
+					<text name='valueHealthForPotion'>  
+						<X>100</X>    
+						<Y>100</Y>     
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForPotion].Value}% 
+						</Text>        
+					</text>
+					<slider name='sldHealthForPotion'>   
+						<X>180</X>      
+						<Y>95</Y>     
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>   
+						<Height>15</Height>    
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForPotion"]
+						</OnChange>     
+					</slider>
+					<text name='lblMainHandPoison'>    
+						<X>10</X>     
+						<Y>135</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>MH Poison:</Text>   
+					</text>
+					<combobox name='cmbMainHandPoison'>   
+						<X>100</X>      
+						<y>130</y>         
+						<Width>180</Width>    
+						<height>20</height>   
+						<FullHeight>100</FullHeight>      
+						<Items>
+							 <Item Value='Instant' default='1'>Instant</Item>
+							 <Item Value='Crippling'>Crippling</Item>
+							 <Item Value='Deadly'>Deadly</Item>
+							 <Item Value='Mind-numbing'>Mind-numbing</Item>
+							 <Item Value='Wound'>Wound</Item>
+							 <Item Value='Anesthetic'>Anesthetic</Item>
+						</Items>    
+						<OnSelect>       
+						Event[OPENBOT_CONFIG_COMBO]:Execute["cmbMainHandPoison"]
+						</OnSelect>   
+					</combobox>
+					<text name='lblOffHandPoison'>      
+						<X>10</X>    
+						<Y>165</Y>   
+						<Width>140</Width>    
+						<Height>20</Height>     
+						<Text>OH Poison:</Text>   
+					</text>
+					<combobox name='cmbOffHandPoison'>      
+						<X>100</X>      
+						<y>160</y>       
+						<Width>180</Width>      
+						<height>20</height>     
+						<FullHeight>100</FullHeight>      
+						<Items>
+							 <Item Value='Instant' default='1'>Instant</Item>
+							 <Item Value='Crippling'>Crippling</Item>
+							 <Item Value='Deadly'>Deadly</Item>
+							 <Item Value='Mind-numbing'>Mind-numbing</Item>
+							 <Item Value='Wound'>Wound</Item>
+							 <Item Value='Anesthetic'>Anesthetic</Item>
+						</Items>     
+						<OnSelect>      
+						Event[OPENBOT_CONFIG_COMBO]:Execute["cmbOffHandPoison"]   
+						</OnSelect>     						
+					</combobox>
+					<text name='lblPatrolInStealth'>     
+						<X>10</X>      
+						<Y>195</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>      
+						<Text>Always Stealth:</Text>    
+					</text>
+					<checkbox name='chkPatrolInStealth'>     
+						<X>100</X>  
+						<y>190</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>    
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkPatrolInStealth"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblRacial'>  
+						<X>10</X>       
+						<Y>225</Y>     
+						<Width>140</Width>  
+						<Height>20</Height>   
+						<Text>Use Racial:</Text>     
+					</text>
+					<checkbox name='chkRacial'>    
+						<X>100</X> 
+						<y>220</y> 
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkRacial"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUsePickPocket'> 
+						<X>10</X>       
+						<Y>255</Y>       
+						<Width>140</Width>   
+						<Height>20</Height>   
+						<Text>Pick Pockets:</Text>   
+					</text>
+					<checkbox name='chkUsePickPocket'>    
+						<X>100</X>  
+						<y>250</y>  
+						<width>60</width>  
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUsePickPocket"]
+						</OnLeftClick> 
+					</checkbox>
+					<text name='lblPullBailOutTimer'>   
+						<X>10</X>     
+						<Y>280</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Pull Bailout Timer:</Text>     
+					</text>
+					<text name='valuePullBailOutTimer'>   
+						<X>100</X>    
+						<Y>280</Y>       
+						<Width>60</Width>    
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldPullBailOutTimer].Value}ms
+						</Text>   
+					</text>
+					<slider name='sldPullBailOutTimer'>    
+						<X>180</X>   
+						<Y>275</Y>    
+						<Offset>1</Offset>      
+						<Range>2500</Range>     
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldPullBailOutTimer"]
+						</OnChange>    
+					</slider>
+				</tab>
+				</tabs>
+		</TabControl>
+		</Children> 
+	</window>
+</ISUI>

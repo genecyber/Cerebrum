@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='ClassGUI'> 
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>0</Visible>
+		<Title>   Hunter Routine Config</Title>
+		<X>5</X> 
+		<Y>600</Y> 
+		<Width>350</Width> 
+		<Height>350</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+				<tab name='Main'>
+					<text name='lblRestHP'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Min Health:</Text>   
+					</text>
+					<text name='valueRestHP'>     
+						<X>130</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+    						${UIElement[Main@Pages@ClassGUI].FindChild[sldRestHP].Value}%     
+						</Text>    
+					</text>
+					<slider name='sldRestHP'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+    						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRestHP"]  
+						</OnChange>    
+					</slider>
+                    
+					<text name='lblRestMana'> 
+						<X>10</X>        
+						<Y>30</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Min Mana:</Text>   
+					</text>
+					<text name='valueRestMana'>     
+						<X>130</X>     
+						<Y>30</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+    						${UIElement[Main@Pages@ClassGUI].FindChild[sldRestMana].Value}%     
+						</Text>    
+					</text>
+					<slider name='sldRestMana'>    
+						<X>180</X>     
+						<Y>25</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+    						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRestMana"]  
+						</OnChange>    
+					</slider>
+                    
+					<text name='lblStandHP'>        
+						<X>10</X>      
+						<Y>60</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Health to Quit Rest at:</Text>      
+					</text>
+					<text name='valueStandHP'>   
+						<X>130</X>   
+						<Y>60</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+	    					${UIElement[Main@Pages@ClassGUI].FindChild[sldStandHP].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldStandHP'>    
+						<X>180</X>    
+						<Y>55</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+    						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldStandHP"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblStandMana'>        
+						<X>10</X>      
+						<Y>80</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Mana to Quit Rest at:</Text>      
+					</text>
+					<text name='valueStandMana'>   
+						<X>130</X>   
+						<Y>80</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+	    					${UIElement[Main@Pages@ClassGUI].FindChild[sldStandMana].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldStandMana'>    
+						<X>180</X>    
+						<Y>75</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+    						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldStandMana"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblUsePot'>        
+						<X>10</X>      
+						<Y>110</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Use Health Potion at:</Text>      
+					</text>
+					<text name='valueUsePot'>   
+						<X>130</X>   
+						<Y>110</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${UIElement[Main@Pages@ClassGUI].FindChild[sldUsePot].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldUsePot'>    
+						<X>180</X>    
+						<Y>105</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldUsePot"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblUseBandage'>        
+						<X>10</X>      
+						<Y>130</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Use Bandage at:</Text>      
+					</text>
+					<text name='valueUseBandage'>   
+						<X>130</X>   
+						<Y>130</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+				    		${UIElement[Main@Pages@ClassGUI].FindChild[sldUseBandage].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldUseBandage'>    
+						<X>180</X>    
+						<Y>125</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+			    			Event[OPENBOT_CONFIG_SLIDER]:Execute["sldUseBandage"] 
+						</OnChange>    
+					</slider>
+                    
+					<text name='lblFeignDeath'>        
+						<X>10</X>      
+						<Y>150</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Use Feign Death at:</Text>      
+					</text>
+					<text name='valueFeignDeath'>   
+						<X>130</X>   
+						<Y>150</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+		    				${UIElement[Main@Pages@ClassGUI].FindChild[sldFeignDeath].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldFeignDeath'>    
+						<X>180</X>    
+						<Y>145</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+        				<OnChange>    
+	    					Event[OPENBOT_CONFIG_SLIDER]:Execute["sldFeignDeath"] 
+						</OnChange>    
+					</slider>
+                    
+                    <checkbox name="chkUseScrolls">
+                        <x>10</x>
+                        <y>180</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Use Scrolls</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseScrolls"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+                           
+                    <checkbox name="chkUseAspectCheetah">
+                        <x>10</x>
+                        <y>200</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Use Aspect of the Cheetah</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseAspectCheetah"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+                    
+				</tab>
+
+
+                    
+				<tab name='Pull'>
+					<text name='lblPullBailOutTimer'>   
+						<X>10</X>     
+						<Y>10</Y>  
+						<Width>200</Width>  
+						<Height>20</Height>    
+						<Text>Pull Bailout Timer:</Text>     
+					</text>
+					<text name='valuePullBailOutTimer'>   
+						<X>130</X>    
+						<Y>10</Y>       
+						<Width>60</Width>    
+						<Height>20</Height>     
+						<Text>
+						    ${UIElement[Pull@Pages@ClassGUI].FindChild[sldPullBailOutTimer].Value}s
+						</Text>   
+					</text>
+					<slider name='sldPullBailOutTimer'>    
+						<X>180</X>   
+						<Y>5</Y>    
+						<Offset>1</Offset>      
+						<Range>60</Range>     
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>
+						    Event[OPENBOT_CONFIG_SLIDER]:Execute["sldPullBailOutTimer"]  
+						</OnChange>    
+					</slider>
+                    
+                    <checkbox name="chkUseRangedAttacks">
+                        <x>10</x>
+                        <y>35</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Use Ranged Attacks (OFF for Melee Only)</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseRangedAttacks"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+                    
+                    <checkbox name="chkUseHuntersMark">
+                        <x>10</x>
+                        <y>70</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Use Hunters Mark</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseHuntersMark"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+                    
+                    <checkbox name="chkSendPetk">
+                        <x>10</x>
+                        <y>90</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Send Pet</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkSendPetk"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+
+                    <checkbox name="chkViperSting">
+                        <x>10</x>
+                        <y>120</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Pull Casters with Viper Sting</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkViperSting"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+
+					<text name='lblPullShot'>   
+						<X>10</X>     
+						<Y>155</Y>  
+						<Width>200</Width>  
+						<Height>20</Height>    
+						<Text>Pull Shot:</Text>     
+					</text>
+                    <combobox name="cmbPullShot">
+                        <x>180</x>
+                        <y>150</y>
+                        <Width>160</Width>
+                        <Height>20</Height>
+                        <Items>
+                            <Item Value='1'default='1'>Concussive Shot</Item>
+                            <Item Value='2'>Serpent Sting</Item>
+                            <Item Value='3'>Arcane Shot</Item>
+                            <Item Value='4'>Scorpid Sting</item>
+                            <Item Value='5'>Aimed Shot</item>
+                        </Items>
+                        <OnSelect>
+                            Event[OPENBOT_CONFIG_COMBO]:Execute["cmbPullShot"]                     
+                        </OnSelect>
+                    </combobox>
+                              
+				</tab>
+                
+                
+                
+				<tab name='Combat'>
+					<text name='lblConserveMana'>        
+						<X>10</X>      
+						<Y>10</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Conserve Mana if Mana is Below:</Text>      
+					</text>
+					<text name='valueConserveMana'>   
+						<X>130</X>   
+						<Y>10</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${UIElement[Combat@Pages@ClassGUI].FindChild[sldConserveMana].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldConserveMana'>    
+						<X>180</X>    
+						<Y>5</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldConserveMana"] 
+						</OnChange>    
+					</slider>
+                                  
+					<text name='lblConserveManaHealth'>        
+						<X>10</X>      
+						<Y>30</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>  or My Health is Above:</Text>      
+					</text>
+					<text name='valueConserveManaHealth'>   
+						<X>130</X>   
+						<Y>30</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${UIElement[Combat@Pages@ClassGUI].FindChild[sldConserveManaHealth].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldConserveManaHealth'>    
+						<X>180</X>    
+						<Y>25</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldConserveManaHealth"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblConserveManaPetHealth'>        
+						<X>10</X>      
+						<Y>50</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>  and My Pet's Health is Above:</Text>      
+					</text>
+					<text name='valueConservePManaPetHealth'>   
+						<X>130</X>   
+						<Y>50</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${UIElement[Combat@Pages@ClassGUI].FindChild[sldConserveManaPetHealth].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldConserveManaPetHealth'>    
+						<X>180</X>    
+						<Y>45</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldConserveManaPetHealth"] 
+						</OnChange>    
+					</slider>
+                                  
+					<text name='lblStingType'>   
+						<X>10</X>     
+						<Y>90</Y>  
+						<Width>200</Width>  
+						<Height>20</Height>    
+						<Text>Sting Type:</Text>     
+					</text>
+                    <combobox name="cmbStingType">
+                        <x>180</x>
+                        <y>85</y>
+                        <Width>160</Width>
+                        <Height>20</Height>
+                        <Items>
+                            <Item Value='1'default='1'>Serpent Sting</Item>
+                            <Item Value='2'>Scorpid Sting</item>
+                        </Items>
+                        <OnSelect>
+                            Event[OPENBOT_CONFIG_COMBO]:Execute["cmbStingType"]                     
+                        </OnSelect>
+                    </combobox>
+
+					<text name='lblHinderRunners'>        
+						<X>10</X>      
+						<Y>130</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Hinder Runners at % Health:</Text>      
+					</text>
+					<text name='valueHinderRunners'>   
+						<X>130</X>   
+						<Y>130</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${UIElement[Combat@Pages@ClassGUI].FindChild[sldHinderRunners].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldHinderRunners'>    
+						<X>180</X>    
+						<Y>125</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHinderRunners"] 
+						</OnChange>    
+					</slider>
+                                  
+                    <checkbox name="chkSaveIntimidation">
+                        <x>10</x>
+                        <y>150</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Save Intimidation for adds</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkSaveIntimidation"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+
+                    <checkbox name="chkSaveBestialWrath">
+                        <x>10</x>
+                        <y>170</y>
+                        <width>70</width>
+                        <height>25</height>
+                        <text>   Save Bestial Wrath for adds</text>
+                        <OnLeftClick>  
+                             Event[OPENBOT_CONFIG_XBOX]:Execute["chkSaveBestialWrath"]     
+                       </OnLeftClick>                       
+                    </checkbox>
+
+					<text name='lblMinMelee'>        
+						<X>10</X>      
+						<Y>r90</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Minimum Melee Range:</Text>      
+					</text>
+					<text name='valueMinMelee'>   
+						<X>130</X>   
+						<Y>r90</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMinMelee].Value} / 10].Int}.${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMinMelee].Value} % 10].Int}
+						</Text>     
+					</text>
+					<slider name='sldMinMelee'>    
+						<X>180</X>    
+						<Y>r95</Y>   
+						<Offset>1</Offset>       
+						<Range>20</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldMinMelee"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblMaxMelee'>        
+						<X>10</X>      
+						<Y>r70</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Maximum Melee Range:</Text>      
+					</text>
+					<text name='valueMaxMelee'>   
+						<X>130</X>   
+						<Y>r70</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMaxMelee].Value} / 10 + 3].Int}.${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMaxMelee].Value} % 10].Int}
+       					</Text>     
+					</text>
+					<slider name='sldMaxMelee'>    
+						<X>180</X>    
+						<Y>r75</Y>   
+						<Offset>1</Offset>       
+						<Range>20</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldMaxMelee"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblMinRanged'>        
+						<X>10</X>      
+						<Y>r40</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Minimum Ranged Range:</Text>      
+					</text>
+					<text name='valueMinRanged'>   
+						<X>130</X>   
+						<Y>r40</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						    ${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMinRanged].Value} / 10 + 12].Int}.${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMinRanged].Value} % 10].Int}
+						</Text>     
+					</text>
+					<slider name='sldMinRanged'>    
+						<X>180</X>    
+						<Y>r45</Y>   
+						<Offset>1</Offset>       
+						<Range>80</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldMinRanged"] 
+						</OnChange>    
+					</slider>
+
+					<text name='lblMaxRanged'>        
+						<X>10</X>      
+						<Y>r20</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Maximum Ranged Range:</Text>      
+					</text>
+					<text name='valueMaxRanged'>   
+						<X>140</X>   
+						<Y>r20</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>
+						    ${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMaxRanged].Value} / 10 + 25].Int}.${Math.Calc[${UIElement[Combat@Pages@ClassGUI].FindChild[sldMaxRanged].Value} % 10].Int}
+						</Text>     
+					</text>
+					<slider name='sldMaxRanged'>    
+						<X>180</X>    
+						<Y>r25</Y>   
+						<Offset>1</Offset>       
+						<Range>200</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+					    	Event[OPENBOT_CONFIG_SLIDER]:Execute["sldMaxRanged"] 
+						</OnChange>    
+					</slider>
+                
+				</tab>
+			</tabs>
+		</TabControl>
+		</Children> 
+	</window>
+</ISUI>

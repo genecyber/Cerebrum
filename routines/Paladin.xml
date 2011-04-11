@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='ClassGUI'> 
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>1</Visible>
+		<Title>${Script[openbot].VariableScope.Class.bOtAdinN} ${Script[openbot].VariableScope.Class.bOtAdinV}</Title>
+		<X>5</X> 
+		<Y>600</Y> 
+		<Width>350</Width> 
+		<Height>350</Height>
+		<Children>
+				<TabControl Name='Settings'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+				<tab name='Resting'>
+					<text name='RestHP_title'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Healt Rest:</Text>   
+					</text>
+						<text name='RestHP_value'>     
+						<X>130</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Resting@Settings@ClassGUI].FindChild[RestHP_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='RestHP_slider'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["RestHP"]   
+						</OnChange>    
+					</slider>
+					<text name='MinHP_title'>          
+						<X>10</X>        
+						<Y>40</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>HP limit:</Text>   
+					</text>
+						<text name='MinHP_value'>     
+						<X>130</X>     
+						<Y>40</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Resting@Settings@ClassGUI].FindChild[MinHP_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='MinHP_slider'>    
+						<X>180</X>     
+						<Y>35</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["MinHP"]   
+						</OnChange>    
+					</slider>
+					<text name='RestMana_title'>          
+						<X>10</X>        
+						<Y>70</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Mana Rest:</Text>   
+					</text>
+						<text name='RestMana_value'>     
+						<X>130</X>     
+						<Y>70</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Resting@Settings@ClassGUI].FindChild[RestMana_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='RestMana_slider'>    
+						<X>180</X>     
+						<Y>65</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["RestMana"]   
+						</OnChange>    
+					</slider>
+					<text name='MinMana_title'>          
+						<X>10</X>        
+						<Y>100</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Mana limit:</Text>   
+					</text>
+						<text name='MinMana_value'>     
+						<X>130</X>     
+						<Y>100</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Resting@Settings@ClassGUI].FindChild[MinMana_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='MinMana_slider'>    
+						<X>180</X>     
+						<Y>95</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["MinMana"]   
+						</OnChange>    
+					</slider>
+				<text name='scrollSpam_title'>    
+						<X>10</X>     
+						<Y>130</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Scroll Spamming:</Text>     
+					</text>
+					<checkbox name='scrollSpam'>   
+						<X>180</X>  
+						<y>125</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Resting@Settings@ClassGUI].FindChild[scrollSpam]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["scrollSpam"]   
+						</OnLeftClick>   
+					</checkbox>	
+				</tab>
+				<tab name='Healing'>
+				<text name='flashMult_title'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Flash of Light Multiplier:</Text>   
+					</text>
+						<text name='flashMult_value'>     
+						<X>130</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Healing@Settings@ClassGUI].FindChild[flashMult_slider].Value}    
+						</Text>    
+					</text>
+					<slider name='flashMult_slider'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>3</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["flashMult"]   
+						</OnChange>    
+					</slider>
+								<text name='holyMult_title'>          
+						<X>10</X>        
+						<Y>40</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Holy Light Multiplier:</Text>   
+					</text>
+						<text name='holyMult_value'>     
+						<X>130</X>     
+						<Y>40</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Healing@Settings@ClassGUI].FindChild[holyMult_slider].Value}  
+						</Text>    
+					</text>
+					<slider name='holyMult_slider'>    
+						<X>180</X>     
+						<Y>35</Y>  
+						<Offset>1</Offset>    
+						<Range>3</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["holyMult"]   
+						</OnChange>    
+					</slider>
+			<text name='HpHammer_title'>          
+						<X>10</X>        
+						<Y>70</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>HOJ HP Percentage:</Text>   
+					</text>
+						<text name='HpHammer_value'>     
+						<X>130</X>     
+						<Y>70</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Healing@Settings@ClassGUI].FindChild[HpHammer_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='HpHammer_slider'>    
+						<X>180</X>     
+						<Y>65</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["HpHammer"]   
+						</OnChange>    
+					</slider>
+								<text name='HpEmerg_title'>          
+						<X>10</X>        
+						<Y>100</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Emergency HP Percentage:</Text>   
+					</text>
+						<text name='HpEmerg_value'>     
+						<X>130</X>     
+						<Y>100</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Healing@Settings@ClassGUI].FindChild[HpEmerg_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='HpEmerg_slider'>    
+						<X>180</X>     
+						<Y>95</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["HpEmerg"]   
+						</OnChange>    
+					</slider>	
+						<text name='HpPotion_title'>          
+						<X>10</X>        
+						<Y>130</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Potion HP Percentage:</Text>   
+					</text>
+						<text name='HpPotion_value'>     
+						<X>130</X>     
+						<Y>130</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Healing@Settings@ClassGUI].FindChild[HpPotion_slider].Value}%     
+						</Text>    
+					</text>
+					<slider name='HpPotion_slider'>    
+						<X>180</X>     
+						<Y>125</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["HpPotion"]   
+						</OnChange>    
+					</slider>
+					<text name='emergBless_title'>    
+						<X>10</X>     
+						<Y>160</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Emergency Blessing of Light:</Text>     
+					</text>
+					<checkbox name='emergBless'>   
+						<X>180</X>  
+						<y>155</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Healing@Settings@ClassGUI].FindChild[emergBless]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["emergBless"]   
+						</OnLeftClick>   
+					</checkbox>	
+					<text name='useBandage_title'>    
+						<X>10</X>     
+						<Y>190</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Bandages use:</Text>     
+					</text>
+					<checkbox name='useBandage'>   
+						<X>180</X>  
+						<y>185</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Healing@Settings@ClassGUI].FindChild[useBandage]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["useBandage"]   
+						</OnLeftClick>   
+					</checkbox>					
+				</tab>
+					<tab name='Miscellaneous'>
+						<text name='multiCons_title'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Mobs for Consecration:</Text>   
+					</text>
+						<text name='multiCons_value'>     
+						<X>130</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Miscellaneous@Settings@ClassGUI].FindChild[multiCons_slider].Value}    
+						</Text>    
+					</text>
+					<slider name='multiCons_slider'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>5</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["multiCons"]   
+						</OnChange>    
+					</slider>						
+						
+			<text name='multiChange_title'>    
+						<X>10</X>     
+						<Y>40</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Permit Aggro Aura change</Text>     
+					</text>
+					<checkbox name='multiChange'>   
+						<X>180</X>  
+						<y>35</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Miscellaneous@Settings@ClassGUI].FindChild[multiChange]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["multiChange"]   
+						</OnLeftClick>   
+					</checkbox>							
+									
+				<text name='multiAura_title'>    
+						<X>10</X>     
+						<Y>70</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Multi aggro Aura:</Text>   
+					</text>
+					<combobox name='multiAura'>   
+						<X>180</X>      
+						<y>65</y>         
+						<Width>150</Width>    
+						<height>20</height>   
+						<FullHeight>60</FullHeight>      
+						<Items>
+							 <Item Value='Devotion Aura'>Devotion Aura</Item>
+							 <Item Value='Concentration Aura'>Concentration Aura</Item>
+							 <Item Value='Retribution Aura'>Retribution Aura</Item>
+						</Items>    
+						<OnSelect>       
+							Event[CLASS_GUI_CHANGE]:Execute["multiAura"]    
+						</OnSelect>   
+					</combobox>				
+			<text name='castInterruption_title'>    
+						<X>10</X>     
+						<Y>100</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Block Nmy Casting</Text>     
+					</text>
+					<checkbox name='castInterruption'>   
+						<X>180</X>  
+						<y>95</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Miscellaneous@Settings@ClassGUI].FindChild[castInterruption]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["castInterruption"]   
+						</OnLeftClick>   
+					</checkbox>	
+			<text name='hammerSpam_title'>    
+						<X>10</X>     
+						<Y>130</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Use HOJ to block casting</Text>     
+					</text>
+					<checkbox name='hammerSpam'>   
+						<X>180</X>  
+						<y>125</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Miscellaneous@Settings@ClassGUI].FindChild[hammerSpam]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["hammerSpam"]   
+						</OnLeftClick>   
+					</checkbox>	
+			<text name='torrentSpam_title'>    
+						<X>10</X>     
+						<Y>160</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Permit Aggro Aura change</Text>     
+					</text>
+					<checkbox name='torrentSpam'>   
+						<X>180</X>  
+						<y>155</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Miscellaneous@Settings@ClassGUI].FindChild[torrentSpam]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["torrentSpam"]   
+						</OnLeftClick>   
+					</checkbox>				
+					</tab>
+		<tab name='Combat'>	
+						<text name='PullRange_title'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Pull distance:</Text>   
+					</text>
+						<text name='PullRange_value'>     
+						<X>130</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Combat@Settings@ClassGUI].FindChild[PullRange_slider].Value}   
+						</Text>    
+					</text>
+					<slider name='PullRange_slider'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>10</Offset>    
+						<Range>20</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["PullRange"]   
+						</OnChange>    
+					</slider>			
+			<text name='useWrath_title'>    
+						<X>10</X>     
+						<Y>40</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Use Hammer of Wrath</Text>     
+					</text>
+					<checkbox name='useWrath'>   
+						<X>180</X>  
+						<y>35</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Combat@Settings@ClassGUI].FindChild[useWrath]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["useWrath"]   
+						</OnLeftClick>   
+					</checkbox>	
+				<text name='combatDebuff_title'>    
+						<X>10</X>     
+						<Y>70</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Debuff Cleaning in combat</Text>     
+					</text>
+					<checkbox name='combatDebuff'>   
+						<X>180</X>  
+						<y>65</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Combat@Settings@ClassGUI].FindChild[combatDebuff]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["combatDebuff"]   
+						</OnLeftClick>   
+					</checkbox>	
+					
+		<text name='Blessing_title'>    
+						<X>10</X>     
+						<Y>100</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Combat Blessing:</Text>   
+					</text>
+					<combobox name='Blessing'>   
+						<X>130</X>      
+						<y>95</y>         
+						<Width>200</Width>    
+						<height>20</height>   
+						<FullHeight>80</FullHeight>      
+						<Items>
+							 <Item Value='Blessing of Might'>Blessing of Might</Item>
+							 <Item Value='Blessing of Kings'>Blessing of Kings</Item>
+							 <Item Value='Blessing of Wisdom'>Blessing of Wisdom</Item>
+							 <Item Value='Blessing of Light'>Blessing of Light</Item>
+						</Items>    
+						<OnSelect>       
+							Event[CLASS_GUI_CHANGE]:Execute["Blessing"]    
+						</OnSelect>   
+					</combobox>				
+			
+		<text name='Aura_title'>    
+						<X>10</X>     
+						<Y>130</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Combat Aura:</Text>   
+					</text>
+					<combobox name='Aura'>   
+						<X>130</X>      
+						<y>125</y>         
+						<Width>200</Width>    
+						<height>20</height>   
+						<FullHeight>120</FullHeight>      
+						<Items>
+							 <Item Value='Devotion Aura'>Devotion Aura</Item>
+							 <Item Value='Retribution Aura'>Retribution Aura</Item>
+							 <Item Value='Concentration Aura'>Concentration Aura</Item>
+							 <Item Value='Shadow Resistance Aura'>Shadow Resistance Aura</Item>
+							 <Item Value='Frost Resistance Aura'>Frost Resistance Aura</Item>
+							 <Item Value='Fire Resistance Aura'>Fire Resistance Aura</Item>
+						</Items>    
+						<OnSelect>       
+							Event[CLASS_GUI_CHANGE]:Execute["Aura"]    
+						</OnSelect>   
+					</combobox>						
+								
+<text name='DmgSeal_title'>    
+						<X>10</X>     
+						<Y>160</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Combat Seal:</Text>   
+					</text>
+					<combobox name='DmgSeal'>   
+						<X>130</X>      
+						<y>155</y>         
+						<Width>200</Width>    
+						<height>20</height>   
+						<FullHeight>120</FullHeight>      
+						<Items>
+							 <Item Value='Seal of the Crusader'>Seal of the Crusader</Item>
+							 <Item Value='Seal of Wisdom'>Seal of Wisdom</Item>
+							 <Item Value='Seal of Righteousness'>Seal of Righteousness</Item>
+							 <Item Value='Seal of Light'>Seal of Light</Item>
+							 <Item Value='Seal of Command'>Seal of Command</Item>
+							 <Item Value='Seal of Justice'>Seal of Justice</Item>
+						</Items>    
+						<OnSelect>       
+							Event[CLASS_GUI_CHANGE]:Execute["DmgSeal"]    
+						</OnSelect>   
+					</combobox>									
+
+<text name='SealPull_title'>    
+						<X>10</X>     
+						<Y>190</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Pull Seal:</Text>   
+					</text>
+					<combobox name='SealPull'>   
+						<X>130</X>      
+						<y>185</y>         
+						<Width>200</Width>    
+						<height>20</height>   
+						<FullHeight>120</FullHeight>      
+						<Items>
+							 <Item Value='Seal of the Crusader'>Seal of the Crusader</Item>
+							 <Item Value='Seal of Wisdom'>Seal of Wisdom</Item>
+							 <Item Value='Seal of Righteousness'>Seal of Righteousness</Item>
+							 <Item Value='Seal of Light'>Seal of Light</Item>
+							 <Item Value='Seal of Command'>Seal of Command</Item>
+							 <Item Value='Seal of Justice'>Seal of Justice</Item>
+						</Items>    
+						<OnSelect>       
+							Event[CLASS_GUI_CHANGE]:Execute["SealPull"]    
+						</OnSelect>   
+					</combobox>	
+
+
+			<text name='useEx_title'>    
+						<X>10</X>     
+						<Y>220</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Use Exorcism</Text>     
+					</text>
+					<checkbox name='useEx'>   
+						<X>180</X>  
+						<y>215</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						UIElement[Combat@Settings@ClassGUI].FindChild[useEx]:ToggleChecked     
+						Event[CLASS_GUI_CHANGE]:Execute["useEx"]   
+						</OnLeftClick>   
+					</checkbox>	
+
+
+						<text name='useExHP_title'>          
+						<X>10</X>        
+						<Y>250</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>HP to use Exorcism:</Text>   
+					</text>
+						<text name='useExHP_value'>     
+						<X>130</X>     
+						<Y>250</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Combat@Settings@ClassGUI].FindChild[useExHP_slider].Value}   
+						</Text>    
+					</text>
+					<slider name='useExHP_slider'>    
+						<X>180</X>     
+						<Y>245</Y>  
+						<Offset>10</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[CLASS_GUI_CHANGE]:Execute["useExHP"]   
+						</OnChange>    
+					</slider>			
+
+
+										
+			</tab>				
+			</tabs>
+		</TabControl>
+			
+		</Children> 
+	</window>
+</ISUI>

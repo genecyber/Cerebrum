@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ISUI>
+	<template name='Warlock.SmallFont'>
+		<Name>Terminal</Name>
+		<Size>12</Size>
+		<Color>FFFFFFFF</Color>
+	</template>
+	<Window name='ClassGUI'>
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>1</Visible>
+		<Title>Warlock Control</Title>
+		<X>5</X>
+		<Y>600</Y>
+		<Width>350</Width>
+		<Height>330</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+<!-- Pet Tab -->
+				<tab name='Pet'>
+<!-- Shards to keep -->
+					<text name='txtNumShards'>
+					<X>90</X>
+					<Y>10</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Keeping X shards</Text>
+					</text>
+
+					<slider name='sldNumShards'>
+					<X>10</X>
+					<Y>5</Y>
+					<Range>45</Range>
+					<Width>75</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["keepnumshards"]
+					</OnChange>
+					</slider>
+<!-- Pet to Summon -->
+					<text name='lblSelectPet'>
+						<X>215</X>
+						<Y>10</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Summon:</Text>
+					</text>
+					<combobox name='cmbPet'>
+						<x>258</x>
+						<y>7</y>
+						<width>90</width>
+						<height>15</height>
+						<FullHeight>82</FullHeight>
+						<OnSelect>
+							Event[TOON_GUI_CHANGE]:Execute["selectpet"]
+						</OnSelect>
+						<Items>
+							<Item Value='1' Default='1'>Imp</Item>
+							<Item Value="2">Voidwalker</Item>
+							<Item Value='3'>Succubus</Item>
+							<Item Value='4'>Felhunter</Item>
+							<Item Value='5'>Felguard</Item>
+						</Items>
+					</combobox>
+<!-- Funnel pet when he's at X -->
+					<text name='txtFunnelPet'>
+					<X>115</X>
+					<Y>40</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Funnel pet at:</Text>
+					</text>
+
+					<slider name='sldFunnelPet'>
+					<X>10</X>
+					<Y>35</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["funnelpet"]
+					</OnChange>
+					</slider>
+
+<!-- Funnel if I'm above X -->
+					<text name='txtFunnelMe'>
+					<X>115</X>
+					<Y>60</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Funnel pet at:</Text>
+					</text>
+
+					<slider name='sldFunnelMe'>
+					<X>10</X>
+					<Y>55</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["funnelme"]
+					</OnChange>
+					</slider>
+<!-- C DarkPact pet minmana -->
+					<text name='lblDPCPetMana'>
+						<X>115</X>
+						<Y>90</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>(InCombat)DPact Keep Pet Mana Above:</Text>
+					</text>
+					<slider name='sldDPCPetMana'>
+						<X>10</X>
+						<Y>85</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["dpcpet"]
+						</OnChange>
+					</slider>
+
+<!-- C DarkPact when my mana below -->
+					<text name='lblDPCMyMana'>
+						<X>115</X>
+						<Y>110</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>(InCombat)DPact If My Mana Below:</Text>
+					</text>
+					<slider name='sldDPCMyMana'>
+						<X>10</X>
+						<Y>105</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["dpcme"]
+						</OnChange>
+					</slider>
+<!-- R DarkPact pet minmana -->
+					<text name='lblDPRPetMana'>
+						<X>115</X>
+						<Y>140</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>(Rest)DPact Keep Pet Mana Above:</Text>
+					</text>
+					<slider name='sldDPRPetMana'>
+						<X>10</X>
+						<Y>135</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["dprpet"]
+						</OnChange>
+					</slider>
+<!-- R DarkPact when my mana below -->
+					<text name='lblDPRMyMana'>
+						<X>115</X>
+						<Y>160</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>(Rest)DPact If My Mana Below:</Text>
+					</text>
+					<slider name='sldDPRMyMana'>
+						<X>10</X>
+						<Y>155</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["dprme"]
+						</OnChange>
+					</slider>
+
+<!-- Pet aggro gain -->
+					<text name='txtPetAggroWait'  template='Warlock.SmallFont'>
+					<X>10</X>
+					<Y>250</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Attack at same time as pet</Text>
+					</text>
+
+					<slider name='sldPetAggroWait'>
+					<X>10</X>
+					<Y>270</Y>
+					<Range>10</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["petaggrowait"]
+					</OnChange>
+					</slider>
+				</tab>
+
+
+
+<!-- Spell Tab -->
+
+				<tab name='Spells' >
+<!-- Pull -->
+					<commandcheckbox name='chkUsePull'>
+						<x>10</x>
+						<y>5</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].usePull}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usepull"]</command>
+					</commandcheckbox>
+					<text name='lblUsePull' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>10</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Pull:</Text>
+					</text>
+<!-- Corruption -->
+					<commandcheckbox name='chkUseCorr'>
+						<x>10</x>
+						<y>25</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useCorruption}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usecorr"]</command>
+					</commandcheckbox>
+					<text name='lblUseCorruption' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>30</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Corruption:</Text>
+					</text>
+<!-- CoA -->
+					<commandcheckbox name='chkUseCoA'>
+						<x>10</x>
+						<y>45</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useCoA}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usecoa"]</command>
+					</commandcheckbox>
+					<text name='lblUseCoA' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>50</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Curse of Agony:</Text>
+					</text>
+<!-- Amp -->
+					<commandcheckbox name='chkUseAmp'>
+						<x>10</x>
+						<y>65</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useAmp}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useamp"]</command>
+					</commandcheckbox>
+					<text name='lblUseAmp' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>70</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Amplify Curse:</Text>
+					</text>
+<!-- Siphon Life -->
+					<commandcheckbox name='chkUseSiphonLife'>
+						<x>10</x>
+						<y>85</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useSiphonLife}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usesl"]</command>
+					</commandcheckbox>
+					<text name='lblUseSiphonLife' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>90</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Siphon Life:</Text>
+					</text>
+<!-- Unstable Affl -->
+					<commandcheckbox name='chkuseUnstableAffliction'>
+						<x>10</x>
+						<y>105</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useUnstableAffliction}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useua"]</command>
+					</commandcheckbox>
+					<text name='lblUseUnstableAffliction' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>110</Y>
+						<Width>200</Width>
+						<Height>20</Height>
+						<Text>Use Unstable Affliction:</Text>
+					</text>
+<!-- Immolate -->
+					<commandcheckbox name='chkuseImmolate'>
+						<x>10</x>
+						<y>125</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useImmolate}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useimmo"]</command>
+					</commandcheckbox>
+					<text name='lblUseImmolate' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>130</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Immolate:</Text>
+					</text>
+<!-- Conflagrate -->
+					<commandcheckbox name='chkuseConflagrate'>
+						<x>145</x>
+						<y>125</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useConflag}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useconfl"]</command>
+					</commandcheckbox>
+					<text name='lblUseConflagrate' template='Warlock.SmallFont'>
+						<X>165</X>
+						<Y>130</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Conflagrate:</Text>
+					</text>
+<!-- Wait for Conflagrate -->
+					<text name='txtConflPop'  template='Warlock.SmallFont'>
+					<X>145</X>
+					<Y>260</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Pop Conflagrate immediately</Text>
+					</text>
+
+					<slider name='sldConflPop'>
+					<X>145</X>
+					<Y>270</Y>
+					<Range>13</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["conflpopwait"]
+					</OnChange>
+					</slider>
+<!-- Incinerate -->
+					<commandcheckbox name='chkuseIncinerate'>
+						<x>10</x>
+						<y>145</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useIncinerate}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useincin"]</command>
+					</commandcheckbox>
+					<text name='lblUseIncinerate' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>150</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Incinerate:</Text>
+					</text>
+<!-- Searing Pain -->
+					<commandcheckbox name='chkuseSearingPain'>
+						<x>10</x>
+						<y>165</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useSearingPain}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usesp"]</command>
+					</commandcheckbox>
+					<text name='lblUseSearingPain' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>170</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Searing Pain:</Text>
+					</text>
+<!-- Drain Life -->
+					<commandcheckbox name='chkDrainLife'>
+						<x>10</x>
+						<y>185</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useDrainLife}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usedl"]</command>
+					</commandcheckbox>
+					<text name='lblDrainLife' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>190</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Drain Life</Text>
+					</text>
+<!-- Wand -->
+					<commandcheckbox name='chkWand'>
+						<x>10</x>
+						<y>205</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].WandNoNuke}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["wandnuke"]</command>
+					</commandcheckbox>
+					<text name='lblUseWand' template='Warlock.SmallFont'>
+						<X>30</X>
+						<Y>210</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Wand Instead of Nuke</Text>
+					</text>
+<!-- Wand at % -->
+					<text name='txtWandMonsterHealth'>
+					<X>10</X>
+					<Y>260</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Wand Monster</Text>
+					</text>
+					<slider name='sldWandMonsterHealth'>
+					<X>10</X>
+					<Y>270</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["wandmonsterhealth"]
+					</OnChange>
+					</slider>
+<!-- Spells Column 2 Tab -->
+<!-- Pull Spell -->
+					<text name='lblUsePullSpell' template='Warlock.SmallFont'>
+						<X>195</X>
+						<Y>7</Y>
+						<Width>150</Width>
+						<Height>20</Height>
+						<Text>Pull Spell:</Text>
+					</text>
+					<combobox name='cmbUsePullSpell'>
+						<x>240</x>
+						<y>5</y>
+						<width>105</width>
+						<height>15</height>
+						<FullHeight>60</FullHeight>
+						<OnSelect>
+							Event[TOON_GUI_CHANGE]:Execute["pullspell"]
+						</OnSelect>
+						<Items>
+							<Item Value='1' Default='1'>Shadow Bolt</Item>
+							<Item Value="2">Fear</Item>
+							<Item Value="3">Immolate</Item>
+						</Items>
+					</combobox>
+<!-- Fear Juggle Mode -->
+					<commandcheckbox name='chkFearJuggle'>
+						<x>145</x>
+						<y>25</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].FearJuggle}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usefj"]</command>
+					</commandcheckbox>
+					<text name='lblFearJuggle' template='Warlock.SmallFont'>
+						<X>165</X>
+						<Y>30</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Fear Juggle:</Text>
+					</text>
+<!-- Fear Elites -->
+					<commandcheckbox name='chkFearElites'>
+						<x>145</x>
+						<y>45</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].FearElites}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["fearleet"]</command>
+					</commandcheckbox>
+					<text name='lblFearElites' template='Warlock.SmallFont'>
+						<X>165</X>
+						<Y>50</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Fear Elites:</Text>
+					</text>
+<!-- Buff Unending Breath -->
+					<commandcheckbox name='chkuseUnendingBreath'>
+						<x>145</x>
+						<y>185</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useUnendingBreath}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usebreath"]</command>
+					</commandcheckbox>
+					<text name='lblUseUnendingBreath' template='Warlock.SmallFont'>
+						<X>165</X>
+						<Y>190</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Buff Unending Breath:</Text>
+					</text>
+<!-- Use Soulstones -->
+					<commandcheckbox name='chkuseSoulstone'>
+						<x>145</x>
+						<y>205</y>
+						<width>20</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useSoulstone}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["usesoulstone"]</command>
+					</commandcheckbox>
+					<text name='lblUseSoulstone' template='Warlock.SmallFont'>
+						<X>165</X>
+						<Y>210</Y>
+						<Width>178</Width>
+						<Height>20</Height>
+						<Text>Use Soulstones:</Text>
+					</text>
+				</tab>
+<!-- Vitality Tab -->
+				<tab name='Vitality'>
+<!-- Drain Life at X -->
+					<text name='lblDrainLifeAt'>
+						<X>115</X>
+						<Y>10</Y>
+						<Width>178</Width>
+						<Height>40</Height>
+						<Text>Drain Life At:</Text>
+					</text>
+					<slider name='sldDrainLifeAt'>
+						<X>10</X>
+						<Y>5</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["drainlifeat"]
+						</OnChange>
+					</slider>
+<!-- Drain Soul when he's at X -->
+					<text name='lblDrainSoulAt'>
+						<X>115</X>
+						<Y>30</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>Drain Soul At:</Text>
+					</text>
+					<slider name='sldDrainSoulAt'>
+						<X>10</X>
+						<Y>25</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["drainsoulat"]
+						</OnChange>
+					</slider>
+<!-- Panic Fears if I'm at X -->
+					<text name='lblFearAt'>
+						<X>115</X>
+						<Y>60</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>Deathcoil/Fear At:</Text>
+					</text>						
+					<slider name='sldFearAt'>
+						<X>10</X>
+						<Y>55</Y>
+						<Range>99</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["panicat"]
+						</OnChange>
+					</slider>
+
+<!-- Rest at HP -->
+					<text name='lblMinHealth'>
+						<X>115</X>
+						<Y>90</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>Rest at Health:</Text>
+					</text>
+					<slider name='sldMinHealth'>
+						<X>10</X>
+						<Y>85</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["minhealth"]
+						</OnChange>
+					</slider>
+<!-- Rest at Mana -->
+					<text name='lblMinMana'>
+						<X>115</X>
+						<Y>110</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>Rest at Mana:</Text>
+					</text>
+					<slider name='sldMinMana'>
+						<X>10</X>
+						<Y>105</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["minmana"]
+						</OnChange>
+					</slider>
+<!-- Use Healthstone at X -->
+					<text name='lblUseHealthstone'>
+						<X>115</X>
+						<Y>140</Y>
+						<Width>260</Width>
+						<Height>40</Height>
+						<Text>Use Healthstone At:</Text>
+					</text>
+					<slider name='sldUseHealthstone'>
+						<X>10</X>
+						<Y>135</Y>
+						<Range>100</Range>
+						<Width>100</Width>
+						<Height>15</Height>
+						<OnChange>
+							Event[TOON_SLIDE_CHANGE]:Execute["usehealthstone"]
+						</OnChange>
+					</slider>
+<!-- R Lifetap if below X mana -->
+					<text name='txtLTRMyMana'>
+					<X>115</X>
+					<Y>160</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Lifetap If Mana Below:</Text>
+					</text>
+
+					<slider name='sldLTRMyMana'>
+					<X>10</X>
+					<Y>155</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["restlifetapmana"]
+					</OnChange>
+					</slider>
+<!-- R Lifetap if below X HP -->
+					<text name='txtLTRMyHealth'>
+					<X>115</X>
+					<Y>180</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Lifetap If Health Above:</Text>
+					</text>
+
+					<slider name='sldLTRMyHealth'>
+					<X>10</X>
+					<Y>175</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["restlifetaphealth"]
+					</OnChange>
+					</slider>
+<!-- C Lifetap if below X mana -->
+					<text name='txtLTCMyMana'>
+					<X>115</X>
+					<Y>200</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>(Com)Lifetap If Mana Below:</Text>
+					</text>
+
+					<slider name='sldLTCMyMana'>
+					<X>10</X>
+					<Y>195</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["comlifetapmana"]
+					</OnChange>
+					</slider>
+
+<!-- C Lifetap if above X HP -->
+					<text name='txtLTCMyHealth'>
+					<X>115</X>
+					<Y>220</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>(Com)Lifetap If Health Above:</Text>
+					</text>
+
+					<slider name='sldLTCMyHealth'>
+					<X>10</X>
+					<Y>215</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["comlifetaphealth"]
+					</OnChange>
+					</slider>
+<!-- Sacrifice Voidwalker at X -->
+					<text name='txtSacVW'>
+					<X>115</X>
+					<Y>240</Y>
+					<Width>200</Width>
+					<Height>40</Height>
+					<Text>Sacrifice VW when I'm at:</Text>
+					</text>
+
+					<slider name='sldSacVW'>
+					<X>10</X>
+					<Y>235</Y>
+					<Range>100</Range>
+					<Width>100</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[TOON_SLIDE_CHANGE]:Execute["sacvw"]
+					</OnChange>
+					</slider>
+<!-- UseBoth -->
+					<text name='lblUseBoth' template='Warlock.SmallFont'>
+						<X>31</X>
+						<Y>260</Y>
+						<Width>275</Width>
+						<Height>40</Height>
+						<Text>Rest Only if Health AND Mana are below minimums</Text>
+					</text>
+					<commandcheckbox name='chkUseBoth'>
+						<x>10</x>
+						<y>255</y>
+						<width>138</width>
+						<height>20</height>
+						<data>${Script[openbot].Variable[Class].useRestBoth}</data>
+						<command>Event[TOON_GUI_CHANGE]:Execute["useboth"]</command>
+					</commandcheckbox>
+				</tab>
+				<tab name='PVP'>
+				</tab>
+			</tabs>
+		</TabControl>
+		</Children>
+	</Window>
+</ISUI>

@@ -1,0 +1,814 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='ClassGUI'> 
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>0</Visible>
+		<Title>Crazy Warrior Config</Title>
+		<X>5</X> 
+		<Y>600</Y> 
+		<Width>350</Width> 
+		<Height>350</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+				<tab name='Core'>
+					<text name='lblRestHP'>          
+						<X>10</X>        
+						<Y>10</Y>         
+						<Width>140</Width>       
+						<Height>20</Height>       
+						<Text>Min Health:</Text>   
+					</text>
+						<text name='valueRestHP'>     
+						<X>100</X>     
+						<Y>10</Y>    
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>   
+						${UIElement[Core@Pages@ClassGUI].FindChild[sldRestHP].Value}%     
+						</Text>    
+					</text>
+					<slider name='sldRestHP'>    
+						<X>180</X>     
+						<Y>5</Y>  
+						<Offset>1</Offset>    
+						<Range>100</Range>     
+						<Width>160</Width>   
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRestHP"]
+						</OnChange>    
+					</slider>
+					<text name='lblStandHP'>        
+						<X>10</X>      
+						<Y>40</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Quit Rest at:</Text>      
+					</text>
+					<text name='valueStandHP'>   
+						<X>100</X>   
+						<Y>40</Y>    
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>   
+						${UIElement[Core@Pages@ClassGUI].FindChild[sldStandHP].Value}%     
+						</Text>     
+					</text>
+					<slider name='sldStandHP'>    
+						<X>180</X>    
+						<Y>35</Y>   
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldStandHP"]
+						</OnChange>    
+					</slider>
+					<text name='lblSkipToLoot'>    
+						<X>10</X>     
+						<Y>75</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Skip To Loot:</Text>     
+					</text>			
+					<checkbox name='chkSkipToLoot'>   
+						<X>100</X>  
+						<y>70</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkSkipToLoot"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblShootToPull'>    
+						<X>10</X>     
+						<Y>105</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Shoot To Pull:</Text>     
+					</text>			
+					<checkbox name='chkShootToPull'>   
+						<X>100</X>  
+						<y>100</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkShootToPull"]
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblAlwaysOverpower'>   
+						<X>10</X>      
+						<Y>135</Y>   
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Always Overpower:</Text>     
+					</text>
+					<checkbox name='chkAlwaysOverpower'>   
+						<X>100</X>   
+						<y>130</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkAlwaysOverpower"]
+						Event[CLASS_GUI_CHANGE]:Execute["AlwaysOverpower"]   
+						</OnLeftClick>   
+					</checkbox>
+
+					<text name='lblBattleShout'>   
+						<X>10</X>      
+						<Y>165</Y>   
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Battleshout:</Text>     
+					</text>
+					<checkbox name='chkBattleShout'>   
+						<X>100</X>   
+						<y>160</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						UIElement[Core@Pages@ClassGUI].FindChild[chkCommandingShout]:ToggleChecked     						
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkBattleShout"]
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkCommandingShout"]						
+						Event[CLASS_GUI_CHANGE]:Execute["BattleShout"]   
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblCommandingShout'>   
+						<X>180</X>      
+						<Y>165</Y>   
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Commanding Shout:</Text>     
+					</text>
+					<checkbox name='chkCommandingShout'>   
+						<X>270</X>   
+						<y>160</y>   
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>  On - Off</text>  
+						<OnLeftClick> 
+						UIElement[Core@Pages@ClassGUI].FindChild[chkBattleShout]:ToggleChecked    
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkBattleShout"] 						
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkCommandingShout"]
+						Event[CLASS_GUI_CHANGE]:Execute["CommandingShout"]   
+						</OnLeftClick>   
+					</checkbox>						
+				</tab>
+				<tab name='Ability'>
+					<text name='lblUseRecklessness'>     
+						<X>10</X>     
+						<Y>10</Y>       
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Reckless on Elites:</Text>   
+					</text>
+					<checkbox name='chkUseRecklessness'>  
+						<x>100</x>
+						<y>5</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>   
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseRecklessness"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseRecklessness"]   
+						</OnLeftClick>   
+					</checkbox>
+				<text name='lblUseDisarm'>     
+						<X>10</X>     
+						<Y>45</Y>       
+						<Width>140</Width>   
+						<Height>20</Height>    
+						<Text>Disarm:</Text>   
+					</text>
+					<checkbox name='chkUseDisarm'>  
+						<x>100</x>
+						<y>40</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>   
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseDisarm"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseDisarm"]   
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseBloodRage'>    
+						<X>10</X>       
+						<Y>75</Y>  
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Blood Rage:</Text>      
+					</text>
+					<checkbox name='chkUseBloodRage'>  
+						<X>100</X>  
+						<y>70</y>  
+						<width>60</width>  
+						<height>20</height>    
+						<FullHeight>20</FullHeight> 
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBloodRage"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseBloodRage"]    
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblHealthForBloodRage'>     
+						<X>190</X>    
+						<Y>75</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Min Pct:</Text>     
+					</text>
+					<text name='valueHealthForBloodRage'>     
+						<X>225</X>     
+						<Y>75</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Ability@Pages@ClassGUI].FindChild[sldHealthForBloodRage].Value}%   
+						</Text>   
+					</text>
+					<slider name='sldHealthForBloodRage'>     
+						<X>260</X> 
+						<Y>70</Y>      
+						<Offset>1</Offset>          
+						<Range>100</Range>  
+						<Width>80</Width>  
+						<Height>15</Height>   
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForBloodRage"]
+						</OnChange>   
+					</slider>
+					<text name='lblUseBerserkerRage'>  
+						<X>10</X>       
+						<Y>105</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Berserker Rage:</Text>      
+					</text>
+					<checkbox name='chkUseBerserkerRage'>  
+						<X>100</X>  
+						<y>100</y>   
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBerserkerRage"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseBerserkerRage"]    
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseDeathwish'>     
+						<X>10</X> 
+						<Y>135</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>       
+						<Text>Deathwish:</Text>  
+					</text>
+					<checkbox name='chkUseDeathwish'>   
+						<X>100</X> 
+						<y>130</y>  
+						<width>60</width>  
+						<height>20</height>  
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseDeathwish"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseDeathwish"]    
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblHealthForDeathwish'>     
+						<X>190</X>    
+						<Y>135</Y>    
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Min Pct:</Text>     
+					</text>
+					<text name='valueHealthForDeathwish'>     
+						<X>225</X>     
+						<Y>135</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Ability@Pages@ClassGUI].FindChild[sldHealthForDeathwish].Value}%   
+						</Text>   
+					</text>
+					<slider name='sldHealthForDeathwish'>     
+						<X>260</X> 
+						<Y>130</Y>      
+						<Offset>1</Offset>          
+						<Range>100</Range>  
+						<Width>80</Width>  
+						<Height>15</Height>   
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForDeathwish"]
+						</OnChange>   
+					</slider>
+					<text name='lblUseIntercept'>    
+						<X>10</X>      
+						<Y>165</Y>      
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Intercept:</Text>    
+					</text>
+					<checkbox name='chkUseIntercept'>  
+						<X>100</X>  
+						<y>160</y>   
+						<width>60</width>  
+						<height>20</height> 
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>  
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseIntercept"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseIntercept"]   
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseVictoryRush'>   
+						<X>10</X>     
+						<Y>195</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Victory Rush:</Text>   
+					</text>
+					<checkbox name='chkUseVictoryRush'>  
+						<X>100</X>  
+						<y>190</y>    
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseVictoryRush"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseVictoryRush"]  
+						</OnLeftClick>    
+					</checkbox>
+					<text name='lblUseSunder'>      
+						<X>10</X>      
+						<Y>225</Y>   
+						<Width>140</Width>      
+						<Height>20</Height>       
+						<Text>Sunder Armor:</Text>     
+					</text>
+					<checkbox name='chkUseSunder'>  
+						<X>100</X>  
+						<y>220</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>   
+						<text>       On - Off</text>   
+						<OnLeftClick>   
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseSunder"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseSunder"]     
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseRend'>      
+						<X>10</X>      
+						<Y>255</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Rend:</Text>     
+					</text>
+					<checkbox name='chkUseRend'> 
+						<X>100</X>   
+						<y>250</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseRend"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseRend"]   
+						</OnLeftClick>   
+					</checkbox>
+					<text name='lblUseSlam'>     
+						<X>10</X>     
+						<Y>285</Y>    
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Slam:</Text>   
+					</text>
+					<checkbox name='chkUseSlam'>  
+						<X>100</X> 
+						<y>280</y> 
+						<width>60</width>   
+						<height>20</height>  
+						<FullHeight>20</FullHeight> 
+						<text>       On - Off</text>
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseSlam"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseSlam"]   
+						</OnLeftClick> 
+					</checkbox>
+				</tab>
+				<tab name='Aggro'>
+					<text name='lblRangePullOnDetectAdds'>      
+						<X>10</X>   
+						<Y>15</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Detect Adds:</Text>   
+					</text>
+					<checkbox name='chkRangePullOnDetectAdds'>  
+						<X>100</X>  
+						<y>10</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkRangePullOnDetectAdds"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblRangePullOnDetectAddsRadius'>       
+						<X>10</X>    
+						<Y>40</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>      
+						<Text>Detect Radius:</Text>  
+					</text>
+					<text name='valueRangePullOnDetectAddsRadius'>     
+						<X>100</X>    
+						<Y>40</Y>       
+						<Width>60</Width>     
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldRangePullOnDetectAddsRadius].Value}    
+						</Text>    
+					</text>
+					<slider name='sldRangePullOnDetectAddsRadius'>    
+						<X>180</X>     
+						<Y>35</Y>      
+						<Offset>5</Offset>      
+						<Range>45</Range>    
+						<Width>160</Width>     
+						<Height>15</Height>     
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldRangePullOnDetectAddsRadius"] 
+						</OnChange>   
+					</slider>
+					<text name='lblUseDemoShout'>      
+						<X>10</X>   
+						<Y>70</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use DemoShout on Adds:</Text>   
+					</text>
+					<checkbox name='chkUseDemoShout'>  
+						<X>130</X>   
+						<Y>65</Y>     
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseDemoShout"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseDemoShout"]   						
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseThunderClap'>      
+						<X>10</X>   
+						<Y>100</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use ThunderClap on Adds:</Text>   
+					</text>
+					<checkbox name='chkUseThunderClap'>  
+						<X>130</X>   
+						<Y>95</Y>     
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseThunderClap"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseThunderClap"]    						
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseCleave'>      
+						<X>10</X>    
+						<Y>130</Y>   
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use Cleave on Adds:</Text>   
+					</text>
+					<checkbox name='chkUseCleave'>  
+						<X>130</X>  
+						<y>125</y>  
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseCleave"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseCleave"]    
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseIntimidatingShout'>      
+						<X>10</X>   
+						<Y>160</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Use Intimidating Shout:</Text>   
+					</text>
+					<checkbox name='chkUseIntimidatingShout'>  
+						<X>130</X>   
+						<Y>155</Y>     
+						<width>60</width> 
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text> 
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseIntimidatingShout"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseIntimidatingShout"]    
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblAddsForTrinketOne'>       
+						<X>10</X>    
+						<Y>190</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>   
+						<Text>Adds - Trinket1:</Text>    
+					</text>
+					<text name='valueAddsForTrinketOne'>        
+						<X>130</X>     
+						<Y>190</Y>      
+						<Width>60</Width>   
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForTrinketOne].Value}
+						</Text>     
+					</text>
+					<slider name='sldAddsForTrinketOne'>      
+						<X>180</X>   
+						<Y>185</Y>  
+						<Offset>1</Offset>      
+						<Range>5</Range>  
+						<Width>160</Width>     
+						<Height>15</Height>      
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForTrinketOne"]
+						</OnChange> 
+					</slider>
+					<text name='lblAddsForTrinketTwo'>      
+						<X>10</X>      
+						<Y>220</Y>        
+						<Width>140</Width>     
+						<Height>20</Height>     
+						<Text>Adds - Trinket2:</Text>   
+					</text>
+					<text name='valueAddsForTrinketTwo'>    
+						<X>130</X>      
+						<Y>220</Y>       
+						<Width>60</Width>       
+						<Height>20</Height>   
+						<Text>
+						${UIElement[Aggro@Pages@ClassGUI].FindChild[sldAddsForTrinketTwo].Value}
+						</Text>    
+					</text>
+					<slider name='sldAddsForTrinketTwo'>    
+						<X>180</X>   
+						<Y>215</Y>   
+						<Offset>1</Offset>   
+						<Range>5</Range>    
+						<Width>160</Width>   
+						<Height>15</Height>      
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldAddsForTrinketTwo"]
+						</OnChange>    
+					</slider>
+				</tab>
+				<tab name='Misc'>
+					<text name='lblMaxRageLoss'>   
+						<X>10</X>     
+						<Y>10</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Max Rage Loss:</Text>     
+					</text>
+					<text name='valueMaxRageLoss'>   
+						<X>100</X>    
+						<Y>10</Y>       
+						<Width>60</Width>    
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldMaxRageLoss].Value} rage
+						</Text>   
+					</text>
+					<slider name='sldMaxRageLoss'>    
+						<X>180</X>   
+						<Y>5</Y>    
+						<Offset>1</Offset>      
+						<Range>100</Range>     
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldMaxRageLoss"]
+						</OnChange>    
+					</slider>
+					<text name='lblHealthForBandage'>     
+						<X>10</X>    
+						<Y>70</Y>     
+						<Width>140</Width>    
+						<Height>20</Height>    
+						<Text>Pct  Bandage:</Text>   
+					</text>
+					<text name='valueHealthForBandage'>   
+						<X>100</X>   
+						<Y>70</Y>     
+						<Width>60</Width>    
+						<Height>20</Height>    
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForBandage].Value}%    
+						</Text>    
+					</text>
+					<slider name='sldHealthForBandage'>   
+						<X>180</X>    
+						<Y>65</Y>      
+						<Offset>1</Offset>      
+						<Range>100</Range>    
+						<Width>160</Width>   
+						<Height>15</Height>    
+						<OnChange>     
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForBandage"]
+						</OnChange>    
+					</slider>
+					<text name='lblHealthForPotion'>     
+						<X>10</X>    
+						<Y>100</Y>     
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Pct Potion:</Text>   
+					</text>
+					<text name='valueHealthForPotion'>  
+						<X>100</X>    
+						<Y>100</Y>     
+						<Width>60</Width>   
+						<Height>20</Height>    
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldHealthForPotion].Value}% 
+						</Text>        
+					</text>
+					<slider name='sldHealthForPotion'>   
+						<X>180</X>      
+						<Y>95</Y>     
+						<Offset>1</Offset>       
+						<Range>100</Range>   
+						<Width>160</Width>   
+						<Height>15</Height>    
+						<OnChange>  
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldHealthForPotion"]
+						</OnChange>     
+					</slider>
+					<text name='lblPrimaryStance'>    
+						<X>10</X>     
+						<Y>135</Y>   
+						<Width>140</Width>     
+						<Height>20</Height>    
+						<Text>Primary Stance:</Text>   
+					</text>
+					<combobox name='cmbPrimaryStance'>   
+						<X>100</X>      
+						<y>130</y>         
+						<Width>180</Width>    
+						<height>20</height>   
+						<FullHeight>60</FullHeight>      
+						<Items>
+							 <Item Value='Battle Stance' default='1'>Battle Stance</Item>
+							 <Item Value='Berserker Stance'>Berserker Stance</Item>
+							 <Item Value='Defensive Stance'>Defensive Stance</Item>
+						</Items>    
+						<OnSelect>     
+							Event[OPENBOT_CONFIG_COMBO]:Execute["cmbPrimaryStance"]						
+							Event[CLASS_GUI_CHANGE]:Execute["PrimaryStance"]    
+						</OnSelect>   
+					</combobox>
+					<text name='lblUseBattleStance'>     
+						<X>10</X>      
+						<Y>165</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>      
+						<Text>Use Battle Stance:</Text>    
+					</text>
+					<checkbox name='chkUseBattleStance'>     
+						<X>120</X>  
+						<y>160</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>    
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBattleStance"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseBattleStance"]     
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseBerserkerStance'>     
+						<X>10</X>      
+						<Y>195</Y>     
+						<Width>140</Width>     
+						<Height>20</Height>      
+						<Text>Use Berserker Stance:</Text>    
+					</text>
+					<checkbox name='chkUseBerserkerStance'>     
+						<X>120</X>  
+						<y>190</y>  
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>    
+						<text>       On - Off</text>    
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseBerserkerStance"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseBerserkerStance"]     
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblUseDefensiveStance'> 
+						<X>10</X>       
+						<Y>225</Y>     						
+						<Width>140</Width>   
+						<Height>20</Height>   
+						<Text>Use Defensive Stance:</Text>   
+					</text>
+					<checkbox name='chkUseDefensiveStance'>    
+						<X>120</X>  
+						<Y>220</Y>     
+						<width>60</width>  
+						<height>20</height>  
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick>  
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkUseDefensiveStance"]
+						Event[CLASS_GUI_CHANGE]:Execute["UseDefensiveStance"] 
+						</OnLeftClick> 
+					</checkbox>
+					<text name='lblRacial'>  
+						<X>10</X>       
+						<Y>255</Y>     
+						<Width>140</Width>  
+						<Height>20</Height>   
+						<Text>Use Racial:</Text>     
+					</text>
+					<checkbox name='chkRacial'>    
+						<X>100</X> 
+						<y>250</y> 
+						<width>60</width>  
+						<height>20</height>   
+						<FullHeight>20</FullHeight>  
+						<text>       On - Off</text>  
+						<OnLeftClick> 
+						Event[OPENBOT_CONFIG_XBOX]:Execute["chkRacial"]
+						</OnLeftClick>  
+					</checkbox>
+					<text name='lblPullBailOutTimer'>   
+						<X>10</X>     
+						<Y>280</Y>  
+						<Width>140</Width>  
+						<Height>20</Height>    
+						<Text>Pull Bailout Timer:</Text>     
+					</text>
+					<text name='valuePullBailOutTimer'>   
+						<X>100</X>    
+						<Y>280</Y>       
+						<Width>60</Width>    
+						<Height>20</Height>     
+						<Text>
+						${UIElement[Misc@Pages@ClassGUI].FindChild[sldPullBailOutTimer].Value}ms
+						</Text>   
+					</text>
+					<slider name='sldPullBailOutTimer'>    
+						<X>180</X>   
+						<Y>275</Y>    
+						<Offset>1</Offset>      
+						<Range>2500</Range>     
+						<Width>160</Width>     
+						<Height>15</Height>    
+						<OnChange>    
+						Event[OPENBOT_CONFIG_SLIDER]:Execute["sldPullBailOutTimer"]
+						</OnChange>    
+					</slider>
+				</tab>
+			</tabs>
+		</TabControl>
+		</Children> 
+	</window>
+</ISUI>

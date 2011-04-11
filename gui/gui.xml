@@ -1,0 +1,3355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ISUI>
+	<template name='mapped_blip'>
+		<BackgroundColor>FF00FF00</BackgroundColor>
+	</template>
+
+	<template name='me_blip'>
+		<BackgroundColor>FF0033FF</BackgroundColor>
+	</template>
+	
+	<template name='text'>
+		<Font Template='WoW.Font' />
+		<Wrap>0</Wrap>
+		<Alignment>Left</Alignment>
+		<VerticalAlignment>Top</VerticalAlignment>
+	</template>
+
+	<template name='JHn.window.TitleBar.Pause.Texture' Filename='Interface/obSkin/pause-up.png' />
+	<template name='JHn.window.TitleBar.Pause.TexturePressed' Filename='Interface/obSkin/pause-down.png' />
+	<template name='JHn.window.TitleBar.Play.Texture' Filename='Interface/obSkin/play-up.png' />
+	<template name='JHn.window.TitleBar.Play.TexturePressed' Filename='Interface/obSkin/play-down.png'/>
+	
+	<template name='JHn.Window.TitleBar.Play'>
+		<X>488</X>
+		<Y>2</Y>
+		<Width>12</Width>
+		<Height>12</Height>
+		<Bottom>30</Bottom>
+		<Texture Template='JHn.Window.TitleBar.Play.Texture' />
+		<TexturePressed Template='JHn.Window.TitleBar.Play.TexturePressed' />
+	</template>
+	
+	<template name='JHn.Window.TitleBar.Pause'>
+		<X>488</X>
+		<Y>2</Y>
+		<Width>12</Width>
+		<Height>12</Height>
+		<Bottom>30</Bottom>
+		<Texture Template='JHn.Window.TitleBar.Pause.Texture' />
+		<TexturePressed Template='JHn.Window.TitleBar.Pause.TexturePressed' />
+	</template>
+	
+	<Window name='MapGUI'>
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />				
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -toggle MapGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>0</Visible>
+		<Title>Rendered Mapping</Title>
+		<X>200</X> 
+		<Y>500</Y> 
+		<Width>350</Width> 
+		<Height>400</Height>
+		<Children>
+			<map name='rend'>
+				<width>350</width>
+				<height>350</height>
+				<x>0</x>
+				<y>10</y>
+				<ShowLabels>false</ShowLabels>
+				<OnLeftClick>
+					Event[GUI_BUTTON_HANDLE]:Execute["MapLeftClick"]
+				</OnLeftClick>
+				<OnRightClick>
+					Event[GUI_BUTTON_HANDLE]:Execute["MapRightClick"]
+				</OnRightClick>
+			</map>
+			<slider name='sldZoom'>    
+				<X>0</X>     
+				<Y>350</Y>  
+				<Offset>10</Offset>    
+				<Range>100</Range>     
+				<Width>100</Width>   
+				<Height>20</Height>     
+				<OnChange>    
+					Script[Cerebrum].VariableScope.MapEditor.r:Set[${This.Value}]
+					Script[Cerebrum].VariableScope.MapEditor:Recycle
+				</OnChange>    
+			</slider>
+			<text name="lblLocations">
+				<Width>150</Width>
+				<Height>40</Height>
+				<x>0</x>
+				<y>375</y>
+				<Text>Zoom: ${Script[Cerebrum].VariableScope.MapEditor.r}</Text>
+			</text>
+		</Children>
+	</Window>
+	
+	<Window name="Cerebrum">
+	<StorePosition>0</StorePosition>
+		<TitleBar template="window.TitleBar">
+			<Children>
+				<text Name="Title" template="window.TitleBar.title" />
+				<button Name="barPause" template="JHn.Window.TitleBar.Pause">
+				<onleftclick>
+				Event[GUI_BUTTON_HANDLE]:Execute["Pause"]
+				</onleftclick>
+				</button>
+				<button Name="barPlay" template="JHn.Window.TitleBar.Play">
+				<onleftclick>
+				Event[GUI_BUTTON_HANDLE]:Execute["Resume"]
+				</onleftclick>
+				</button>
+				<button Name="Minimize" template="window.TitleBar.Minimize" />
+				<button name="Close Button" template="window.TitleBar.Close">
+					<onleftclick>
+						endscript Cerebrum
+					</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Title>     Cerebrum ${Script[Cerebrum].VariableScope.Bot.Version}</Title>
+		<Visible>1</Visible>
+		<Height>348</Height>
+		<Width>540</Width>
+		<X>20</X>
+		<Y>220</Y>
+		<Children>
+			<TabControl name="Pages">
+				<width>100%</width>
+				<height>65%</height>
+				<draggable>false</draggable>
+				<tabs>
+					<tab name="Overview">				
+						<!-- status text -->
+						<text name="lblLocationSet">
+							<x>10</x>
+							<y>1</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>LocationSet:</Text>
+						</text>
+						<text name="txtLocationSet">
+							<x>70</x>
+							<y>1</y>
+							<Width>250</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>					
+						<text name="lblHotspot">
+							<x>175</x>
+							<y>1</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Hotspot:</Text>
+						</text>
+						<text name="txtHotspot">
+							<x>212</x>
+							<y>1</y>
+							<Width>250</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>					
+						<text name="lblGrindStatus">
+							<x>35</x>
+							<y>10</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>State:</Text>
+						</text>
+						<text name="txtGrindStatus">
+							<x>70</x>
+							<y>10</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblHotspotYds">
+							<x>240</x>
+							<y>10</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>H:</Text>
+						</text>
+						<text name="txtHotspotYds">
+							<x>255</x>
+							<y>10</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>	
+						<text name="lblPOIStatus">
+							<x>42</x>
+							<y>20</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>POI:</Text>
+						</text>
+						<text name="txtPOIStatus">
+							<x>70</x>
+							<y>20</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblPOIYds">
+							<x>240</x>
+							<y>20</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>P:</Text>
+						</text>
+						<text name="txtPOIYds">
+							<x>255</x>
+							<y>20</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>							
+						<text name="lblMeleeStatus">
+							<x>32</x>
+							<y>30</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>Melee:</Text>
+						</text>
+						<text name="txtMeleeStatus">
+							<x>70</x>
+							<y>30</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblRangedStatus">
+							<x>132</x>
+							<y>30</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>Ranged:</Text>
+						</text>
+						<text name="txtRangedStatus">
+							<x>170</x>
+							<y>30</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblTargetYds">
+							<x>240</x>
+							<y>30</y>
+							<Width>110</Width>
+							<Height>40</Height>
+							<Text>T:</Text>
+						</text>
+						<text name="txtTargetYds">
+							<x>255</x>
+							<y>30</y>
+							<Width>300</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>							
+						<text name="lblRunning">
+							<x>23</x>
+							<y>40</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Running:</Text>
+						</text>
+						<text name="txtRunning">
+							<x>70</x>
+							<y>40</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblMemory">
+							<x>123</x>
+							<y>40</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>MB Usage:</Text>
+						</text>
+						<text name="txtMemory">
+							<x>180</x>
+							<y>40</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblFPS">
+							<x>230</x>
+							<y>40</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>FPS:</Text>
+						</text>
+						<text name="txtFPS">
+							<x>255</x>
+							<y>40</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblGrindRange">
+							<x>6</x>
+							<y>50</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Grind Range:</Text>
+						</text>
+						<text name="txtGrindRange">
+							<x>70</x>
+							<y>50</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblPullRange">
+							<x>13</x>
+							<y>60</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Pull Range:</Text>
+						</text>
+						<text name="txtPullRange">
+							<x>70</x>
+							<y>60</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>							
+						<!-- begin counters -->
+						<text name="lblKills">
+							<x>147</x>
+							<y>50</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Kills:</Text>
+						</text>
+						<text name="txtKills">
+							<x>180</x>
+							<y>50</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblXP">
+							<x>235</x>
+							<y>50</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>XP:</Text>
+						</text>
+						<text name="txtXP">
+							<x>255</x>
+							<y>50</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>						
+						<text name="lblStuck">
+							<x>141</x>
+							<y>70</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Stuck:</Text>
+						</text>
+						<text name="txtStuck">
+							<x>180</x>
+							<y>70</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text>0</Text>
+						</text>
+						<text name="lblDCCount">
+							<x>40</x>
+							<y>70</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>DCs:</Text>
+						</text>
+						<text name="txtDCCount">
+							<x>70</x>
+							<y>70</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text>0</Text>
+						</text>
+						<text name="lblDeaths">
+							<x>135</x>
+							<y>60</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Deaths:</Text>
+						</text>
+						<text name="txtDeaths">
+							<x>180</x>
+							<y>60</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>
+						<text name="lblXhr">
+							<x>220</x>
+							<y>60</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>XP/Hr:</Text>
+						</text>
+						<text name="txtXhr">
+							<x>255</x>
+							<y>60</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text></Text>
+						</text>						
+						<!-- end counters -->
+						<!-- begin buttons -->
+						<button name="btnGrindLoadBestLocationSet">
+							<x>10</x>
+							<y>85</y>
+							<width>60</width>
+							<height>25</height>
+							<text>Go</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["GrindLoadBestLocationSet"]
+									Event[GUI_BUTTON_HANDLE]:Execute["Resume"]
+							</OnLeftClick>
+						</button>
+						<button name="Pause">
+							<x>80</x>
+							<y>85</y>
+							<width>60</width>
+							<height>25</height>
+							<text>Pause</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["Pause"]
+							</OnLeftClick>
+						</button>
+						<button name="Resume">
+							<x>80</x>
+							<y>85</y>
+							<width>60</width>
+							<height>25</height>
+							<text>Resume</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["Resume"]
+							</OnLeftClick>
+						</button>
+						<button name="btnForceLogout">
+							<x>10</x>
+							<y>112</y>
+							<width>60</width>
+							<height>25</height>
+							<text>Logout</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["ForceLogout"]
+							</OnLeftClick>
+						</button>
+						<button name="btnForceSellRepair">
+							<x>80</x>
+							<y>112</y>
+							<width>75</width>
+							<height>25</height>
+							<text>Repair Sell</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["ForceSellRepair"]
+							</OnLeftClick>
+						</button>
+						<button name="btnForceTrain">
+							<x>165</x>
+							<y>112</y>
+							<width>40</width>
+							<height>25</height>
+							<text>Train</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["ForceTrain"]
+							</OnLeftClick>
+						</button>
+						<button name="btnForceHotspotSwitch">
+							<x>215</x>
+							<y>112</y>
+							<width>65</width>
+							<height>25</height>
+							<text>Next HS</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["ForceHotspotSwitch"]
+							</OnLeftClick>
+						</button>
+						<checkbox name="chkAssistMode">
+							<x>148</x>
+							<y>83</y>
+							<width>25</width>
+							<height>25</height>
+							<text>Assist Mode</text> 
+							<OnLeftClick>  
+							</OnLeftClick>  							
+						</checkbox>
+						<checkbox name="chkPartyMode">
+							<x>225</x>
+							<y>83</y>
+							<width>25</width>
+							<height>25</height>
+							<text>Party</text> 	
+							<OnLeftClick>  
+								Event[GUI_BUTTON_HANDLE]:Execute["PartyMode"]									
+							</OnLeftClick>  								
+						</checkbox>						
+						<!-- mapping options -->
+						<button name="btnBackupZone">
+							<x>199</x>
+							<y>173</y>
+							<width>80</width>
+							<height>25</height>
+							<text>Backup Zone</text>
+							<OnLeftClick>
+									Event[GUI_BUTTON_HANDLE]:Execute["BackupZone"]
+							</OnLeftClick>
+						</button>	
+						<checkbox name="chkMapPathway">
+							<x>10</x>
+							<y>173</y>
+							<width>50</width>
+							<height>25</height>
+							<text>PPF</text>
+							<OnLeftClick>  
+								Event[GUI_BUTTON_HANDLE]:Execute["MapSettingChanged"]
+							</OnLeftClick>  								
+						</checkbox>
+						<checkbox name="chkMapPathwayReverse">
+							<x>60</x>
+							<y>173</y>
+							<width>50</width>
+							<height>25</height>
+							<text>PPB</text>
+							<OnLeftClick>  
+								Event[GUI_BUTTON_HANDLE]:Execute["MapSettingChanged"]
+							</OnLeftClick>  								
+						</checkbox>						
+						<checkbox name="chkMappingOff">
+							<x>130</x>
+							<y>173</y>
+							<width>50</width>
+							<height>25</height>
+							<text>Map Off</text>
+							<OnLeftClick>  
+								Event[GUI_BUTTON_HANDLE]:Execute["MapSettingChanged"]
+							</OnLeftClick>  								
+						</checkbox>						
+						<!-- begin combo boxes -->						
+						<text name="txtSpec">
+							<x>13</x>
+							<y>140</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text>Toon Spec:</Text>
+						</text>
+						<combobox name="cmbSpec">
+							<Width>120</Width>
+							<Height>18</Height>
+							<x>13</x>
+							<y>150</y>
+							<OnSelect>
+								Script[Cerebrum].VariableScope.TalentTree.specToLevel:Set[${This.SelectedItem.Text}]
+							</OnSelect>
+						</combobox>						
+						<text name="txtCPURating">
+							<x>160</x>
+							<y>140</y>
+							<Width>120</Width>
+							<Height>40</Height>
+							<Text>CPU Rating:</Text>
+						</text>
+						<combobox name="cmbBotGlobalCooldown">
+							<Width>115</Width>
+							<Height>20</Height>
+							<x>160</x>
+							<y>150</y>
+							<Items>
+								<Item Value='1'default='1'>Very Fast CPU</Item>
+								<Item Value='2'>Fast CPU</Item>
+								<Item Value='3'>Decent CPU</Item>
+								<Item value='4'>Slower CPU</item>
+								<Item Value='5'>Very Slow CPU</Item>
+							</Items>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["UpdateBotGlobalCooldown"]
+								Event[CEREBRUM_CONFIG_COMBO]:Execute["cmbBotGlobalCooldown"]							
+							</OnSelect>
+						</combobox>
+						<!-- end buttons -->
+						<!-- begin targets -->
+						<listbox name="lstTargets">
+							<x>290</x>
+							<y>14</y>
+							<width>238</width>
+							<height>156</height>
+						</listbox>
+						<text name="lblTargets">
+							<Width>100</Width>
+							<Height>40</Height>
+							<X>390</X>
+							<Y>3</Y>
+							<Text>Targets:</Text>
+						</text>
+						<text name="txtMaxTargetCollection">
+							<X>292</X>
+							<Y>180</Y>
+							<Width>70</Width>
+							<Height>20</Height>
+							<Text>Target List size:</Text>
+						</text>						
+						<text name="valMaxTargetCollection">
+							<X>362</X>
+							<Y>180</Y>
+							<Width>70</Width>
+							<Height>20</Height>
+							<Text>${UIElement[Overview@Pages@Cerebrum].FindChild[sldMaxTargetCollection].Value} mobs</Text>
+						</text>	
+						<slider name="sldMaxTargetCollection">
+							<X>400</X>
+							<Y>177</Y>
+							<Range>20</Range>
+							<Width>120</Width>
+							<Height>15</Height>
+							<OnChange>
+								Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldMaxTargetCollection"]							
+							</OnChange>
+						</slider>						
+						<!-- end targets -->
+					</tab>
+					<tab name="Inventory">
+						<TabControl name="InvPages">
+							<width>100%</width>
+							<height>100%</height>
+							<draggable>false</draggable>
+							<onload>
+								Event[GUI_BUTTON_HANDLE]:Execute["UpdateItemList"]
+								Event[GUI_BUTTON_HANDLE]:Execute["UpdateRestockList"]
+							</onload>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["UpdateItemList"]
+								Event[GUI_BUTTON_HANDLE]:Execute["UpdateRestockList"]
+							</OnSelect>
+							<tabs>
+								<tab name="Config">
+									<!-- Inventory Control -->
+									<!-- Auto ComboBoxes -->
+						<checkbox name="chkLoot">
+							<x>10</x>
+							<y>10</y>
+							<width>70</width>
+							<height>25</height>
+							<text>Loot Mobs</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkLoot"]     
+							</OnLeftClick>  								
+						</checkbox>
+						<text name="lblleaveFreeSlots">
+										<x>15</x>
+										<y>100</y>
+										<Width>120</Width>
+										<Height>40</Height>
+										<Text>Sell Leave Free Slots:</Text>
+						</text>
+						<combobox name="leaveFreeSlots">
+										<x>10</x>
+										<y>110</y>
+										<width>100</width>
+										<height>20</height>
+										<items>
+											<item value="0">0</item>
+											<item value="1">1</item>
+											<item value="2">2</item>
+											<item value="3">3</item>
+											<item value="4">4</item>
+											<item value="5">5</item>
+											<item value="6">6</item>
+											<item value="7">7</item>
+											<item value="8">8</item>
+											<item value="9">9</item>
+											<item value="10">10</item>
+										</items>
+										<OnSelect>
+											Event[CEREBRUM_CONFIG_COMBO]:Execute["leaveFreeSlots"]										
+										</OnSelect>	
+						</combobox>		
+						<checkbox name="chkGather">
+							<x>10</x>
+							<y>30</y>
+							<width>70</width>
+							<height>25</height>
+							<text>Gather</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkGather"]     
+							</OnLeftClick>  								
+						</checkbox>
+						<checkbox name="chkHarvestQuests">
+							<x>90</x>
+							<y>10</y>
+							<width>70</width>
+							<height>25</height>
+							<text>Harvest Quest Objects</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkHarvestQuests"]     
+							</OnLeftClick>  								
+						</checkbox>						
+						<checkbox name="chkRoamHerb">
+							<x>250</x>
+							<y>10</y>
+							<width>70</width>
+							<height>25</height>
+							<text>Roam Herb</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkRoamHerb"]     
+							</OnLeftClick>  								
+						</checkbox>						
+						<checkbox name="chkRoamMine">
+							<x>360</x>
+							<y>10</y>
+							<width>70</width>
+							<height>25</height>
+							<text>Roam Mine</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkRoamMine"]     
+							</OnLeftClick>  								
+						</checkbox>												
+									<text name="lblAutoSell">
+										<x>15</x>
+										<y>140</y>
+										<Width>120</Width>
+										<Height>40</Height>
+										<Text>AutoSell:</Text>
+									</text>
+									<combobox name="cmbAutoSell">
+										<x>10</x>
+										<y>150</y>
+										<width>100</width>
+										<height>20</height>
+										<items>
+											<item value="0">disabled</item>
+											<item default="1" value="1">grey</item>
+											<item value="2">white</item>
+											<item value="3">green</item>
+											<item value="4">blue</item>
+											<item value="5">purple</item>
+										</items>
+										<OnSelect>
+											Event[CEREBRUM_CONFIG_COMBO]:Execute["cmbAutoSell"]										
+											Event[GUI_BUTTON_HANDLE]:Execute["UpdateItemList"]
+										</OnSelect>										
+									</combobox>
+									<!-- next -->
+									<text name="lblAutoMule">
+										<x>155</x>
+										<y>140</y>
+										<Width>120</Width>
+										<Height>40</Height>
+										<Text>AutoMule:</Text>
+									</text>
+									<combobox name="cmbAutoMule">
+										<x>150</x>
+										<y>150</y>
+										<width>100</width>
+										<height>20</height>
+										<items>
+											<item default="1" value="99">disabled</item>
+											<item value="5">purple</item>
+											<item value="4">blue</item>
+											<item value="3">green</item>
+											<item value="2">white</item>
+											<item value="1">grey</item>
+										</items>
+										<OnSelect>
+											Event[CEREBRUM_CONFIG_COMBO]:Execute["cmbAutoMule"]										
+											Event[GUI_BUTTON_HANDLE]:Execute["UpdateItemList"]
+										</OnSelect>	
+									</combobox>		
+									<!-- mule -->						
+									<text name="lblMuleChar">
+										<x>10</x>
+										<y>60</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Mule:</text>
+									</text>
+									<textentry name="tenMuleChar">
+										<Width>130</Width>
+										<Height>18</Height>
+										<x>10</x>
+										<y>73</y>
+									</textentry>
+									<button name="btnMuleSet">
+										<x>145</x>
+										<y>73</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["MuleSet"]
+										</OnLeftClick>
+									</button>
+									<!-- mule -->
+									<text name="lbloverAllRepairPCT">
+										<x>250</x>
+										<y>40</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Overall Repair %:</text>
+									</text>
+									<textentry name="overAllRepairPCT">
+										<Width>20</Width>
+										<Height>18</Height>
+										<x>250</x>
+										<y>53</y>
+									</textentry>
+									<button name="btnoverAllRepairPCT">
+										<x>280</x>
+										<y>53</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["overAllRepairPCTSet"]
+										</OnLeftClick>
+									</button>
+									<text name="lbllowestRepairPCT">
+										<x>250</x>
+										<y>80</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Lowest Repair %:</text>
+									</text>
+									<textentry name="lowestRepairPCT">
+										<Width>20</Width>
+										<Height>18</Height>
+										<x>250</x>
+										<y>93</y>
+									</textentry>
+									<button name="btnlowestRepairPCT">
+										<x>280</x>
+										<y>93</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["lowestRepairPCTSet"]
+										</OnLeftClick>
+									</button>
+									<text name="lblFoodMerchantName">
+										<x>360</x>
+										<y>40</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Food Merchant name:</text>
+									</text>
+									<textentry name="FoodMerchant">
+										<Width>130</Width>
+										<Height>18</Height>
+										<x>360</x>
+										<y>53</y>
+									</textentry>
+									<button name="btnFoodSet">
+										<x>500</x>
+										<y>53</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["FoodSet"]
+										</OnLeftClick>
+									</button>
+									<text name="lblDrinkMerchantName">
+										<x>360</x>
+										<y>80</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Drink Merchant name:</text>
+									</text>
+									<textentry name="DrinkMerchant">
+										<Width>130</Width>
+										<Height>18</Height>
+										<x>360</x>
+										<y>93</y>
+									</textentry>
+									<button name="btnDrinkSet">
+										<x>500</x>
+										<y>93</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["DrinkSet"]
+										</OnLeftClick>
+									</button>
+									<text name="lblAmmoMerchantName">
+										<x>360</x>
+										<y>120</y>
+										<width>100</width>
+										<height>20</height>
+										<text>Ammo Merchant name:</text>
+									</text>
+									<textentry name="AmmoMerchant">
+										<Width>130</Width>
+										<Height>18</Height>
+										<x>360</x>
+										<y>133</y>
+									</textentry>
+									<button name="btnAmmoSet">
+										<x>500</x>
+										<y>133</y>
+										<Width>25</Width>
+										<Height>18</Height>
+										<text>Set</text>
+										<OnLeftClick>
+										Event[GUI_BUTTON_HANDLE]:Execute["AmmoSet"]
+										</OnLeftClick>
+									</button>
+								</tab>
+								<tab name="Items">
+									<listbox name="lstListed">
+										<x>290</x>
+										<y>20</y>
+										<width>200</width>
+										<height>160</height>
+									</listbox>
+									<listbox name="lstInventory">
+										<x>3</x>
+										<y>20</y>
+										<width>200</width>
+										<height>160</height>
+									</listbox>
+									<button name="btnSellRemove">
+										<x>210</x>
+										<y>10</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Remove</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["Remove"]
+										</onleftclick>
+									</button>
+									<button name="btnAddSell">
+										<x>210</x>
+										<y>35</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Sell</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddSell"]
+										</onleftclick>
+									</button>
+									<button name="btnAddKeep">
+										<x>210</x>
+										<y>60</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Keep</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddKeep"]
+										</onleftclick>
+									</button>
+									<button name="btnAddMule">
+										<x>210</x>
+										<y>85</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Mule</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddMule"]
+										</onleftclick>
+									</button>
+									<button name="btnAddBank">
+										<x>210</x>
+										<y>110</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Bank</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddBank"]
+										</onleftclick>
+									</button>
+									<button name="btnAddDestroy">
+										<x>210</x>
+										<y>135</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Destroy</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddDestroy"]
+										</onleftclick>
+									</button>
+									<button name="btnAddOpen">
+										<x>210</x>
+										<y>160</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Open</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddOpen"]
+										</onleftclick>
+									</button>
+									<text name="lblInventory">
+										<Width>100</Width>
+										<Height>40</Height>
+										<X>5</X>
+										<Y>5</Y>
+										<Text>Inventory:</Text>
+									</text>
+									<text name="lblSell">
+										<Width>100</Width>
+										<Height>40</Height>
+										<X>290</X>
+										<Y>5</Y>
+										<Text>Listed:</Text>
+									</text>
+								</tab>
+								<tab name="Restock">
+									<text name="lblMinAmount">
+										<x>210</x>
+										<y>150</y>
+										<Width>80</Width>
+										<Height>40</Height>
+										<Text>Min Stacks:</Text>
+									</text>
+									<combobox name="cmbMinAmount">
+										<x>210</x>
+										<y>160</y>
+										<width>60</width>
+										<height>20</height>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["RMinChange"]
+										</OnSelect>
+									</combobox>
+									<text name="lblMaxAmount">
+										<x>300</x>
+										<y>150</y>
+										<Width>80</Width>
+										<Height>40</Height>
+										<Text>Max Stacks:</Text>
+									</text>
+									<combobox name="cmbMaxAmount">
+										<x>300</x>
+										<y>160</y>
+										<width>60</width>
+										<height>20</height>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["RMaxChange"]
+										</OnSelect>
+									</combobox>		
+									<text name="lblType">
+										<x>400</x>
+										<y>150</y>
+										<Width>120</Width>
+										<Height>40</Height>
+										<Text>Type:</Text>
+									</text>
+									<combobox name="cmbType">
+										<x>400</x>
+										<y>160</y>
+										<width>100</width>
+										<height>20</height>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["RTypeChange"]
+										</OnSelect>
+										<items>
+											<item default="1" value="1">FOOD</item>
+											<item value="2">AMMO</item>
+											<item value="3">ARROW</item>
+											<item value="4">WATER</item>
+										</items>
+									</combobox>										
+									<listbox name="lstListed">
+										<x>290</x>
+										<y>20</y>
+										<width>200</width>
+										<height>120</height>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["RestockedClick"]
+										</OnSelect>
+									</listbox>
+									<listbox name="lstInventory">
+										<x>3</x>
+										<y>20</y>
+										<width>200</width>
+										<height>160</height>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["RInventoryClick"]
+										</OnSelect>
+									</listbox>
+									<button name="btnAddRestock">
+										<x>210</x>
+										<y>60</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Restock</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddRestock"]
+										</onleftclick>
+									</button>
+									<button name="btnRemoveRestock">
+										<x>210</x>
+										<y>85</y>
+										<Width>70</Width>
+										<Height>20</Height>
+										<text>Remove</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["RemoveRestock"]
+										</onleftclick>
+									</button>
+									<text name="lblInventory">
+										<Width>300</Width>
+										<Height>40</Height>
+										<X>5</X>
+										<Y>5</Y>
+										<Text>Choose items to restock and quantity:</Text>
+									</text>
+									<text name="lblSell">
+										<Width>100</Width>
+										<Height>40</Height>
+										<X>290</X>
+										<Y>5</Y>
+										<Text>Restock:</Text>
+									</text>
+								</tab>
+							</tabs>
+						</TabControl>
+					</tab>
+					<tab name="Grind">	
+						<text name="lblLocations">
+							<Width>150</Width>
+							<Height>40</Height>
+							<x>4</x>
+							<y>32</y>
+							<Text>Location Sets:</Text>
+						</text>
+						<textentry name="tenLocations">
+							<Width>180</Width>
+							<Height>18</Height>
+							<x>3</x>
+							<y>43</y>
+						</textentry>
+						<text name="lblHotspots">
+							<Width>150</Width>
+							<Height>40</Height>
+							<x>297</x>
+							<y>32</y>
+							<Text>Hot Spots:</Text>
+						</text>				
+						<textentry name="tenHotspots">
+							<Width>160</Width>
+							<Height>18</Height>
+							<x>296</x>
+							<y>43</y>
+						</textentry>
+						<text name="lblWoWEcho">
+							<Width>205</Width>
+							<Height>40</Height>
+							<x>297</x>
+							<y>168</y>
+							<Text>/slash command on hotsport: (ex: /quicknote)</Text>
+						</text>
+						<textentry name="tenWoWEcho">
+							<Width>205</Width>
+							<Height>18</Height>
+							<x>296</x>
+							<y>178</y>
+						</textentry>						
+						<text name="lblLocation">
+							<Width>30</Width>
+							<Height>20</Height>
+							<x>295</x>
+							<y>8</y>
+							<Text>Loc.</Text>
+						</text>
+						<text name="lblLocationLvl">
+							<Width>30</Width>
+							<Height>20</Height>
+							<x>295</x>
+							<y>18</y>
+							<Text>LvL</Text>
+						</text>
+						<combobox name="cmbLocationLvlFrom">
+							<Width>40</Width>
+							<Height>17</Height>
+							<x>315</x>
+							<y>8</y>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateLvlFrom"]
+							</OnSelect>
+						</combobox>
+						<text name="lblLocationLvlTo">
+							<Width>15</Width>
+							<Height>20</Height>
+							<x>360</x>
+							<y>12</y>
+							<Text>-</Text>
+						</text>
+						<combobox name="cmbLocationLvlTo">
+							<Width>40</Width>
+							<Height>17</Height>
+							<x>370</x>
+							<y>8</y>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateLvlTo"]
+							</OnSelect>
+						</combobox>
+						<text name="lblLocationGrindLoot">
+							<Width>50</Width>
+							<Height>20</Height>
+							<x>415</x>
+							<y>8</y>
+							<Text>Grind</Text>
+						</text>
+						<text name="lblLocationGrindRange">
+							<Width>50</Width>
+							<Height>20</Height>
+							<x>415</x>
+							<y>18</y>
+							<Text>Range:</Text>
+						</text>
+						<combobox name="cmbLocationGrindRange">
+							<Width>55</Width>
+							<Height>17</Height>
+							<x>445</x>
+							<y>8</y>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateGrindRange"]
+							</OnSelect>
+						</combobox>
+						<checkbox name="chkLocationActive">
+							<x>233</x>
+							<y>10</y>
+							<width>30</width>
+							<height>25</height>
+							<text>Active</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateActive"]
+							</OnLeftClick>
+						</checkbox>	
+						<button name="btnLocationDel">
+							<x>184</x>
+							<y>50</y>
+							<width>40</width>
+							<height>14</height>
+							<text>Del</text>
+							<onleftclick>
+								Event[GUI_BUTTON_HANDLE]:Execute["DelLocation"]
+							</onleftclick>
+						</button>
+						<button name="btnLocationAdd">
+							<x>184</x>
+							<y>34</y>
+							<width>40</width>
+							<height>14</height>
+							<text>Add</text>
+							<onleftclick>
+								Event[GUI_BUTTON_HANDLE]:Execute["AddLocation"]
+							</onleftclick>
+						</button>
+						<listbox name="tlbLocations">
+							<Width>220</Width>
+							<Height>130</Height>
+							<x>3</x>
+							<y>65</y>
+							<onload>
+								Event[GUI_BUTTON_HANDLE]:Execute["LoadLocations"]
+							</onload>
+							<onselect>
+								Event[GUI_BUTTON_HANDLE]:Execute["LoadHotspots"]
+							</onselect>
+						</listbox>
+						<listbox name="tlbHotspots">
+							<Width>205</Width>
+							<Height>100</Height>
+							<x>296</x>
+							<y>65</y>
+						</listbox>
+						<button name="btnHotspotAdd">
+							<Width>40</Width>
+							<Height>14</Height>
+							<x>458</x>
+							<y>34</y>
+							<text>Add</text>
+							<onleftclick>
+								Event[GUI_BUTTON_HANDLE]:Execute["AddHotspot"]
+							</onleftclick>
+						</button>
+						<button name="btnHotspotDel">
+							<Width>40</Width>
+							<Height>14</Height>
+							<x>458</x>
+							<y>50</y>
+							<text>Del</text>
+							<onleftclick>
+								Event[GUI_BUTTON_HANDLE]:Execute["DelHotspot"]
+							</onleftclick>
+						</button>
+						<button name="bntHotspotGoto">
+							<Width>40</Width>
+							<Height>18</Height>
+							<x>248</x>
+							<y>63</y>
+							<text>Goto</text>
+							<onleftclick>
+								Event[GUI_BUTTON_HANDLE]:Execute["GotoHotspot"]
+							</onleftclick>
+						</button>
+						<text name="lblPullRange">
+							<x>234</x>
+							<y>93</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Pull Range:</Text>
+						</text>
+						<combobox name="cmbPullRange">
+							<x>232</x>
+							<y>103</y>
+							<width>50</width>
+							<height>17</height>
+							<items>
+								<item>50</item>
+								<item>45</item>							
+								<item>40</item>
+								<item>35</item>
+								<item default="1">30</item>
+								<item>25</item>
+								<item>20</item>
+								<item>15</item>
+								<item>10</item>
+								<item>5</item>
+							</items>
+							<OnSelect>
+								Event[CEREBRUM_CONFIG_COMBO]:Execute["cmbPullRange"]							
+							</OnSelect>							
+						</combobox>
+						<text name="lblLocTimer">
+							<x>234</x>
+							<y>123</y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Loc Timer:</Text>
+						</text>
+						<combobox name="cmbLocTimer">
+							<x>232</x>
+							<y>133</y>
+							<width>50</width>
+							<height>17</height>
+							<items>
+								<item>240</item>
+								<item>210</item>
+								<item>180</item>
+								<item>150</item>
+								<item>120</item>
+								<item default="1">90</item>
+								<item>60</item>
+								<item>30</item>
+							</items>
+							<OnSelect>
+								Event[CEREBRUM_CONFIG_COMBO]:Execute["cmbLocTimer"]							
+							</OnSelect>							
+						</combobox>	
+						<checkbox name="chkRandomHotSpots">
+							<x>226</x>
+							<y>176</y>
+							<width>30</width>
+							<height>20</height>
+							<text>Random</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateRandom"]				
+							</OnLeftClick>
+						</checkbox>	
+						<checkbox name="chkKillInPath">
+							<x>226</x>
+							<y>153</y>
+							<width>30</width>
+							<height>20</height>
+							<text>Kill In Path</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationUpdateKillInPath"]											
+							</OnLeftClick>								
+						</checkbox>						
+						<text name="lblLocZone">
+							<Width>50</Width>
+							<Height>20</Height>
+							<x>4</x>
+							<y>3</y>
+							<Text>Zone List:</Text>
+						</text>
+						<combobox name="cmbLocZone">
+							<Width>220</Width>
+							<Height>17</Height>
+							<FullHeight>150</FullHeight> 							
+							<x>4</x>
+							<y>12</y>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["LocationListZone"]
+							</OnSelect>
+						</combobox>							
+					</tab>
+					<tab name="POIs">
+						<TabControl name="POIPages">
+							<width>100%</width>
+							<height>100%</height>
+							<draggable>false</draggable>
+							<onload>
+								Event[GUI_BUTTON_HANDLE]:Execute["PopulatePOIs"]
+								Event[GUI_BUTTON_HANDLE]:Execute["PopulateAvoids"]								
+							</onload>
+							<OnSelect>
+								Event[GUI_BUTTON_HANDLE]:Execute["PopulatePOIs"]
+								Event[GUI_BUTTON_HANDLE]:Execute["PopulateAvoids"]								
+							</OnSelect>
+							<tabs>					
+								<tab name="Blacklist">					
+									<combobox name="cmbPOIsType">
+										<Width>190</Width>
+										<Height>20</Height>
+										<x>3</x>
+										<y>3</y>
+										<Items>
+										</Items>
+										<OnSelect>
+											Event[GUI_BUTTON_HANDLE]:Execute["PopulatePOIs"]
+										</OnSelect>
+									</combobox>
+									<listbox name="tlbPOIs">
+										<Width>200</Width>
+										<Height>150</Height>
+										<x>3</x>
+										<y>30</y>
+										<onload>
+											Event[GUI_BUTTON_HANDLE]:Execute["PopulatePOIs"]
+										</onload>
+									</listbox>
+									<listbox name="tlbPOIsBL">
+										<Width>200</Width>
+										<Height>130</Height>
+										<x>335</x>
+										<y>50</y>
+									</listbox>
+									<text name="lblPOIsBL">
+										<Width>150</Width>
+										<Height>40</Height>
+										<x>335</x>
+										<y>40</y>
+										<Text>Blacklisted POI's</Text>
+									</text>
+									<text name="lblManualBL">
+										<Width>150</Width>
+										<Height>40</Height>
+										<x>335</x>
+										<y>3</y>
+										<Text>Manual Add:</Text>
+									</text>
+									<textentry name="tenManualBL">
+										<Width>150</Width>
+										<Height>18</Height>
+										<x>335</x>
+										<y>13</y>
+									</textentry>
+									<button name="btnManualBL">
+										<x>488</x>
+										<y>13</y>
+										<width>30</width>
+										<height>14</height>
+										<text>Add</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["ManualBlacklistPOI"]
+										</onleftclick>
+									</button>						
+									<button name="btnManualBLTarget">
+										<x>442</x>
+										<y>33</y>
+										<width>80</width>
+										<height>14</height>
+										<text>Add Target</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["ManualBlacklistPOITarget"]
+										</onleftclick>
+									</button>						
+									<button name="btnPOIsDFBL">
+										<x>272</x>
+										<y>165</y>
+										<width>60</width>
+										<height>14</height>
+										<text>Remove</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["BlacklistRemovePOI"]
+										</onleftclick>
+									</button>
+									<button name="btnPOIsDel">
+										<x>205</x>
+										<y>150</y>
+										<width>60</width>
+										<height>14</height>
+										<text>Del POI</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["DelPOI"]
+										</onleftclick>
+									</button>
+									<button name="btnPOIsBL">
+										<x>205</x>
+										<y>165</y>
+										<width>60</width>
+										<height>14</height>
+										<text>Blacklist</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["BlacklistAddPOI"]
+										</onleftclick>
+									</button>
+									<button name="btnGotoPOI">
+										<x>210</x>
+										<y>35</y>
+										<width>30</width>
+										<height>20</height>
+										<text> Goto</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["GotoPOI"]
+										</onleftclick>
+									</button>
+									<checkbox name="chkTakeFMToPOI">
+										<x>212</x>
+										<y>120</y>
+										<width>40</width>
+										<height>25</height>
+										<text>Fly to NPCs</text>
+										<OnLeftClick>
+											Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTakeFMToPOI"]     					
+										</OnLeftClick>								
+									</checkbox>
+									<checkbox name="chkTakeFMToGrind">
+										<x>212</x>
+										<y>90</y>
+										<width>40</width>
+										<height>25</height>
+										<text>Fly to Locations</text>
+										<OnLeftClick>
+											Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTakeFMToGrind"]     					
+										</OnLeftClick>								
+									</checkbox>
+									<checkbox name="chkLearnFM">
+										<x>212</x>
+										<y>60</y>
+										<width>40</width>
+										<height>25</height>
+										<text>Learn Flightpaths</text>
+										<OnLeftClick>
+											Event[CEREBRUM_CONFIG_XBOX]:Execute["chkLearnFM"]     					
+										</OnLeftClick>								
+									</checkbox>							
+								</tab>
+								<tab name="Avoidance">
+									<text name="lblAvoid">
+										<Width>200</Width>
+										<Height>40</Height>
+										<x>13</x>
+										<y>20</y>
+										<Text>Enter Mob To Avoid:   (exact spelling!)</Text>
+									</text>
+									<textentry name="tenAvoid">
+										<Width>150</Width>
+										<Height>18</Height>
+										<x>13</x>
+										<y>30</y>
+									</textentry>
+									<button name="btnManualAvoid">
+										<x>168</x>
+										<y>33</y>
+										<width>30</width>
+										<height>14</height>
+										<text>Add</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddToAvoid"]
+										</onleftclick>
+									</button>						
+									<button name="btnManualAvoidTarget">
+										<x>13</x>
+										<y>53</y>
+										<width>80</width>
+										<height>14</height>
+										<text>Add Target</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["AddTargetToAvoid"]
+										</onleftclick>
+									</button>	
+									<button name="btnDelAvoid">
+										<x>230</x>
+										<y>156</y>
+										<width>60</width>
+										<height>14</height>
+										<text>Remove</text>
+										<onleftclick>
+											Event[GUI_BUTTON_HANDLE]:Execute["RemoveAvoid"]
+										</onleftclick>
+									</button>									
+									<text name="lblAvoidList">
+										<Width>150</Width>
+										<Height>40</Height>
+										<x>300</x>
+										<y>20</y>
+										<Text>Avoided Mobs</Text>
+									</text>									
+									<listbox name="tlbAvoids">
+										<Width>220</Width>
+										<Height>140</Height>
+										<x>300</x>
+										<y>30</y>
+										<onload>
+											Event[GUI_BUTTON_HANDLE]:Execute["PopulateAvoids"]
+										</onload>
+									</listbox>								
+								</tab>
+							</tabs>
+						</TabControl>
+					</tab>					
+					<tab name="Talents">
+						<TabControl name="TalentPages">
+							<width>100%</width>
+							<height>100%</height>
+							<draggable>false</draggable>
+							<tabs>
+								<tab name="Management">
+									<text name="lblSpecs">
+										<Width>150</Width>
+										<Height>40</Height>
+										<x>4</x>
+										<y>5</y>
+										<Text>Specs:</Text>
+									</text>
+									<textentry name="textSpec">
+										<Width>180</Width>
+										<Height>18</Height>
+										<x>3</x>
+										<y>16</y>
+									</textentry>		
+									<button name="btnSpecDel">
+										<x>184</x>
+										<y>26</y>
+										<width>40</width>
+										<height>14</height>
+										<text>Del</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:RemoveSpec[${This.Parent.FindChild[tlbSpecs].SelectedItem.Text}]
+										</onleftclick>
+									</button>
+									<button name="btnSpecAdd">
+										<x>184</x>
+										<y>10</y>
+										<width>40</width>
+										<height>14</height>
+										<text>Add</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:AddSpec[${This.Parent.FindChild[textSpec].Text}]
+										</onleftclick>
+									</button>
+									<button name="btnSpecImport">
+										<x>230</x>
+										<y>10</y>
+										<width>50</width>
+										<height>18</height>
+										<text>Import</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:ImportSpec[${This.Parent.FindChild[textSpec].Text}]
+										</onleftclick>
+									</button>
+									<listbox name="tlbSpecs">
+										<Width>220</Width>
+										<Height>130</Height>
+										<x>3</x>
+										<y>40</y>	
+									</listbox>
+								</tab>
+								<tab name="Specs">
+									<text name="lblTalents">
+										<Width>60</Width>
+										<Height>24</Height>
+										<x>220</x>
+										<y>50</y>
+										<Text>Talents:</Text>
+									</text>
+									<button name="btnTalentAdd">
+										<Width>60</Width>
+										<Height>18</Height>
+										<x>220</x>
+										<y>70</y>
+										<text>Add</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:AddTalent
+										</onleftclick>
+									</button>
+									<button name="btnTalentRemove">
+										<Width>60</Width>
+										<Height>18</Height>
+										<x>220</x>
+										<y>94</y>
+										<text>Remove</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:RemoveTalent
+										</onleftclick>
+									</button>
+									<button name="btnTalentLevelIncrease">
+										<Width>60</Width>
+										<Height>18</Height>
+										<x>220</x>
+										<y>140</y>
+										<text>+</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:TalentLevelIncrease							
+										</onleftclick>
+									</button>
+									<button name="btnTalentLevelDecrease">
+										<Width>60</Width>
+										<Height>18</Height>
+										<x>220</x>
+										<y>164</y>
+										<text>-</text>
+										<onleftclick>
+											Script[Cerebrum].VariableScope.TalentTree:TalentLevelDecrease							
+										</onleftclick>
+									</button>
+									<text name="lblSpecs">
+										<Width>40</Width>
+										<Height>30</Height>
+										<x>181</x>
+										<y>10</y>
+										<Text>Spec:</Text>
+									</text>
+									<combobox name="cmbSpec">
+            				<Width>140</Width>
+            				<Height>20</Height>
+            				<x>201</x>
+            				<y>10</y>
+            				<Items></Items>
+            				<OnSelect>
+											Script[Cerebrum].VariableScope.TalentTree:ChangeSpec[${This.SelectedItem.Text}]		
+            				</OnSelect>
+									</combobox>
+									<text name="lblTree">
+										<Width>40</Width>
+										<Height>30</Height>
+										<x>354</x>
+										<y>10</y>
+										<Text>Tree:</Text>
+									</text>
+									<combobox name="cmbTree">
+            				<Width>140</Width>
+            				<Height>20</Height>
+            				<x>384</x>
+            				<y>10</y>
+            				<OnSelect>
+											Script[Cerebrum].VariableScope.TalentTree:ChangeTree[${This.SelectedItem.Value}]						
+            				</OnSelect>
+									</combobox>
+									<listbox name="tlbAvailableTalents">
+										<Width>200</Width>
+										<Height>139</Height>
+										<x>3</x>
+										<y>40</y>
+									</listbox>
+									<listbox name="tlbSpecedTalents">
+										<Width>230</Width>
+										<Height>139</Height>
+										<x>296</x>
+										<y>40</y>
+								</listbox>
+								</tab>
+							</tabs>
+						</TabControl>
+					</tab>
+					<tab name="EQ">
+						<text name='lblAutoequip'>          
+							<X>40</X>        
+							<Y>5</Y>         
+							<Width>500</Width>       
+							<Height>20</Height>       
+							<Text>AUTOEQUIP STAT MODIFIERS:  This score is wieghted against item score to determine relative item values.</Text>   
+						</text>
+						<!-- left side -->						
+						<text name='lblAgility'>          
+							<X>10</X>        
+							<Y>20</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Agility Modifier:</Text>   
+						</text>
+							<text name='valueAgility'>     
+							<X>80</X>     
+							<Y>20</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldAgility].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldAgility'>    
+							<X>120</X>     
+							<Y>15</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Agility"]
+							</OnChange>    
+						</slider>
+						<text name='lblStrength'>          
+							<X>10</X>        
+							<Y>35</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Strength Modifier:</Text>   
+						</text>
+							<text name='valueStrength'>     
+							<X>80</X>     
+							<Y>35</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldStrength].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldStrength'>    
+							<X>120</X>     
+							<Y>30</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Strength"]
+							</OnChange>    
+						</slider>	
+						<text name='lblSpirit'>          
+							<X>10</X>        
+							<Y>50</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Spirit Modifier:</Text>   
+						</text>
+							<text name='valueSpirit'>     
+							<X>80</X>     
+							<Y>50</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldSpirit].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldSpirit'>    
+							<X>120</X>     
+							<Y>45</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Spirit"]
+							</OnChange>    
+						</slider>	
+						<text name='lblIntellect'>          
+							<X>10</X>        
+							<Y>65</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Intellect Modifier:</Text>   
+						</text>
+							<text name='valueIntellect'>     
+							<X>80</X>     
+							<Y>65</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldIntellect].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldIntellect'>    
+							<X>120</X>     
+							<Y>60</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Intellect"]
+							</OnChange>    
+						</slider>	
+						<text name='lblStamina'>          
+							<X>10</X>        
+							<Y>80</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Stamina Modifier:</Text>   
+						</text>
+							<text name='valueStamina'>     
+							<X>80</X>     
+							<Y>80</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldStamina].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldStamina'>    
+							<X>120</X>     
+							<Y>75</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Stamina"]
+							</OnChange>    
+						</slider>	
+						<text name='lblAttackPower'>          
+							<X>10</X>        
+							<Y>95</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>AP Modifier:</Text>   
+						</text>
+							<text name='valueAttackPower'>     
+							<X>80</X>     
+							<Y>95</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldAttackPower].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldAttackPower'>    
+							<X>120</X>     
+							<Y>90</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["AttackPower"]
+							</OnChange>    
+						</slider>	
+						<text name='lblRangedAttackPower'>          
+							<X>10</X>        
+							<Y>110</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Ranged AP:</Text>   
+						</text>
+							<text name='valueRangedAttackPower'>     
+							<X>80</X>     
+							<Y>110</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldRangedAttackPower].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldRangedAttackPower'>    
+							<X>120</X>     
+							<Y>105</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["RangedAttackPower"]
+							</OnChange>    
+						</slider>	
+						<text name='lblArmor'>          
+							<X>10</X>        
+							<Y>125</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Armor Modifier:</Text>   
+						</text>
+							<text name='valueArmor'>     
+							<X>80</X>     
+							<Y>125</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldArmor].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldArmor'>    
+							<X>120</X>     
+							<Y>120</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Armor"]
+							</OnChange>    
+						</slider>	
+						<text name='lblBlock'>          
+							<X>10</X>        
+							<Y>140</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Block Modifier:</Text>   
+						</text>
+							<text name='valueBlock'>     
+							<X>80</X>     
+							<Y>140</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldBlock].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldBlock'>    
+							<X>120</X>     
+							<Y>135</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Block"]
+							</OnChange>    
+						</slider>	
+						<text name='lblDPS'>          
+							<X>10</X>        
+							<Y>155</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>DPS Modifier:</Text>   
+						</text>
+							<text name='valueDPS'>     
+							<X>80</X>     
+							<Y>155</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldDPS].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldDPS'>    
+							<X>120</X>     
+							<Y>150</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["DPS"]
+							</OnChange>    
+						</slider>
+						<checkbox name="chkAutoEQ">
+							<x>10</x>
+							<y>168</y>
+							<width>73</width>
+							<height>25</height>
+							<text>Autoequip</text>
+							<OnLeftClick>
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkAutoEQ"]     					
+							</OnLeftClick>								
+						</checkbox>					
+						<checkbox name="chkActionSlot">
+							<x>84</x>
+							<y>168</y>
+							<width>73</width>
+							<height>25</height>
+							<text>Actionbar</text>
+							<OnLeftClick>
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkActionSlot"]     					
+							</OnLeftClick>								
+						</checkbox>
+						<checkbox name="chkWeaponSubTypeOnly">
+							<x>160</x>
+							<y>168</y>
+							<width>73</width>
+							<height>25</height>
+							<text>Similar Weapons Only</text>
+							<OnLeftClick>
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkWeaponSubTypeOnly"]     					
+							</OnLeftClick>								
+						</checkbox>
+						<!-- right side -->
+						<text name='lblDefense'>          
+							<X>280</X>        
+							<Y>20</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Defense Modifier:</Text>   
+						</text>
+							<text name='valueDefense'>     
+							<X>350</X>     
+							<Y>20</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldDefense].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldDefense'>    
+							<X>390</X>     
+							<Y>15</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Defense"]
+							</OnChange>    
+						</slider>
+						<text name='lblResilience'>          
+							<X>280</X>        
+							<Y>35</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Resilience:</Text>   
+						</text>
+							<text name='valueResilience'>     
+							<X>350</X>     
+							<Y>35</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldResilience].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldResilience'>    
+							<X>390</X>     
+							<Y>30</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Resilience"]
+							</OnChange>    
+						</slider>	
+						<text name='lblParry'>          
+							<X>280</X>        
+							<Y>50</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Parry Modifier:</Text>   
+						</text>
+							<text name='valueParry'>     
+							<X>350</X>     
+							<Y>50</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldParry].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldParry'>    
+							<X>390</X>     
+							<Y>45</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Parry"]
+							</OnChange>    
+						</slider>	
+						<text name='lblDodge'>          
+							<X>280</X>        
+							<Y>65</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Dodge Modifier:</Text>   
+						</text>
+							<text name='valueDodge'>     
+							<X>350</X>     
+							<Y>65</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldDodge].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldDodge'>    
+							<X>390</X>     
+							<Y>60</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Dodge"]
+							</OnChange>    
+						</slider>	
+						<text name='lblHit'>          
+							<x>280</x>        
+							<Y>80</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Hit Modifier:</Text>   
+						</text>
+							<text name='valueHit'>     
+							<x>350</x>     
+							<Y>80</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldHit].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldHit'>    
+							<x>390</x>     
+							<Y>75</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Hit"]
+							</OnChange>    
+						</slider>	
+						<text name='lblCrit'>          
+							<x>280</x>        
+							<Y>95</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>Crit Modifier:</Text>   
+						</text>
+							<text name='valueCrit'>     
+							<x>350</x>     
+							<Y>95</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldCrit].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldCrit'>    
+							<x>390</x>     
+							<Y>90</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["Crit"]
+							</OnChange>    
+						</slider>	
+						<text name='lblSpellDamage'>          
+							<x>280</x>        
+							<Y>110</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>SpellDamage:</Text>   
+						</text>
+							<text name='valueSpellDamage'>     
+							<x>350</x>     
+							<Y>110</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldSpellDamage].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldSpellDamage'>    
+							<x>390</x>     
+							<Y>105</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["SpellDamage"]
+							</OnChange>    
+						</slider>	
+						<text name='lblHealingBonus'>          
+							<x>280</x>        
+							<Y>125</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>HealingBonus:</Text>   
+						</text>
+							<text name='valueHealingBonus'>     
+							<x>350</x>     
+							<Y>125</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldHealingBonus].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldHealingBonus'>    
+							<x>390</x>     
+							<Y>120</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["HealingBonus"]
+							</OnChange>    
+						</slider>	
+						<text name='lblSpellHit'>          
+							<x>280</x>        
+							<Y>140</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>SpellHit:</Text>   
+						</text>
+							<text name='valueSpellHit'>     
+							<x>350</x>     
+							<Y>140</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldSpellHit].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldSpellHit'>    
+							<x>390</x>     
+							<Y>135</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["SpellHit"]
+							</OnChange>    
+						</slider>	
+						<text name='lblSpellCrit'>          
+							<x>280</x>        
+							<Y>155</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>SpellCrit:</Text>   
+						</text>
+							<text name='valueSpellCrit'>     
+							<x>350</x>     
+							<Y>155</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldSpellCrit].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldSpellCrit'>    
+							<x>390</x>     
+							<Y>150</Y>  
+							<Offset>1</Offset>    
+							<Range>100000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["SpellCrit"]
+							</OnChange>    
+						</slider>	
+						<text name='lblMP5'>          
+							<x>280</x>        
+							<Y>170</Y>         
+							<Width>140</Width>       
+							<Height>20</Height>       
+							<Text>MP5 Modifier:</Text>   
+						</text>
+							<text name='valueMP5'>     
+							<x>350</x>     
+							<Y>170</Y>    
+							<Width>32</Width>    
+							<Height>20</Height>   
+							<Text>   
+							${Math.Calc[${UIElement[Cerebrum].FindChild[Pages].Tab["EQ"].FindChild[sldMP5].Value}/1000]}   
+							</Text>    
+						</text>
+						<slider name='sldMP5'>    
+							<x>390</x>     
+							<Y>165</Y>  
+							<Offset>1</Offset>    
+							<Range>10000</Range>     
+							<Width>140</Width>   
+							<Height>15</Height>     
+							<OnChange>    
+							Event[AUTOEQUIP_GUI_SLIDER]:Execute["MP5"]
+							</OnChange>    
+						</slider>						
+					</tab>						
+					<tab name="Human">
+						<TabControl name="HumanPages">
+							<width>100%</width>
+							<height>100%</height>
+							<draggable>false</draggable>
+							<tabs>
+							<tab name="Config">
+								<checkbox name="chkAutoEmote">
+									<x>10</x>
+									<y>10</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Auto Emote</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkAutoEmote"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<text name="lblEmoteTimer">
+									<X>100</X>
+									<Y>18</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Emote Player Every:</Text>
+								</text>					
+								<text name="valEmoteTimer">
+									<X>190</X>
+									<Y>18</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[Config@HumanPages@Human@Pages@Cerebrum].FindChild[sldEmoteTimer].Value}m</Text>
+								</text>	
+								<slider name="sldEmoteTimer">
+									<X>215</X>
+									<Y>15</Y>
+									<Range>180</Range>
+									<Width>80</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldEmoteTimer"]							
+									</OnChange>
+								</slider>
+								<checkbox name="chkCaptureWhispers">
+									<x>10</x>
+									<y>30</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Capture Whispers</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkCaptureWhispers"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkHumanSoundOn">
+									<x>10</x>
+									<y>50</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Enable Sounds for Player Alerts</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkHumanSoundOn"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkTargetFollower">
+									<x>300</x>
+									<y>30</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Target Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTargetFollower"]   
+									</OnLeftClick>  								
+								</checkbox>								
+								<checkbox name="chkTranslate">
+									<x>300</x>
+									<y>50</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Turn On Translator</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTranslate"]   
+										if ${This.Checked}
+										{
+											Translate on
+										}
+										else
+										{
+											Translate off
+										}	
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkWoWRadar">
+									<x>185</x>
+									<y>30</y>
+									<width>70</width>
+									<height>25</height>
+									<text>WoW Radar Window</text>
+									<OnLeftClick>  
+										if ${This.Checked}
+										{
+											UIElement -show "ob wowradar"
+										}
+										else
+										{
+											UIElement -hide "ob wowradar"
+										}	
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkPvPRadar">
+									<x>185</x>
+									<y>50</y>
+									<width>70</width>
+									<height>25</height>
+									<text>PvP Radar Window</text>
+									<OnLeftClick>  
+										if ${This.Checked}
+										{
+											UIElement -show "ob pvp"
+										}
+										else
+										{
+											UIElement -hide "ob pvp"
+										}	
+									</OnLeftClick>  								
+								</checkbox>															
+								<checkbox name="chkActiveSonar">
+									<x>10</x>
+									<y>80</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Activate Follower Sonar</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkActiveSonar"]     
+									</OnLeftClick>  								
+								</checkbox>								
+								<checkbox name="chkTrackFaction">
+									<x>40</x>
+									<y>100</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Track my Faction</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTrackFaction"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkTrackOppositeFaction">
+									<x>185</x>
+									<y>100</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Track Opposite Faction</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkTrackOppositeFaction"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<text name="lblFollowRadius">
+									<X>145</X>
+									<Y>88</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Follower Radius:</Text>
+								</text>					
+								<text name="valFollowRadius">
+									<X>220</X>
+									<Y>88</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[Config@HumanPages@Human@Pages@Cerebrum].FindChild[sldFollowRadius].Value}</Text>
+								</text>	
+								<slider name="sldFollowRadius">
+									<X>240</X>
+									<Y>85</Y>
+									<Range>300</Range>
+									<Width>90</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldFollowRadius"]							
+									</OnChange>
+								</slider>	
+								<text name="lblFollowAlertInterval">
+									<X>355</X>
+									<Y>88</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Sonar Intervals:</Text>
+								</text>					
+								<text name="valFollowAlertInterval">
+									<X>420</X>
+									<Y>88</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[Config@HumanPages@Human@Pages@Cerebrum].FindChild[sldFollowAlertInterval].Value}</Text>
+								</text>	
+								<slider name="sldFollowAlertInterval">
+									<X>440</X>
+									<Y>85</Y>
+									<Range>180</Range>
+									<Width>90</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldFollowAlertInterval"]							
+									</OnChange>
+								</slider>	
+								<checkbox name="chkFollowLogout">
+									<x>10</x>
+									<y>130</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Logout on Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkFollowLogout"]     
+									</OnLeftClick>  								
+								</checkbox>	
+								<text name="lblMaxFollows">
+									<X>145</X>
+									<Y>138</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Max Follow Count:</Text>
+								</text>					
+								<text name="valMaxFollows">
+									<X>225</X>
+									<Y>138</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[Config@HumanPages@Human@Pages@Cerebrum].FindChild[sldMaxFollows].Value}</Text>
+								</text>	
+								<slider name="sldMaxFollows">
+									<X>240</X>
+									<Y>135</Y>
+									<Range>20</Range>
+									<Width>90</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldMaxFollows"]							
+									</OnChange>
+								</slider>	
+								<text name="lblLongIntervalReset">
+									<X>355</X>
+									<Y>138</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Reset After:</Text>
+								</text>					
+								<text name="valLongIntervalReset">
+									<X>405</X>
+									<Y>138</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[Config@HumanPages@Human@Pages@Cerebrum].FindChild[sldLongIntervalReset].Value}</Text>
+								</text>	
+								<slider name="sldLongIntervalReset">
+									<X>440</X>
+									<Y>135</Y>
+									<Range>108000</Range>
+									<Width>90</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldLongIntervalReset"]							
+									</OnChange>
+								</slider>							
+								<checkbox name="chkStopOnFollow">
+									<x>10</x>
+									<y>155</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Stop on Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkStopOnFollow"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkEmoteOnFollow">
+									<x>115</x>
+									<y>155</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Wave to Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkEmoteOnFollow"]     
+									</OnLeftClick>  								
+								</checkbox>						
+								<checkbox name="chkBeepOnFollow">
+									<x>220</x>
+									<y>155</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Sound on Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkBeepOnFollow"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<checkbox name="chkNewLocOnFollow">
+									<x>325</x>
+									<y>155</y>
+									<width>70</width>
+									<height>25</height>
+									<text>New Location on Follower</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkNewLocOnFollow"]     
+									</OnLeftClick>  								
+								</checkbox>	
+							</tab>						
+							<tab name="Whispers">
+								<console Name="Status">
+								<BackBufferSize>50</BackBufferSize>
+								<Width>100%</Width> 
+								<Height>100%</Height> 
+								</console>
+							</tab>
+							<tab name="PartyConfig">
+								<checkbox name="chkPartyLeader">
+									<x>10</x>
+									<y>10</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Party Leader</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkPartyLeader"]     
+									</OnLeftClick>  								
+								</checkbox>	
+								<text name="lblFollowDistance">
+									<X>100</X>
+									<Y>18</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Follow Distance:</Text>
+								</text>					
+								<text name="valFollowDistance">
+									<X>190</X>
+									<Y>18</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[PartyConfig@HumanPages@Human@Pages@Cerebrum].FindChild[sldPartyFollowDistance].Value}yds</Text>
+								</text>	
+								<slider name="sldPartyFollowDistance">
+									<X>220</X>
+									<Y>15</Y>
+									<Range>30</Range>
+									<Width>80</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldPartyFollowDistance"]							
+									</OnChange>
+								</slider>
+								<checkbox name="chkCanTank">
+									<x>10</x>
+									<y>30</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Can Tank</text>
+									<OnLeftClick>  
+										Event[CEREBRUM_CONFIG_XBOX]:Execute["chkCanTank"]     
+									</OnLeftClick>  								
+								</checkbox>
+								<text name="lblAssistRange">
+									<X>100</X>
+									<Y>38</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Assist Range:</Text>
+								</text>					
+								<text name="valAssistRange">
+									<X>190</X>
+									<Y>38</Y>
+									<Width>70</Width>
+									<Height>20</Height>
+									<Text>${UIElement[PartyConfig@HumanPages@Human@Pages@Cerebrum].FindChild[sldAssistRange].Value}yds</Text>
+								</text>	
+								<slider name="sldAssistRange">
+									<X>220</X>
+									<Y>35</Y>
+									<Range>200</Range>
+									<Width>80</Width>
+									<Height>15</Height>
+									<OnChange>
+										Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldAssistRange"]							
+									</OnChange>
+								</slider>	
+							</tab>
+							<tab name="Quest">
+								<checkbox name="chkRecordQuest">
+									<x>10</x>
+									<y>10</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Record Quests</text>								
+								</checkbox>
+								<checkbox name="chkPlayQuest">
+									<x>100</x>
+									<y>10</y>
+									<width>70</width>
+									<height>25</height>
+									<text>Play Quests</text>							
+								</checkbox>
+								<listbox name="tlbQuests">
+									<Width>220</Width>
+									<Height>130</Height>
+									<x>10</x>
+									<y>40</y>
+									<onselect>
+										Event[GUI_BUTTON_HANDLE]:Execute["LoadQuest"]
+									</onselect>
+								</listbox>
+								<text name="lblQuestString">
+									<X>300</X>
+									<Y>40</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Quest:</Text>
+								</text>	
+								<text name="txtQuestString">
+									<X>340</X>
+									<Y>40</Y>
+									<Width>250</Width>
+									<Height>40</Height>
+									<Text>(0) NULL ID: NULL</Text>
+								</text>
+								<text name="lblQuestArea">
+									<X>300</X>
+									<Y>50</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Area:</Text>
+								</text>	
+								<text name="txtQuestArea">
+									<X>340</X>
+									<Y>50</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>NULL</Text>
+								</text>
+								<text name="lblQuestType">
+									<X>300</X>
+									<Y>60</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Type:</Text>
+								</text>	
+								<text name="txtQuestType">
+									<X>340</X>
+									<Y>60</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>NULL</Text>
+								</text>
+								<text name="lblQuestItem">
+									<X>300</X>
+									<Y>70</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Item:</Text>
+								</text>	
+								<text name="txtQuestItem">
+									<X>340</X>
+									<Y>70</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>NULL</Text>
+								</text>
+								<text name="lblQuestWeight">
+									<X>300</X>
+									<Y>80</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Weight:</Text>
+								</text>	
+								<text name="txtQuestWeight">
+									<X>340</X>
+									<Y>80</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>NULL</Text>
+								</text>
+								<text name="lblQuestFaction">
+									<X>300</X>
+									<Y>90</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>Faction:</Text>
+								</text>	
+								<text name="txtQuestFaction">
+									<X>340</X>
+									<Y>90</Y>
+									<Width>100</Width>
+									<Height>40</Height>
+									<Text>NULL</Text>
+								</text>
+								<button name="btnQuestWeightInc">
+									<x>340</x>
+									<y>100</y>
+									<width>80</width>
+									<height>15</height>
+									<text>+10 Weight</text>
+									<onleftclick>
+										Event[GUI_BUTTON_HANDLE]:Execute["QuestWeightInc"]
+									</onleftclick>
+								</button>
+								<button name="btnQuestWeightDec">
+									<x>340</x>
+									<y>120</y>
+									<width>80</width>
+									<height>15</height>
+									<text>-10 Weight</text>
+									<onleftclick>
+										Event[GUI_BUTTON_HANDLE]:Execute["QuestWeightDec"]
+									</onleftclick>
+								</button>
+								<button name="btnQuestSetHorde">
+									<x>430</x>
+									<y>140</y>
+									<width>80</width>
+									<height>15</height>
+									<text>Horde Only</text>
+									<onleftclick>
+										Event[GUI_BUTTON_HANDLE]:Execute["QuestSetHorde"]
+									</onleftclick>
+								</button>
+								<button name="btnQuestSetAlliance">
+									<x>250</x>
+									<y>140</y>
+									<width>80</width>
+									<height>15</height>
+									<text>Alliance Only</text>
+									<onleftclick>
+										Event[GUI_BUTTON_HANDLE]:Execute["QuestSetAlliance"]
+									</onleftclick>
+								</button>
+								<button name="btnQuestSetNeutral">
+									<x>340</x>
+									<y>140</y>
+									<width>80</width>
+									<height>15</height>
+									<text>Both Factions</text>
+									<onleftclick>
+										Event[GUI_BUTTON_HANDLE]:Execute["QuestSetNeutral"]
+									</onleftclick>
+								</button>
+							</tab>											
+						</tabs>
+						</TabControl>
+					</tab>
+						
+					<tab name="Config">
+					<!-- left side -->
+						<checkbox name="chkDebug">
+							<x>10</x>
+							<y>10</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Debug</text>
+						</checkbox>
+						<checkbox name="chkUseMount">
+							<x>90</x>
+							<y>10</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Use Mount</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkUseMount"]     
+							</OnLeftClick>  								
+						</checkbox>
+						<!-- next -->
+						<button name="btnToonGui">
+							<x>10</x>
+							<y>165</y>
+							<width>80</width>
+							<height>30</height>
+							<text>Class Config</text>
+							<onleftclick>
+								UIElement -toggle ClassGUI
+							</onleftclick>
+						</button>
+						<button name="btnRendMap">
+							<x>100</x>
+							<y>165</y>
+							<width>120</width>
+							<height>30</height>
+							<text>Rendered Mapping</text>
+							<onleftclick>
+								UIElement -toggle MapGUI
+							</onleftclick>
+						</button>
+						<checkbox name="chkLogOutput">
+							<x>10</x>
+							<y>30</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Log Output</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkLogOutput"]     
+							</OnLeftClick>  								
+						</checkbox>
+						<checkbox name="chkIgnoreMax">
+							<x>100</x>
+							<y>50</y>
+							<width>75</width>
+							<height>25</height>
+							<text>Ignore All Lvls</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["MinMaxLvLs"]								
+							</OnLeftClick>								
+						</checkbox>
+						<checkbox name="chkIgnoreMin">
+							<x>10</x>
+							<y>50</y>
+							<width>75</width>
+							<height>25</height>
+							<text>Ignore Min Lvl</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["MinMaxLvLs"]								
+							</OnLeftClick>								
+						</checkbox>	
+						<checkbox name="chkPreferElites">
+							<x>10</x>
+							<y>90</y>
+							<width>75</width>
+							<height>25</height>
+							<text>Pull Elites</text>
+							<OnLeftClick>
+								Event[GUI_BUTTON_HANDLE]:Execute["PreferElites"]								
+							</OnLeftClick>								
+						</checkbox>					
+						<text name='txtMinLvL'>
+							<X>40</X>
+							<Y>80</Y>
+							<Width>195</Width>
+							<Height>40</Height>
+							<Text>MinLvL</Text>
+						</text>
+						<text name='txtMaxLvL'>
+							<X>100</X>
+							<Y>80</Y>
+							<Width>200</Width>
+							<Height>40</Height>
+							<Text>MaxLvL</Text>
+						</text>
+						<text name="lblCorpseCamped">
+								<X>10</X>
+								<Y>115</Y>
+								<Width>100</Width>
+								<Height>40</Height>
+								<Text>Corpse Camped:</Text>
+							</text>					
+							<text name="valCorpseCamped">
+								<X>92</X>
+								<Y>115</Y>
+								<Width>70</Width>
+								<Height>20</Height>
+								<Text>${UIElement[Config@Pages@Cerebrum].FindChild[sldCorpseCamped].Value} deaths</Text>
+							</text>	
+							<slider name="sldCorpseCamped">
+								<X>125</X>
+								<Y>112</Y>
+								<Range>5</Range>
+								<Width>90</Width>
+								<Height>15</Height>
+								<OnChange>
+									Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldCorpseCamped"]							
+								</OnChange>
+							</slider>							
+					<text name="lblMaxAdds">
+								<X>10</X>
+								<Y>130</Y>
+								<Width>100</Width>
+								<Height>40</Height>
+								<Text>Max Allowed Adds:</Text>
+							</text>					
+							<text name="valMaxAdds">
+								<X>92</X>
+								<Y>130</Y>
+								<Width>70</Width>
+								<Height>20</Height>
+								<Text>${UIElement[Config@Pages@Cerebrum].FindChild[sldMaxAdds].Value} mobs</Text>
+							</text>	
+							<slider name="sldMaxAdds">
+								<X>125</X>
+								<Y>127</Y>
+								<Range>5</Range>
+								<Width>90</Width>
+								<Height>15</Height>
+								<OnChange>
+									Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldMaxAdds"]							
+								</OnChange>
+							</slider>							
+							<text name="lblDetectAddRadius">
+								<X>10</X>
+								<Y>145</Y>
+								<Width>100</Width>
+								<Height>40</Height>
+								<Text>Add Detection Radius:</Text>
+							</text>					
+							<text name="valDetectAddRadius">
+								<X>102</X>
+								<Y>145</Y>
+								<Width>70</Width>
+								<Height>20</Height>
+								<Text>${UIElement[Config@Pages@Cerebrum].FindChild[sldDetectAddRadius].Value}yds</Text>
+							</text>	
+							<slider name="sldDetectAddRadius">
+								<X>125</X>
+								<Y>142</Y>
+								<Range>50</Range>
+								<Width>90</Width>
+								<Height>15</Height>
+								<OnChange>
+									Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldDetectAddRadius"]							
+								</OnChange>
+							</slider>
+					<!-- left side -->
+					<!-- right side -->
+						<checkbox name="chkDefendPvP">
+							<x>250</x>
+							<y>10</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Defend when attacked (PvP)</text>
+							<OnLeftClick>
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkDefendPvP"]     					
+							</OnLeftClick>								
+						</checkbox>
+						<checkbox name="chkAttackPvP">
+							<x>250</x>
+							<y>30</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Attack other faction (PvP)</text>
+							<OnLeftClick>
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkAttackPvP"]     					
+							</OnLeftClick>							
+						</checkbox>
+						<checkbox name="chkRender">
+							<x>250</x>
+							<y>50</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Stop Video Render</text>
+							<onleftclick>
+								if ${This.Checked}
+								 {
+									ISXWoW:DisableRender
+								 }
+								 elseif !${This.Checked}
+								 {
+									ISXWoW:EnableRender
+								 }
+							</onleftclick>
+						</checkbox>
+						<checkbox name="chkBgRender">
+							<x>275</x>
+							<y>75</y>
+							<width>100</width>
+							<height>25</height>
+							<text>(only in background)</text>
+							<onleftclick>
+								if ${This.Checked}
+								 {
+									ISXWoW:DisableBackgroundRender
+								 }
+								 elseif !${This.Checked}
+								 {
+									ISXWoW:EnableBackgroundRender
+								 }
+							</onleftclick>
+						</checkbox>
+						<checkbox name="chkLSOFormat">
+							<x>250</x>
+							<y>100</y>
+							<width>140</width>
+							<height>25</height>
+							<text>Map Files in LSO Format (faster load)</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkLSOFormat"]     
+							</OnLeftClick>  							
+						</checkbox>
+						<checkbox name="chkSoundOn">
+							<x>250</x>
+							<y>120</y>
+							<width>100</width>
+							<height>25</height>
+							<text>Allow Sounds  (global mute button)</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkSoundOn"]     
+							</OnLeftClick>  								
+						</checkbox>
+						<checkbox name="chkErrorSoundOn">
+							<x>275</x>
+							<y>140</y>
+							<width>120</width>
+							<height>25</height>
+							<text>Sound on Errors</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkErrorSoundOn"]     
+							</OnLeftClick>  								
+						</checkbox>	
+						<checkbox name="chkDeathSoundOn">
+							<x>275</x>
+							<y>160</y>
+							<width>120</width>
+							<height>25</height>
+							<text>Sound on My Deaths</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkDeathSoundOn"]     
+							</OnLeftClick>  								
+						</checkbox>				
+						<checkbox name="chkKillSoundOn">
+							<x>400</x>
+							<y>160</y>
+							<width>120</width>
+							<height>25</height>
+							<text>Sound on Mob Kills</text>
+							<OnLeftClick>  
+								Event[CEREBRUM_CONFIG_XBOX]:Execute["chkKillSoundOn"]     
+							</OnLeftClick>  								
+						</checkbox>							
+						<!-- right side -->
+					</tab>
+					<tab name="Logout">
+						<checkbox name='chkLogoutOnTimer'>
+							<x>10</x>
+							<y>10</y>
+							<width>140</width>
+							<height>20</height>
+							<FullHeight>100</FullHeight>
+							<text>Use a timer to logout?</text>
+						<OnLeftClick>
+							Event[GUI_BUTTON_HANDLE]:Execute["LogoutOnTimer"]
+						</OnLeftClick>
+						</checkbox>
+						<text name='lblLogoutafter'>
+							<X>10</X>
+							<Y>35</Y>
+							<Width>100</Width>
+							<Height>40</Height>
+							<Text>Logout after:</Text>
+						</text>					
+						<text name='lblLogOutIn'>
+							<X>215</X>
+							<Y>48</Y>
+							<Width>70</Width>
+							<Height>20</Height>
+							<Text>${UIElement[Logout@Pages@Cerebrum].FindChild[sldLogOutIn].Value}</Text>
+						</text>	
+						<slider name='sldLogOutIn'>
+							<X>10</X>
+							<Y>45</Y>
+							<Range>1000</Range>
+							<Width>200</Width>
+							<Height>15</Height>
+							<OnChange>
+								Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldLogOutIn"]							
+							</OnChange>
+						</slider>
+						<checkbox name='chkLogoutOnLevel'>
+							<x>10</x>
+							<y>75</y>
+							<width>140</width>
+							<height>20</height>
+							<FullHeight>100</FullHeight>
+							<text>Logout after reeching a certain level?</text>
+						<OnLeftClick>
+							Event[GUI_BUTTON_HANDLE]:Execute["LogOutOnLevel"]
+						</OnLeftClick>
+						</checkbox>
+						<text name='lblLogoutOnLevel'>
+							<X>10</X>
+							<Y>100</Y>
+							<Width>177</Width>
+							<Height>40</Height>
+							<Text>Logout at this level:</Text>
+						</text>	
+						<text name='lblLogOutLevel'>
+							<X>215</X>
+							<Y>113</Y>
+							<Width>70</Width>
+							<Height>20</Height>
+							<Text>${UIElement[Logout@Pages@Cerebrum].FindChild[sldLogOutLevel].Value}</Text>
+						</text>
+						<slider name='sldLogOutLevel'>
+							<X>10</X>
+							<Y>110</Y>
+							<Range>70</Range>
+							<Width>200</Width>
+							<Height>15</Height>
+							<OnChange>
+								Event[CEREBRUM_CONFIG_SLIDER]:Execute["sldLogOutLevel"]	
+							</OnChange>
+						</slider>
+						<checkbox name='chkAutoReconnect'>
+							<x>360</x>
+							<y>10</y>
+							<width>140</width>
+							<height>20</height>
+							<FullHeight>100</FullHeight>
+							<text>Auto Reconnect</text>
+						<OnLeftClick>
+							Event[GUI_BUTTON_HANDLE]:Execute["SetAutoReconnect"]
+						</OnLeftClick>
+						</checkbox>
+						<text name="lblAccountName">
+							<x>360</x>
+							<y>40</y>
+							<width>100</width>
+							<height>20</height>
+							<text>Account Name:</text>
+						</text>
+						<textentry name="AccountName">
+							<Width>130</Width>
+							<Height>18</Height>
+							<x>360</x>
+							<y>53</y>
+						</textentry>
+						<button name="btnAccountNameSet">
+							<x>500</x>
+							<y>53</y>
+							<Width>25</Width>
+							<Height>18</Height>
+							<text>Set</text>
+							<OnLeftClick>
+							Event[GUI_BUTTON_HANDLE]:Execute["SetAccountName"]
+							</OnLeftClick>
+						</button>
+						<text name="lblPassword">
+							<x>360</x>
+							<y>80</y>
+							<width>100</width>
+							<height>20</height>
+							<text>Password:</text>
+						</text>
+						<textentry name="Password">
+							<Width>130</Width>
+							<Height>18</Height>
+							<x>360</x>
+							<y>93</y>
+						</textentry>
+						<button name="btnPasswordSet">
+							<x>500</x>
+							<y>93</y>
+							<Width>25</Width>
+							<Height>18</Height>
+							<text>Set</text>
+							<OnLeftClick>
+							Event[GUI_BUTTON_HANDLE]:Execute["SetPassword"]
+							</OnLeftClick>
+						</button>
+						<text name="lblEnterKey">
+						<x>360</x>
+						<y>120</y>
+						<width>100</width>
+						<height>20</height>
+						<text>EnterKey (ex. enter)</text>
+					</text>
+					<textentry name="EnterKey">
+						<Width>130</Width>
+						<Height>18</Height>
+						<x>360</x>
+						<y>133</y>
+					</textentry>
+					<button name="btnEnterKey">
+						<x>500</x>
+						<y>133</y>
+						<Width>25</Width>
+						<Height>18</Height>
+						<text>Set</text>
+						<OnLeftClick>
+						Event[GUI_BUTTON_HANDLE]:Execute["SetEnterKey"]
+						</OnLeftClick>
+					</button>
+
+					</tab>
+				</tabs>
+			</TabControl>
+			<console name="Console">
+			<BackBufferSize>24</BackBufferSize>
+				<X>0</X>
+				<Y>217</Y>
+				<Width>100%</Width>
+				<Height>35%</Height>
+			</console>
+		</Children>
+	</Window>
+
+</ISUI>

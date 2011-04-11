@@ -1,0 +1,785 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<ISUI> 
+	<Window name='ClassGUI'> 
+		<StorePosition>1</StorePosition>
+		<TitleBar template='window.TitleBar'>
+			<Children>
+				<text Name='Title' template='window.TitleBar.title' />
+				<button Name='Minimize' template='window.TitleBar.Minimize' />
+				<button name='Custom Close Button' template='window.TitleBar.Close'>
+					<onleftclick>UIElement -hide ClassGUI</onleftclick>
+				</button>
+			</Children>
+		</TitleBar>
+		<Visible>0</Visible>
+		<Title>Default Mage Config</Title>
+		<X>5</X> 
+		<Y>600</Y> 
+		<Width>350</Width> 
+		<Height>330</Height>
+		<Children>
+		<TabControl Name='Pages'>
+			<width>100%</width>
+			<height>100%</height>
+			<tabs>
+				<tab name='Generic'>
+
+					<text name='lblRestMP'>
+						<X>10</X>
+						<Y>10</Y>
+						<Width>100</Width>
+						<Height>40</Height>
+						<Text>Drink at:</Text>
+					</text>	
+					
+					<text name='lblRestMPPct'>
+						<X>215</X>
+						<Y>33</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Generic@Pages@ClassGUI].FindChild[sldRestMP].Value}%</Text>
+					</text>	
+
+				<slider name='sldRestMP'>
+					<X>10</X>
+					<Y>30</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+					<OnChange>
+						Event[CLASS_GUI_CHANGE]:Execute["RestMP"]
+					</OnChange>
+				</slider>
+				
+					<text name='lblRestHP'>
+						<X>10</X>
+						<Y>60</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Eat at:</Text>
+					</text>	
+						
+					<text name='lblRestHPPct'>
+						<X>215</X>
+						<Y>83</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Generic@Pages@ClassGUI].FindChild[sldRestHP].Value}%</Text>
+					</text>
+					
+				<slider name='sldRestHP'>
+					<X>10</X>
+					<Y>80</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+            Event[CLASS_GUI_CHANGE]:Execute["RestHP"]
+          </OnChange>
+				</slider>
+				
+					<text name='lblGemMana'>
+						<X>10</X>
+						<Y>110</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Mana Gem at:</Text>
+					</text>	
+					
+					<text name='lblGemManaPct'>
+						<X>215</X>
+						<Y>133</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Generic@Pages@ClassGUI].FindChild[sldGemMana].Value}%</Text>
+					</text>	
+
+				<slider name='sldGemMana'>
+					<X>10</X>
+					<Y>130</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+						Event[CLASS_GUI_CHANGE]:Execute["GemMana"]
+					</OnChange>
+				</slider>		
+
+					<text name='lblWand'>
+						<X>10</X>
+						<Y>160</Y>
+						<Width>150</Width>
+						<Height>40</Height>
+						<Text>Wand at:</Text>
+					</text>	
+
+					<text name='lblWandPct'>
+						<X>215</X>
+						<Y>183</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Generic@Pages@ClassGUI].FindChild[sldWand].Value}%</Text>
+					</text>	
+
+				<slider name='sldWand'>
+					<X>10</X>
+					<Y>180</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+            Event[CLASS_GUI_CHANGE]:Execute["Wand"]
+          </OnChange>
+				</slider>								
+
+        <text name='lblPullWith'>
+          <X>10</X>
+          <Y>210</Y>
+          <Width>105</Width>
+          <Height>40</Height>
+          <Text>Pull with:</Text>
+        </text>
+        <combobox name='cmbPullWith'>
+          <x>105</x>
+          <y>205</y>
+          <Width>150</Width>
+          <height>20</height>
+          <FullHeight>63</FullHeight>
+          <OnSelect>
+            Event[CLASS_GUI_CHANGE]:Execute["PullWith"]
+          </OnSelect>
+          <Items>
+            <Item Value='Fireball' Default='1'>Fireball</Item>
+            <Item Value='Pyroblast'>Pyroblast</Item>
+            <Item Value='Frostbolt'>Frostbolt</Item>
+            </Items>
+        </combobox>
+          
+          <checkbox name='chkRandPull'>
+            <x>270</x>
+            <y>205</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+						<text>Random</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["RandPull"]
+            </OnLeftClick>
+          </checkbox>
+          
+        <text name='lblCombatCast'>
+          <X>10</X>
+          <Y>240</Y>
+          <Width>105</Width>
+          <Height>40</Height>
+          <Text>Nuke Spell:</Text>
+        </text>
+        <combobox name='cmbCombatCast'>
+          <x>105</x>
+          <y>235</y>
+          <width>150</width>
+          <height>20</height>
+          <FullHeight>63</FullHeight>
+          <OnSelect>
+            Event[CLASS_GUI_CHANGE]:Execute["CombatCast"]
+          </OnSelect>
+            <Items>
+            <Item Value='Fireball' Default='1'>Fireball</Item>
+            <Item Value='Scorch'>Scorch</Item>
+            <Item Value='Pyroblast'>Pyroblast</Item>
+            <Item Value='Arcane Missiles'>Arcane Missiles</Item>
+            <Item Value='Arcane Blast'>Arcane Blast</Item>
+            <Item Value='Frostbolt'>Frostbolt</Item>
+            </Items>
+        </combobox>
+
+          <checkbox name='chkRandCom'>
+            <x>270</x>
+            <y>235</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <Text>Random</Text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["RandCom"]
+            </OnLeftClick>
+          </checkbox>
+		  
+		  
+		<text name='lblPullSecond'>
+          <X>10</X>
+          <Y>265</Y>
+          <Width>105</Width>
+          <Height>40</Height>
+          <Text>Second Pull Spell:</Text>
+        </text>
+        <combobox name='cmbPullSecond'>
+          <x>105</x>
+          <y>270</y>
+          <width>150</width>
+          <height>20</height>
+          <FullHeight>63</FullHeight>
+          <OnSelect>
+            Event[CLASS_GUI_CHANGE]:Execute["PullSecond"]
+          </OnSelect>
+            <Items>
+            <Item Value='Fireball' Default='1'>Fireball</Item>
+			<Item Value='Frostbolt'>Frostbolt</Item>
+            <Item Value='Scorch'>Scorch</Item>
+            <Item Value='Pyroblast'>Pyroblast</Item>
+            <Item Value='Arcane Missiles'>Arcane Missiles</Item>
+            <Item Value='Arcane Blast'>Arcane Blast</Item>
+            </Items>
+        </combobox>
+
+          <checkbox name='chkTwoPull'>
+            <x>270</x>
+            <y>270</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <Text>Use 2nd Spell?</Text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["TwoPull"]
+            </OnLeftClick>
+          </checkbox>
+  			</tab>
+				<tab name='Buffs'>
+					<checkbox name='chkArcInt'>
+						<x>10</x>
+						<y>10</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<Text>Arcane Intellect</Text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ArcInt"]
+						</OnLeftClick>
+					</checkbox>
+										
+					<text name='lblArmor'>
+						<X>10</X>
+						<Y>40</Y>
+						<Width>105</Width>
+						<Height>40</Height>
+						<Text>Armor:</Text>
+					</text>	
+					<combobox name='cmbArmor'>
+						<x>105</x>
+						<y>35</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["Armor"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Frost Armor'>Frost Armor</Item>
+							<Item Value='Ice Armor'>Ice Armor</Item>
+							<Item Value='Mage Armor'>Mage Armor</Item>
+							<Item Value='Molten'>Molten Armor</Item>
+						</Items>
+					</combobox>
+					
+					<checkbox name='chkFWard'>
+						<x>10</x>
+						<y>65</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Fire Ward</text>
+						<OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["FWard"]
+            </OnLeftClick>
+					</checkbox>
+					
+					<checkbox name='chkFrWard'>
+						<x>10</x>
+						<y>95</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Frost Ward</text>
+						<OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["FrWard"]
+            </OnLeftClick>
+					</checkbox>
+
+					<checkbox name='chkDampen'>
+						<x>10</x>
+						<y>125</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Dampen Magic</text>
+						<OnLeftClick>
+              UIElement[Buffs@Pages@ClassGUI].FindChild[chkAmplify]:UnsetChecked
+              Event[CLASS_GUI_CHANGE]:Execute["Dampen"]
+            </OnLeftClick>
+          </checkbox>
+
+          <checkbox name='chkAmplify'>
+            <x>10</x>
+            <y>155</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <text>Amplify Magic</text>
+            <OnLeftClick>
+              UIElement[Buffs@Pages@ClassGUI].FindChild[chkDampen]:UnsetChecked
+              Event[CLASS_GUI_CHANGE]:Execute["Amplify"]
+            </OnLeftClick>
+					</checkbox>
+
+          <checkbox name='chkCombatEvocation'>
+            <x>10</x>
+            <y>185</y>
+            <width>77</width>
+            <height>20</height>
+            <FullHeight>63</FullHeight>
+            <text>Evocation in Combat</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["CombatEvocation"]
+            </OnLeftClick>
+          </checkbox>
+          
+          <checkbox name='chkRestEvocation'>
+            <x>10</x>
+            <y>215</y>
+            <width>77</width>
+            <height>20</height>
+            <FullHeight>63</FullHeight>
+            <text>Evocation while resting</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["RestEvocation"]
+            </OnLeftClick>
+          </checkbox>
+
+          <checkbox name='chkManaShield'>
+            <x>10</x>
+            <y>245</y>
+            <width>77</width>
+            <height>20</height>
+            <FullHeight>63</FullHeight>
+            <text>Mana Shield</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["ManaShield"]
+            </OnLeftClick>
+          </checkbox>
+        </tab>
+        
+				<tab name='Arcane'>
+
+          <checkbox name='chkCounterSpell'>
+            <x>10</x>
+            <y>5</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <text>CounterSpell</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["CounterSpell"]
+            </OnLeftClick>
+          </checkbox>
+          
+					<checkbox name='chkPresence'>
+						<x>10</x>
+						<y>35</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Presence of Mind</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["Presence"]
+						</OnLeftClick>
+					</checkbox>
+
+					<checkbox name='chkPOMonPull'>
+						<x>35</x>
+						<y>60</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Only on pull</text>
+						<OnLeftClick>
+              UIElement[Arcane@Pages@ClassGUI].FindChild[chkPresence]:ToggleChecked
+              Event[CLASS_GUI_CHANGE]:Execute["Presence"]
+              Event[CLASS_GUI_CHANGE]:Execute["POMonPull"]
+            </OnLeftClick>
+					</checkbox>
+					
+					<checkbox name='chkSlow'>
+						<x>10</x>
+						<y>95</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Slow</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["Slow"]
+						</OnLeftClick>
+					</checkbox>
+
+					<checkbox name='chkArcanePower'>
+						<x>10</x>
+						<y>125</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Arcane Power</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["ArcanePower"]
+						</OnLeftClick>
+					</checkbox>	
+									
+					<checkbox name='chkAPonPull'>
+						<x>35</x>
+						<y>150</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Only on pull</text>
+						<OnLeftClick>
+              UIElement[Arcane@Pages@ClassGUI].FindChild[chkArcanePower]:ToggleChecked
+              Event[CLASS_GUI_CHANGE]:Execute["ArcanePower"]
+              Event[CLASS_GUI_CHANGE]:Execute["APonPull"]
+            </OnLeftClick>
+					</checkbox>
+          
+          <checkbox name='chkStunBlink'>
+            <x>10</x>
+            <y>185</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <text>Blink out of stuns</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["StunBlink"]
+            </OnLeftClick>
+          </checkbox>
+          
+        </tab>
+				
+				<tab name='Fire'>
+
+					<checkbox name='chkBlastWave'>
+						<x>10</x>
+						<y>5</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Blast Wave</text>
+						<OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["BlastWave"]
+            </OnLeftClick>
+					</checkbox>
+										
+					<checkbox name='chkDragonBreath'>
+						<x>10</x>
+						<y>35</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Dragon's Breath</text>
+						<OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["DragonBreath"]
+            </OnLeftClick>
+					</checkbox>
+					
+					<checkbox name='chkCombustion'>
+						<x>10</x>
+						<y>65</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Combustion</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["Combustion"]
+						</OnLeftClick>
+					</checkbox>
+				</tab>
+				
+				<tab name='Frost'>
+
+					<checkbox name='chkFrostNova'>
+						<x>10</x>
+						<y>5</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Frost Nova</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["FrostNova"]
+						</OnLeftClick>
+					</checkbox>
+						
+					<checkbox name='chkConeOfCold'>
+						<x>10</x>
+						<y>35</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Cone of Cold</text>
+						<OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["ConeOfCold"]
+            </OnLeftClick>
+					</checkbox>
+
+					<checkbox name='chkIceBarrier'>
+						<x>10</x>
+						<y>65</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Ice Barrier</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["IceBarrier"]
+						</OnLeftClick>
+					</checkbox>	
+									
+					<checkbox name='chkWaterElemental'>
+						<x>10</x>
+						<y>95</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Water Elemental</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["WaterElemental"]
+						</OnLeftClick>
+					</checkbox>		
+												
+					<checkbox name='chkIceLance'>
+						<x>10</x>
+						<y>125</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<text>Ice Lance</text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["IceLance"]
+						</OnLeftClick>
+					</checkbox>
+
+          <checkbox name='chkColdSnap'>
+            <x>10</x>
+            <y>155</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <text>Cold Snap</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["ColdSnap"]
+            </OnLeftClick>
+          </checkbox>
+
+          <checkbox name='chkIceBlock'>
+            <x>10</x>
+            <y>185</y>
+            <width>140</width>
+            <height>20</height>
+            <FullHeight>100</FullHeight>
+            <text>Ice Block</text>
+            <OnLeftClick>
+              Event[CLASS_GUI_CHANGE]:Execute["IceBlock"]
+            </OnLeftClick>
+          </checkbox>        
+          
+          <text name='lblIBHealth'>
+						<X>10</X>
+						<Y>220</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Ice Block at:</Text>
+					</text>	
+						
+					<text name='lblIBHealthPct'>
+						<X>215</X>
+						<Y>243</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Frost@Pages@ClassGUI].FindChild[sldIBHealth].Value}%</Text>
+					</text>
+					
+				<slider name='sldIBHealth'>
+					<X>10</X>
+					<Y>240</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+            Event[CLASS_GUI_CHANGE]:Execute["IBHealth"]
+          </OnChange>
+				</slider>
+				</tab>
+				<tab name='Extras'>
+					<checkbox name='chkMakeBand'>
+						<x>10</x>
+						<y>10</y>
+						<width>140</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<Text>Make Bandages</Text>
+						<OnLeftClick>
+							Event[CLASS_GUI_CHANGE]:Execute["MakeBand"]
+						</OnLeftClick>
+					</checkbox>
+										
+					<text name='lblBandage'>
+						<X>10</X>
+						<Y>40</Y>
+						<Width>105</Width>
+						<Height>40</Height>
+						<Text>Choose Bandage:</Text>
+					</text>	
+					<combobox name='cmbBandage'>
+						<x>105</x>
+						<y>35</y>
+						<width>150</width>
+						<height>20</height>
+						<FullHeight>100</FullHeight>
+						<OnSelect>
+							Event[CLASS_GUI_CHANGE]:Execute["Bandage"]
+						</OnSelect>
+						<Items>
+							<Item Value='None' Default='1'>None</Item>
+							<Item Value='Linen Bandage'>Linen Bandage</Item>
+							<Item Value='Heavy Linen Bandage'>Heavy Linen Bandage</Item>
+							<Item Value='Wool Bandage'>Wool Bandage</Item>
+							<Item Value='Heavy Wool Bandage'>Heavy Wool Bandage</Item>
+							<Item Value='Silk Bandage'>Silk Bandage</Item>
+							<Item Value='Heavy Silk Bandage'>Heavy Silk Bandage</Item>
+							<Item Value='Mageweave Bandage'>Mageweave Bandage</Item>
+							<Item Value='Heavy Mageweave Bandage'>Heavy Mageweave Bandage</Item>
+							<Item Value='Runecloth Bandage'>Runecloth Bandage</Item>
+							<Item Value='Heavy Runecloth Bandage'>Heavy Runecloth Bandage</Item>
+							<Item Value='Netherweave Bandage'>Netherweave Bandage</Item>
+							<Item Value='Heavy Netherweave Bandage'>Heavy Netherweave Bandage</Item>
+						</Items>
+					</combobox>
+				
+				
+					<text name='lblBandHP'>
+						<X>10</X>
+						<Y>60</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Bandage at:</Text>
+					</text>	
+						
+					<text name='lblBandHPPct'>
+						<X>215</X>
+						<Y>83</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Extras@Pages@ClassGUI].FindChild[sldBandHP].Value}%</Text>
+					</text>
+					
+				<slider name='sldBandHP'>
+					<X>10</X>
+					<Y>80</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+            Event[CLASS_GUI_CHANGE]:Execute["BandHP"]
+          </OnChange>
+				</slider>
+				
+					<text name='lblPotHP'>
+						<X>10</X>
+						<Y>110</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Use Health Pot at:</Text>
+					</text>	
+					
+					<text name='lblPotHPPct'>
+						<X>215</X>
+						<Y>133</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Extras@Pages@ClassGUI].FindChild[sldPotHP].Value}%</Text>
+					</text>	
+
+				<slider name='sldPotHP'>
+					<X>10</X>
+					<Y>130</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+						Event[CLASS_GUI_CHANGE]:Execute["PotHP"]
+					</OnChange>
+				</slider>		
+
+					<text name='lblPotMP'>
+						<X>10</X>
+						<Y>160</Y>
+						<Width>150</Width>
+						<Height>40</Height>
+						<Text>Use Mana Pot at:</Text>
+					</text>	
+
+					<text name='lblPotMPPct'>
+						<X>215</X>
+						<Y>183</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Extras@Pages@ClassGUI].FindChild[sldPotMP].Value}%</Text>
+					</text>	
+
+				<slider name='sldPotMP'>
+					<X>10</X>
+					<Y>180</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+            Event[CLASS_GUI_CHANGE]:Execute["PotMP"]
+          </OnChange>
+				</slider>
+					<text name='lblFB'>
+						<X>10</X>
+						<Y>210</Y>
+						<Width>177</Width>
+						<Height>40</Height>
+						<Text>Start Fire Blasting at:</Text>
+					</text>	
+					
+					<text name='lblFBPct'>
+						<X>215</X>
+						<Y>233</Y>
+						<Width>70</Width>
+						<Height>20</Height>
+						<Text>${UIElement[Extras@Pages@ClassGUI].FindChild[sldFB].Value}%</Text>
+					</text>	
+
+				<slider name='sldFB'>
+					<X>10</X>
+					<Y>230</Y>
+					<Range>100</Range>
+					<Width>200</Width>
+					<Height>15</Height>
+          <OnChange>
+						Event[CLASS_GUI_CHANGE]:Execute["FB"]
+					</OnChange>
+				</slider>
+				<checkbox name='chkRacial'>
+		            <x>10</x>
+		            <y>265</y>
+		            <width>77</width>
+		            <height>20</height>
+		            <FullHeight>63</FullHeight>
+		            <Text>Use Racial:</Text>
+		            <OnLeftClick>
+		              Event[CLASS_GUI_CHANGE]:Execute["Racial"]
+		            </OnLeftClick>
+				</checkbox>
+				</tab>
+			</tabs>
+		</TabControl>
+		</Children>
+	</Window>
+</ISUI>
