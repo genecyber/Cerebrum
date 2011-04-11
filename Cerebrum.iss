@@ -75,5 +75,5 @@ function atexit()
 		UI -unload "${Script.CurrentDirectory}/Interface/CerebrumRadar.xml"
 		UI -unload "${Script.CurrentDirectory}/gui/gui.xml"
 		UI -unload "${Script.CurrentDirectory}/routines/${Me.Class}.xml"
-		UI -unload "Interface/obSkin/obSkin.xml"	
+		UI -unload "Interface/CerebrumSkin/CerebrumSkin.xml"	
 }
